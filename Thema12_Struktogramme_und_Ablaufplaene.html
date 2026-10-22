@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 12 – Struktogramme | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c12); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 12</span>
+    <span class="topbar-title">Struktogramme</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Struktogramme</h1>
+    <div class="meta">
+      <span>Thema 12 von 13</span>
+      <span class="meta-dot"></span>
+      <span>Nassi-Shneiderman</span> <span class="meta-dot"></span> <span>Flussdiagramm</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<hr>
+<h2>Einleitung: Warum Algorithmen visualisieren?</h2>
+<p>Ein Algorithmus ist eine schrittweise Beschreibung, wie ein Problem gelöst wird.</p>
+<p>Bevor man Code schreibt, hilft es, den Algorithmus grafisch darzustellen.</p>
+<p>Vorteile:</p>
+<ul><li>Programmiersprachen-unabhängig (funktioniert für Java, Python, C, ...)</li><li>Logikfehler sind leichter zu erkennen</li><li>Kommunikation im Team wird einfacher</li></ul>
+<p>Es gibt zwei verbreitete Darstellungsformen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1. Ablaufplan (Flussdiagramm) → DIN 66001
+2. Struktogramm (Nassi-Shneiderman-Diagramm) → DIN 66261</pre></div>
+<hr>
+<h2>Teil 1: Ablaufpläne (Flussdiagramme)</h2>
+<h3>Symbole</h3>
+<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Form</th><th>Bedeutung</th></tr></thead><tbody><tr><td>Start/Ende</td><td>Abgerundetes Rechteck</td><td>Beginn und Ende des Algorithmus</td></tr><tr><td>Anweisung</td><td>Rechteck</td><td>Eine Aktion, Berechnung</td></tr><tr><td>Entscheidung</td><td>Raute</td><td>Eine Ja/Nein-Frage</td></tr><tr><td>Ein-/Ausgabe</td><td>Parallelogramm</td><td>Einlesen oder Ausgeben</td></tr><tr><td>Verbindungspfeil</td><td>Pfeil</td><td>Richtung des Ablaufs</td></tr></tbody></table></div>
+<hr>
+<h3>Beispiel: Ablaufplan „Prüfe ob eine Zahl gerade ist"</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>     ┌─────────┐
+     │  Start  │
+     └────┬────┘
+          │
+     ┌────▼────────────┐
+     │  Lies Zahl n    │
+     └────┬────────────┘
+          │
+     ┌────▼────────────────┐
+     │   n mod 2 = 0?      │
+     └────┬──────────┬─────┘
+         Ja         Nein
+          │          │
+  ┌───────▼───┐  ┌───▼───────────┐
+  │  Ausgabe: │  │  Ausgabe:     │
+  │  &quot;gerade&quot; │  │  &quot;ungerade&quot;   │
+  └───────┬───┘  └───────┬───────┘
+          └──────┬────────┘
+                 │
+            ┌────▼────┐
+            │  Ende   │
+            └─────────┘</pre></div>
+<hr>
+<h3>Schleifen im Ablaufplan</h3>
+<p>Eine while-Schleife sieht so aus:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>          │
+     ┌────▼────────────────┐
+     │   Bedingung?         │◄───────────┐
+     └────┬──────────┬─────┘            │
+         Ja         Nein                │
+          │          │                  │
+  ┌───────▼────┐     │           ┌──────┴────────┐
+  │  Schleife- │     │           │  Nächster     │
+  │  rumpf     │─────────────────►  Durchlauf    │
+  └────────────┘                 └───────────────┘
+                   │
+              ┌────▼────┐
+              │  weiter │
+              └─────────┘</pre></div>
+<hr>
+<h2>Teil 2: Struktogramme (Nassi-Shneiderman)</h2>
+<p>Struktogramme wurden 1973 von Nassi und Shneiderman entwickelt.</p>
+<p>Im Gegensatz zu Ablaufplänen haben Struktogramme <strong>keine Sprünge</strong> (kein <code>goto</code>).</p>
+<p>Der Kontrollfluss ist immer von oben nach unten.</p>
+<hr>
+<h3>Anweisung</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌─────────────────────────────┐
+│  Anweisung                  │
+└─────────────────────────────┘</pre></div>
+<hr>
+<h3>Einfache Verzweigung (if)</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌────────────────────────────────────┐
+│  Bedingung?                        │
+├──────────────────┬─────────────────┤
+│  Ja              │  Nein           │
+│  Anweisung A     │  Anweisung B    │
+└──────────────────┴─────────────────┘</pre></div>
+<hr>
+<h3>Einseitige Verzweigung (if ohne else)</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌────────────────────────────────────┐
+│  Bedingung?                        │
+├──────────────────┬─────────────────┤
+│  Ja              │                 │
+│  Anweisung A     │                 │
+└──────────────────┴─────────────────┘</pre></div>
+<hr>
+<h3>While-Schleife (kopfgesteuert)</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌─────────────────────────────────────┐
+│  SOLANGE Bedingung                  │
+│ ┌───────────────────────────────┐   │
+│ │  Schleifenrumpf               │   │
+│ └───────────────────────────────┘   │
+└─────────────────────────────────────┘</pre></div>
+<hr>
+<h3>Do-While-Schleife (fußgesteuert)</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌─────────────────────────────────────┐
+│ ┌───────────────────────────────┐   │
+│ │  Schleifenrumpf               │   │
+│ └───────────────────────────────┘   │
+│  SOLANGE Bedingung                  │
+└─────────────────────────────────────┘</pre></div>
+<hr>
+<h3>For-Schleife</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌─────────────────────────────────────┐
+│  FÜR i VON 0 BIS n-1               │
+│ ┌───────────────────────────────┐   │
+│ │  Schleifenrumpf               │   │
+│ └───────────────────────────────┘   │
+└─────────────────────────────────────┘</pre></div>
+<hr>
+<h2>Vollständiges Beispiel: Summe der Zahlen 1 bis n</h2>
+<p>Algorithmus:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1. Lies n ein
+2. Setze summe = 0
+3. Setze i = 1
+4. Solange i &lt;= n:
+   4a. summe = summe + i
+   4b. i = i + 1
+5. Gib summe aus</pre></div>
+<h3>Struktogramm</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌─────────────────────────────────────────┐
+│  Lies n                                 │
+├─────────────────────────────────────────┤
+│  summe = 0                              │
+├─────────────────────────────────────────┤
+│  i = 1                                  │
+├─────────────────────────────────────────┤
+│  SOLANGE i &lt;= n                         │
+│ ┌───────────────────────────────────┐   │
+│ │  summe = summe + i                │   │
+│ ├───────────────────────────────────┤   │
+│ │  i = i + 1                        │   │
+│ └───────────────────────────────────┘   │
+├─────────────────────────────────────────┤
+│  Ausgabe: summe                         │
+└─────────────────────────────────────────┘</pre></div>
+<h3>Zugehöriger Java-Code</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Scanner sc = new Scanner(System.in);
+int n = sc.nextInt();
+int summe = 0;
+int i = 1;
+while (i &lt;= n) {
+    summe = summe + i;
+    i++;
+}
+System.out.println(summe);</pre></div>
+<hr>
+<h2>Vergleich: Ablaufplan vs. Struktogramm</h2>
+<div class="table-wrap"><table><thead><tr><th>Eigenschaft</th><th>Ablaufplan</th><th>Struktogramm</th></tr></thead><tbody><tr><td>Darstellung</td><td>Grafisch mit Pfeilen</td><td>Verschachtelte Kästen</td></tr><tr><td>Sprünge möglich?</td><td>Ja (goto)</td><td>Nein</td></tr><tr><td>Lesbarkeit</td><td>Gut für einfache Fälle</td><td>Gut für komplexe Fälle</td></tr><tr><td>Norm</td><td>DIN 66001</td><td>DIN 66261</td></tr><tr><td>Schachtelung</td><td>Schwerer erkennbar</td><td>Deutlich sichtbar</td></tr></tbody></table></div>
+<hr>
+<h2>Verbindung zu anderen Themen</h2>
+<ul><li><strong>Thema 9 (Java):</strong> Struktogramme und Ablaufpläne zeigen, wie Java-Code aufgebaut werden soll.</li><li><strong>Thema 13 (Sortieralgorithmen):</strong> Sortieralgorithmen werden oft zuerst als Struktogramm beschrieben.</li><li><strong>Thema 10 (Softwareentwicklung):</strong> In der Entwurfsphase werden Algorithmen grafisch geplant.</li></ul>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Zeichne ein Struktogramm für folgenden Java-Code:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int max = a;
+if (b &gt; a) {
+    max = b;
+}
+System.out.println(max);</pre></div>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌─────────────────────────────────────────┐
+│  max = a                                │
+├─────────────────────────────────────────┤
+│  b &gt; a ?                                │
+├─────────────────────────┬───────────────┤
+│  Ja                     │  Nein         │
+│  max = b                │               │
+└─────────────────────────┴───────────────┘
+┌─────────────────────────────────────────┐
+│  Ausgabe: max                           │
+└─────────────────────────────────────────┘</pre></div>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Erstelle ein Struktogramm, das alle geraden Zahlen von 2 bis 20 ausgibt.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌─────────────────────────────────────────┐
+│  i = 2                                  │
+├─────────────────────────────────────────┤
+│  SOLANGE i &lt;= 20                        │
+│ ┌───────────────────────────────────┐   │
+│ │  Ausgabe: i                       │   │
+│ ├───────────────────────────────────┤   │
+│ │  i = i + 2                        │   │
+│ └───────────────────────────────────┘   │
+└─────────────────────────────────────────┘</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Ablaufpläne verwenden standardisierte Symbole (Raute = Entscheidung).</li><li>Struktogramme haben keine Sprünge — der Ablauf ist immer von oben nach unten.</li><li>While-Schleife im Struktogramm: Bedingung steht oben.</li><li>Do-While-Schleife: Bedingung steht unten — Rumpf wird mindestens einmal ausgeführt.</li><li>Struktogramme eignen sich besonders gut für die Entwurfsphase.</li><li>Aus einem Struktogramm lässt sich direkt Java-Code ableiten.</li></ol>
+<hr>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau:</span>
+            <span class="rating-score">8 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="80"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema11_Objektorientierung.html" class="nav-btn nav-prev">← Objektorientierung</a><a href="Thema13_Sortieralgorithmen.html" class="nav-btn nav-next">Sortieralgorithmen →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

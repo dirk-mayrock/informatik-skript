@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 10 – Softwareentwicklung | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c10); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 10</span>
+    <span class="topbar-title">Softwareentwicklung</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Softwareentwicklung</h1>
+    <div class="meta">
+      <span>Thema 10 von 13</span>
+      <span class="meta-dot"></span>
+      <span>Wasserfallmodell</span> <span class="meta-dot"></span> <span>Agil</span> <span class="meta-dot"></span> <span>Scrum</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<hr>
+<h2>Einleitung: Warum braucht man ein Vorgehensmodell?</h2>
+<p>Ein einzelnes Programm mit 50 Zeilen schreibt man einfach.</p>
+<p>Aber ein modernes Softwaresystem wie ein Betriebssystem oder eine Banking-App umfasst:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Millionen von Codezeilen
+Hunderte von Entwicklern
+Laufzeit: Jahre
+Kosten: Millionen Euro</pre></div>
+<p>Ohne Planung und strukturiertes Vorgehen entstehen:</p>
+<ul><li>Fehler, die erst beim Kunden auffallen</li><li>Budgetüberschreitungen</li><li>Software, die die Anforderungen nicht erfüllt</li></ul>
+<p><strong>Softwareentwicklungsmodelle</strong> geben eine Struktur vor, wie Software von der Idee bis zur Wartung entwickelt wird.</p>
+<hr>
+<h2>Die Phasen der Softwareentwicklung</h2>
+<p>Unabhängig vom Modell gibt es gemeinsame Phasen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1. Anforderungsanalyse
+2. Entwurf (Design)
+3. Implementierung (Coding)
+4. Testen (Verifikation)
+5. Einführung (Deployment)
+6. Wartung (Maintenance)</pre></div>
+<hr>
+<h2>Das Wasserfallmodell</h2>
+<p>Das <strong>Wasserfallmodell</strong> ist das älteste und bekannteste Softwareentwicklungsmodell.</p>
+<p>Es wurde 1970 von Winston Royce beschrieben.</p>
+<h3>Grundprinzip</h3>
+<p>Die Phasen werden <strong>streng sequenziell</strong> durchlaufen — wie Wasser, das einen Wasserfall hinunterfließt.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Anforderungsanalyse
+        ↓
+      Entwurf
+        ↓
+Implementierung
+        ↓
+       Test
+        ↓
+   Einführung
+        ↓
+     Wartung</pre></div>
+<p>Jede Phase muss <strong>vollständig abgeschlossen</strong> sein, bevor die nächste beginnt.</p>
+<hr>
+<h2>Phase 1: Anforderungsanalyse</h2>
+<p><strong>Ziel:</strong> Was soll die Software können?</p>
+<p><strong>Ergebnis:</strong> Pflichtenheft / Anforderungsspezifikation</p>
+<p>Enthält:</p>
+<ul><li>Funktionale Anforderungen: Was soll das System tun?</li><li>Nicht-funktionale Anforderungen: Wie schnell? Wie sicher? Auf welchen Geräten?</li></ul>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Funktional:
+- Benutzer können sich einloggen.
+- Benutzer können Bestellungen aufgeben.
+
+Nicht-funktional:
+- Die Seite lädt in unter 2 Sekunden.
+- 10.000 gleichzeitige Nutzer möglich.</pre></div>
+<hr>
+<h2>Phase 2: Entwurf (Design)</h2>
+<p><strong>Ziel:</strong> Wie wird das System gebaut?</p>
+<p><strong>Ergebnis:</strong> Systemarchitektur, Datenbankdesign, Klassendiagramme</p>
+<p>Enthält:</p>
+<ul><li>Welche Module gibt es?</li><li>Wie kommunizieren sie miteinander?</li><li>Welche Datenstrukturen werden verwendet?</li></ul>
+<hr>
+<h2>Phase 3: Implementierung</h2>
+<p><strong>Ziel:</strong> Das System wird programmiert.</p>
+<p><strong>Ergebnis:</strong> Quellcode</p>
+<p>Die Entwickler schreiben Code basierend auf den Entwurfsdokumenten.</p>
+<hr>
+<h2>Phase 4: Test</h2>
+<p><strong>Ziel:</strong> Funktioniert das System wie spezifiziert?</p>
+<p><strong>Ergebnis:</strong> Testprotokolle, Fehlerlisten</p>
+<p>Arten von Tests:</p>
+<div class="table-wrap"><table><thead><tr><th>Testart</th><th>Was wird geprüft?</th></tr></thead><tbody><tr><td>Unit-Test</td><td>Einzelne Methoden oder Klassen</td></tr><tr><td>Integrationstest</td><td>Zusammenspiel mehrerer Komponenten</td></tr><tr><td>Systemtest</td><td>Das gesamte System gegen die Anforderungen</td></tr><tr><td>Abnahmetest</td><td>Der Kunde prüft, ob alles erfüllt wurde</td></tr></tbody></table></div>
+<hr>
+<h2>Phase 5: Einführung (Deployment)</h2>
+<p><strong>Ziel:</strong> Das System gelangt zum Kunden.</p>
+<p><strong>Ergebnis:</strong> Laufendes System beim Kunden</p>
+<p>Beinhaltet: Installation, Schulung, Datenmigration</p>
+<hr>
+<h2>Phase 6: Wartung</h2>
+<p><strong>Ziel:</strong> Das System bleibt funktionsfähig.</p>
+<p><strong>Ergebnis:</strong> Bugfixes, Updates, Erweiterungen</p>
+<p>Die Wartung dauert oft länger als die Entwicklung.</p>
+<hr>
+<h2>Vorteile des Wasserfallmodells</h2>
+<div class="table-wrap"><table><thead><tr><th>Vorteil</th><th>Erklärung</th></tr></thead><tbody><tr><td>Klare Struktur</td><td>Jeder weiß, was in welcher Phase zu tun ist</td></tr><tr><td>Gute Dokumentation</td><td>Jede Phase produziert Dokumente</td></tr><tr><td>Einfach zu planen</td><td>Budget und Zeit lassen sich gut abschätzen</td></tr><tr><td>Gut für klare Anforderungen</td><td>Wenn die Anforderungen fest stehen</td></tr></tbody></table></div>
+<hr>
+<h2>Nachteile des Wasserfallmodells</h2>
+<div class="table-wrap"><table><thead><tr><th>Nachteil</th><th>Erklärung</th></tr></thead><tbody><tr><td>Starr</td><td>Änderungen der Anforderungen sind teuer</td></tr><tr><td>Feedback spät</td><td>Der Kunde sieht das Produkt erst am Ende</td></tr><tr><td>Fehler in frühen Phasen</td><td>Werden erst spät (im Test) entdeckt</td></tr><tr><td>Realität ist nicht linear</td><td>Entwicklung ist oft iterativ, nicht sequenziell</td></tr></tbody></table></div>
+<h3>Bekanntes Problem</h3>
+<p>Wenn sich Anforderungen ändern (was fast immer passiert), müssen alle nachfolgenden Phasen wiederholt werden.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Anforderung ändert sich in Phase 4 (Test)
+→ Zurück zu Phase 1
+→ Enormer Aufwand und Kosten</pre></div>
+<hr>
+<h2>Alternativen zum Wasserfallmodell</h2>
+<h3>Spiralmodell (Boehm)</h3>
+<p>Kombiniert Wasserfallmodell mit Risikoanalyse.</p>
+<p>Jede Iteration (Spiralrunde) durchläuft:</p>
+<ol><li>Ziele definieren</li><li>Risiken analysieren</li><li>Entwickeln und testen</li><li>Ergebnis bewerten → nächste Runde oder abschließen</li></ol>
+<hr>
+<h3>Agile Methoden (z.B. Scrum)</h3>
+<p>Modernes Gegenstück zum Wasserfallmodell.</p>
+<p>Grundprinzipien:</p>
+<ul><li>Software in kurzen Zyklen (<strong>Sprints</strong>, 2-4 Wochen) liefern</li><li>Ständiges Feedback vom Kunden</li><li>Anforderungen dürfen sich ändern</li><li>Funktionsfähige Software ist wichtiger als Dokumentation</li></ul>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Sprint 1 → Minimum Viable Product
+Sprint 2 → Erweiterung
+Sprint 3 → Weitere Features
+...</pre></div>
+<hr>
+<h2>Vergleich</h2>
+<div class="table-wrap"><table><thead><tr><th>Eigenschaft</th><th>Wasserfallmodell</th><th>Agile (Scrum)</th></tr></thead><tbody><tr><td>Ablauf</td><td>sequenziell</td><td>iterativ</td></tr><tr><td>Flexibilität</td><td>gering</td><td>hoch</td></tr><tr><td>Kundenbeteiligung</td><td>am Anfang/Ende</td><td>ständig</td></tr><tr><td>Dokumentation</td><td>umfangreich</td><td>minimal</td></tr><tr><td>Gut bei</td><td>klaren Anforderungen</td><td>sich ändernden Anforderungen</td></tr><tr><td>Risiko</td><td>Fehler spät erkannt</td><td>früh erkannt</td></tr></tbody></table></div>
+<hr>
+<h2>Verbindung zu anderen Themen</h2>
+<ul><li><strong>Thema 11 (Objektorientierung):</strong> OOP-Entwurf findet in Phase 2 (Design) statt.</li><li><strong>Thema 12 (Struktogramme):</strong> Struktogramme und Ablaufpläne entstehen in der Entwurfsphase.</li></ul>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Nenne die sechs Phasen des Wasserfallmodells in der richtigen Reihenfolge.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1. Anforderungsanalyse
+2. Entwurf
+3. Implementierung
+4. Test
+5. Einführung
+6. Wartung</pre></div>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Was ist ein wesentlicher Nachteil des Wasserfallmodells?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Das Wasserfallmodell ist unflexibel gegenüber Änderungen.
+Wenn sich Anforderungen ändern, müssen alle Phasen wiederholt werden.
+Fehler, die spät erkannt werden, sind sehr teuer zu korrigieren.</pre></div>
+<hr>
+<h3>Aufgabe 3</h3>
+<p>Nenne zwei Unterschiede zwischen dem Wasserfallmodell und agiler Entwicklung.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1. Wasserfallmodell: sequenziell. Agil: iterativ (viele kurze Zyklen).
+2. Wasserfallmodell: Kunde sieht Produkt erst am Ende.
+   Agil: Kunde gibt nach jedem Sprint Feedback.</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Das Wasserfallmodell durchläuft Phasen sequenziell — keine Phase kann übersprungen werden.</li><li>Jede Phase produziert ein Dokument als Ausgabe.</li><li>Der größte Nachteil: Änderungen sind teuer und erzwingen Rückschritte.</li><li>Agile Methoden sind flexibler und liefern früh erste Ergebnisse.</li><li>In der Praxis werden heute meist agile Methoden bevorzugt.</li><li>Das Pflichtenheft beschreibt, was das System leisten soll.</li></ol>
+<hr>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau:</span>
+            <span class="rating-score">8 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="80"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema9_Java_Grundlagen.html" class="nav-btn nav-prev">← Java-Grundlagen</a><a href="Thema11_Objektorientierung.html" class="nav-btn nav-next">Objektorientierung →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

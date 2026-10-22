@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 04 – Fest- &amp; Gleitkommazahlen | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c4); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 04</span>
+    <span class="topbar-title">Fest- &amp; Gleitkommazahlen</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Fest- &amp; Gleitkommazahlen</h1>
+    <div class="meta">
+      <span>Thema 4 von 13</span>
+      <span class="meta-dot"></span>
+      <span>IEEE 754</span> <span class="meta-dot"></span> <span>Kommazahlen</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<hr>
+<h2>Verbindung zu Thema 3</h2>
+<p>Bisher wurden nur ganze Zahlen betrachtet.</p>
+<p>Ein Computer muss aber auch Kommazahlen darstellen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>3,14159...    (Pi)
+0,001         (winzig kleiner Wert)
+6,022 · 10²³  (riesiger Wert)</pre></div>
+<p>Dafür gibt es zwei Methoden: <strong>Festkommazahlen</strong> und <strong>Gleitkommazahlen</strong>.</p>
+<hr>
+<h2>Festkommazahlen</h2>
+<h3>Idee</h3>
+<p>Die Anzahl der Stellen vor und nach dem Komma ist fest vorgegeben.</p>
+<p>Beispiel: 8 Bit insgesamt, davon 4 Bit vor dem Komma, 4 Bit nach dem Komma.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Bit-Positionen:  8   4  2  1 , 0,5  0,25  0,125  0,0625</pre></div>
+<h3>Beispiel</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0110,1100</pre></div>
+<p>Berechnung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0·8 + 1·4 + 1·2 + 0·1  +  1·0,5 + 1·0,25 + 0·0,125 + 0·0,0625
+
+= 4 + 2  +  0,5 + 0,25
+
+= 6,75</pre></div>
+<h3>Vorteile</h3>
+<ul><li>Einfach zu berechnen</li><li>Schnell</li></ul>
+<h3>Nachteile</h3>
+<ul><li>Wertebereich begrenzt</li><li>Entweder kleine Zahlen oder Kommagenauigkeit, aber nicht beides</li></ul>
+<hr>
+<h2>Gleitkommazahlen</h2>
+<h3>Die Idee: Wissenschaftliche Notation</h3>
+<p>Im Alltag kennt man die wissenschaftliche Notation:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>6,022 · 10²³</pre></div>
+<p>Ein Computer macht etwas Ähnliches — aber im Binärsystem:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1,101 · 2⁵</pre></div>
+<p>Die Kommaposition „gleitet" je nach Exponent.</p>
+<p>Daher der Name: <strong>Gleitkommazahl</strong>.</p>
+<hr>
+<h2>Der IEEE 754 Standard</h2>
+<p>Praktisch alle Computer verwenden den Standard <strong>IEEE 754</strong>.</p>
+<p>Er legt genau fest, wie Gleitkommazahlen gespeichert werden.</p>
+<hr>
+<h2>Aufbau einer 32-Bit-Gleitkommazahl (Single Precision)</h2>
+<p>Eine 32-Bit-Gleitkommazahl besteht aus drei Teilen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>| S | EEEEEEEE | MMMMMMMMMMMMMMMMMMMMMMM |
+  1      8                 23</pre></div>
+<div class="table-wrap"><table><thead><tr><th>Teil</th><th>Bits</th><th>Bedeutung</th></tr></thead><tbody><tr><td>S</td><td>1</td><td>Vorzeichen (Sign)</td></tr><tr><td>E</td><td>8</td><td>Exponent</td></tr><tr><td>M</td><td>23</td><td>Mantisse</td></tr></tbody></table></div>
+<hr>
+<h2>Das Vorzeichen (S)</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 = positive Zahl
+1 = negative Zahl</pre></div>
+<hr>
+<h2>Der Exponent (E)</h2>
+<p>Der Exponent ist um 127 verschoben (Bias = 127).</p>
+<p>Das bedeutet:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Gespeicherter Wert = tatsächlicher Exponent + 127</pre></div>
+<p>Beispiel:</p>
+<p>Tatsächlicher Exponent = 4</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Gespeichert: 4 + 127 = 131 = 10000011</pre></div>
+<p>Der Bias-Trick erlaubt es, auch negative Exponenten ohne Vorzeichenbit zu speichern.</p>
+<hr>
+<h2>Die Mantisse (M)</h2>
+<p>In der wissenschaftlichen Darstellung beginnt die Zahl immer mit 1:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1,xxxxx · 2^e</pre></div>
+<p>Die führende 1 wird <strong>nicht gespeichert</strong> (Hidden Bit), weil sie immer vorhanden ist.</p>
+<p>Das spart ein Bit.</p>
+<hr>
+<h2>Vollständiges Beispiel: Dezimal → IEEE 754</h2>
+<h3>Zahl: 13,5</h3>
+<p><strong>Schritt 1: In Binär umwandeln</strong></p>
+<p>Ganzzahlteil: 13</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>13 : 2 = 6 Rest 1
+ 6 : 2 = 3 Rest 0
+ 3 : 2 = 1 Rest 1
+ 1 : 2 = 0 Rest 1
+→ 1101</pre></div>
+<p>Nachkommateil: 0,5</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0,5 × 2 = 1,0 → Bit: 1
+→ 0,1</pre></div>
+<p>Also: 13,5 = <code>1101,1</code></p>
+<hr>
+<p><strong>Schritt 2: Normalisieren</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1101,1 = 1,1011 · 2³</pre></div>
+<p>Die Eins wird vor das Komma gebracht. Der Exponent gibt an, um wie viele Stellen verschoben wurde.</p>
+<hr>
+<p><strong>Schritt 3: Vorzeichen</strong></p>
+<p>13,5 ist positiv → S = 0</p>
+<hr>
+<p><strong>Schritt 4: Exponent speichern</strong></p>
+<p>Exponent = 3</p>
+<p>Mit Bias: 3 + 127 = 130</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>130 = 10000010</pre></div>
+<hr>
+<p><strong>Schritt 5: Mantisse</strong></p>
+<p>Die Mantisse ist <code>1011</code> (die führende 1 wird weggelassen).</p>
+<p>Auf 23 Bit auffüllen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10110000000000000000000</pre></div>
+<hr>
+<p><strong>Ergebnis:</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 | 10000010 | 10110000000000000000000</pre></div>
+<hr>
+<h2>Vollständiges Beispiel: IEEE 754 → Dezimal</h2>
+<h3>Gegeben:</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 | 10000001 | 01000000000000000000000</pre></div>
+<p><strong>Schritt 1: Vorzeichen</strong></p>
+<p>S = 0 → positiv</p>
+<p><strong>Schritt 2: Exponent</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10000001 = 129
+129 - 127 = 2</pre></div>
+<p>Exponent = 2</p>
+<p><strong>Schritt 3: Mantisse</strong></p>
+<p>Gespeicherte Mantisse: <code>01000000000000000000000</code></p>
+<p>Mit Hidden Bit: <code>1,01</code></p>
+<p><strong>Schritt 4: Berechnen</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1,01 · 2² = 101,0 = 5</pre></div>
+<p>Ergebnis: <strong>5,0</strong></p>
+<hr>
+<h2>Besondere Werte in IEEE 754</h2>
+<div class="table-wrap"><table><thead><tr><th>Exponent</th><th>Mantisse</th><th>Bedeutung</th></tr></thead><tbody><tr><td>00000000</td><td>0</td><td>Null (±0)</td></tr><tr><td>00000000</td><td>≠ 0</td><td>Denormalisiert</td></tr><tr><td>11111111</td><td>0</td><td>Unendlich (±∞)</td></tr><tr><td>11111111</td><td>≠ 0</td><td>NaN (Not a Number)</td></tr></tbody></table></div>
+<p>NaN entsteht zum Beispiel bei:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 ÷ 0
+√(-1)</pre></div>
+<hr>
+<h2>Rundungsfehler</h2>
+<p>Nicht alle Dezimalzahlen lassen sich exakt als Binärbruch darstellen.</p>
+<p>Bekanntes Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0,1 + 0,2 ≠ 0,3</pre></div>
+<p>In Python:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>&gt;&gt;&gt; 0.1 + 0.2
+0.30000000000000004</pre></div>
+<p>Das ist kein Bug — sondern ein Eigenschaft der Binärdarstellung.</p>
+<p>Grund: 0,1 im Binärsystem ist ein unendlicher Bruch (ähnlich wie 1/3 im Dezimalsystem).</p>
+<hr>
+<h2>Vergleich: 32-Bit vs. 64-Bit</h2>
+<div class="table-wrap"><table><thead><tr><th>Eigenschaft</th><th>Single (32 Bit)</th><th>Double (64 Bit)</th></tr></thead><tbody><tr><td>Vorzeichen</td><td>1 Bit</td><td>1 Bit</td></tr><tr><td>Exponent</td><td>8 Bit</td><td>11 Bit</td></tr><tr><td>Mantisse</td><td>23 Bit</td><td>52 Bit</td></tr><tr><td>Genauigkeit</td><td>~7 Dezimalstellen</td><td>~15 Dezimalstellen</td></tr></tbody></table></div>
+<hr>
+<h2>Verbindung zu anderen Themen</h2>
+<ul><li><strong>Thema 1 (Binärzahlen):</strong> Die Mantisse ist eine Binärzahl.</li><li><strong>Thema 3 (Zweierkomplement):</strong> Das Vorzeichen-Bit funktioniert ähnlich.</li><li><strong>Java (Thema 9):</strong> <code>float</code> = 32 Bit, <code>double</code> = 64 Bit IEEE 754.</li></ul>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Welche drei Bestandteile hat eine IEEE-754-Gleitkommazahl (Single Precision)?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1. Vorzeichen (1 Bit)
+2. Exponent (8 Bit, mit Bias 127)
+3. Mantisse (23 Bit, Hidden Bit)</pre></div>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Wandle 5,75 in IEEE 754 (32 Bit) um.</p>
+<h4>Lösung</h4>
+<p>5,75 in Binär:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>5 = 101
+0,75: 0,75 × 2 = 1,5 → 1
+      0,5  × 2 = 1,0 → 1
+→ 0,11</pre></div>
+<p>5,75 = <code>101,11</code> = <code>1,0111 · 2²</code></p>
+<ul><li>S = 0</li><li>Exponent: 2 + 127 = 129 = <code>10000001</code></li><li>Mantisse: <code>01110000000000000000000</code></li></ul>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 | 10000001 | 01110000000000000000000</pre></div>
+<hr>
+<h3>Aufgabe 3</h3>
+<p>Warum ist <code>0,1 + 0,2 ≠ 0,3</code> in vielen Programmiersprachen?</p>
+<h4>Lösung</h4>
+<p>0,1 und 0,2 sind im Binärsystem unendliche periodische Brüche.</p>
+<p>Bei der Speicherung in endlich vielen Bits entstehen Rundungsfehler.</p>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Festkommazahlen haben einen festen Kommastandort — einfach, aber begrenzt.</li><li>Gleitkommazahlen verwenden die Form: Vorzeichen · Mantisse · 2^Exponent.</li><li>Der IEEE-754-Standard wird in fast allen Computern verwendet.</li><li>Single Precision: 1 + 8 + 23 Bit = 32 Bit.</li><li>Double Precision: 1 + 11 + 52 Bit = 64 Bit.</li><li>Der Bias (127 bei Single) erlaubt negative Exponenten ohne Vorzeichen-Bit.</li><li>Rundungsfehler bei Dezimalbrüchen sind systembedingt, kein Programmfehler.</li></ol>
+<hr>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit:</span>
+            <span class="rating-score">8 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="80"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema3_Einer_und_Zweierkomplement.html" class="nav-btn nav-prev">← Einer- &amp; Zweierkomplement</a><a href="Thema5_Nachricht_Information_Nachrichtentraeger.html" class="nav-btn nav-next">Nachricht &amp; Information →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

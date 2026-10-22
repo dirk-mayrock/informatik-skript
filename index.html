@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informatik LK – Hannah's Skript</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+  :root { --active: var(--c1); }
+
+  body { display: block; }
+
+  /* ── Hero ── */
+  .hero {
+    background: var(--bg-deep);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 48px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .hero-badge {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: 1px solid color-mix(in srgb, var(--c1) 40%, transparent);
+    background: color-mix(in srgb, var(--c1) 10%, transparent);
+    color: var(--c1);
+  }
+
+  .hero h1 {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    color: var(--text-primary);
+    line-height: 1.15;
+    max-width: 600px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 500px;
+    line-height: 1.6;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 6px;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat-num {
+    font-family: var(--font-code);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--active);
+    line-height: 1;
+  }
+
+  .hero-stat-lbl {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* ── Theme toggle (top-right) ── */
+  .topnav {
+    position: fixed;
+    top: 16px; right: 24px;
+    z-index: 100;
+  }
+
+  .topnav .theme-toggle {
+    margin: 0;
+  }
+
+  /* ── Grid ── */
+  .grid-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  .grid-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .topic-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color .15s, background .15s, transform .15s, box-shadow .15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topic-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--tc) 8%, transparent), transparent 60%);
+    pointer-events: none;
+  }
+
+  .topic-card:hover {
+    border-color: var(--tc);
+    background: var(--bg-card);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--tc) 15%, transparent);
+  }
+
+  .card-num {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--tc);
+    background: color-mix(in srgb, var(--tc) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--tc) 25%, transparent);
+    padding: 3px 9px;
+    border-radius: 5px;
+    width: fit-content;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .card-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .card-arrow {
+    font-size: 14px;
+    color: var(--tc);
+    margin-top: auto;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity .15s, transform .15s;
+  }
+
+  .topic-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* per-card colors */
+  .tc1  { --tc: var(--c1);  }
+  .tc2  { --tc: var(--c2);  }
+  .tc3  { --tc: var(--c3);  }
+  .tc4  { --tc: var(--c4);  }
+  .tc5  { --tc: var(--c5);  }
+  .tc6  { --tc: var(--c6);  }
+  .tc7  { --tc: var(--c7);  }
+  .tc8  { --tc: var(--c8);  }
+  .tc9  { --tc: var(--c9);  }
+  .tc10 { --tc: var(--c10); }
+  .tc11 { --tc: var(--c11); }
+  .tc12 { --tc: var(--c12); }
+  .tc13 { --tc: var(--c13); }
+
+  /* entry animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .topic-card {
+    animation: fadeUp .4s both;
+  }
+
+  .topic-card:nth-child(1)  { animation-delay: .05s; }
+  .topic-card:nth-child(2)  { animation-delay: .09s; }
+  .topic-card:nth-child(3)  { animation-delay: .13s; }
+  .topic-card:nth-child(4)  { animation-delay: .17s; }
+  .topic-card:nth-child(5)  { animation-delay: .20s; }
+  .topic-card:nth-child(6)  { animation-delay: .23s; }
+  .topic-card:nth-child(7)  { animation-delay: .26s; }
+  .topic-card:nth-child(8)  { animation-delay: .29s; }
+  .topic-card:nth-child(9)  { animation-delay: .31s; }
+  .topic-card:nth-child(10) { animation-delay: .33s; }
+  .topic-card:nth-child(11) { animation-delay: .35s; }
+  .topic-card:nth-child(12) { animation-delay: .37s; }
+  .topic-card:nth-child(13) { animation-delay: .39s; }
+
+  /* footer */
+  .site-footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+
+  .site-footer a {
+    color: var(--active);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- Theme toggle -->
+<div class="topnav">
+  <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+    <span class="toggle-icons">🌙</span>
+    <div class="toggle-track"><div class="toggle-thumb"></div></div>
+    <span class="toggle-label">Dark Mode</span>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">Gymnasium J2 · Leistungskurs</div>
+  <h1>Informatik LK<br>Hannah's Skript</h1>
+  <p>Alle Themen des Leistungskurses – klar erklärt, mit Beispielen, Klausuraufgaben und Merksätzen.</p>
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <div class="hero-stat-num">13</div>
+      <div class="hero-stat-lbl">Themen</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">100+</div>
+      <div class="hero-stat-lbl">Beispiele</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">50+</div>
+      <div class="hero-stat-lbl">Aufgaben</div>
+    </div>
+  </div>
+</div>
+
+<!-- Card grid -->
+<div class="grid-section">
+  <div class="grid-label">Alle Themen</div>
+  <div class="card-grid">
+
+    <a href="Thema1_Binaer_und_Hexadezimalzahlen.html" class="topic-card tc1">
+      <div class="card-num">01</div>
+      <div class="card-title">Binär- &amp; Hexadezimalzahlen</div>
+      <div class="card-sub">Zahlensysteme · Resteverfahren · Umrechnung · Bit &amp; Byte</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema2_Binaere_Arithmetik_V2.html" class="topic-card tc2">
+      <div class="card-num">02</div>
+      <div class="card-title">Binäre Arithmetik</div>
+      <div class="card-sub">Addition · Subtraktion · Multiplikation · Overflow · ALU</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema3_Einer_und_Zweierkomplement.html" class="topic-card tc3">
+      <div class="card-num">03</div>
+      <div class="card-title">Einer- &amp; Zweierkomplement</div>
+      <div class="card-sub">Negative Zahlen · Vorzeichen · Subtraktion via Addition</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema4_Fest_und_Gleitkommazahlen.html" class="topic-card tc4">
+      <div class="card-num">04</div>
+      <div class="card-title">Fest- &amp; Gleitkommazahlen</div>
+      <div class="card-sub">IEEE 754 · Mantisse · Exponent · Bias · Rundungsfehler</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html" class="topic-card tc5">
+      <div class="card-num">05</div>
+      <div class="card-title">Nachricht &amp; Information</div>
+      <div class="card-sub">Shannon · Entropie · Informationsgehalt · Codierung</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema6_Datenkompression.html" class="topic-card tc6">
+      <div class="card-num">06</div>
+      <div class="card-title">Datenkompression</div>
+      <div class="card-sub">RLE · Delta · Huffman-Codierung · LZW · verlustfrei/behaftet</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema7_Hashing.html" class="topic-card tc7">
+      <div class="card-num">07</div>
+      <div class="card-title">Hashing</div>
+      <div class="card-sub">Hashtabellen · Kollisionen · SHA-256 · Passwörter · Blockchain</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema8_Hamming_Codes.html" class="topic-card tc8">
+      <div class="card-num">08</div>
+      <div class="card-title">Hamming-Codes</div>
+      <div class="card-sub">Fehlerkorrektur · Prüfbits · Paritätsbit · Hamming-Abstand</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema9_Java_Grundlagen.html" class="topic-card tc9">
+      <div class="card-num">09</div>
+      <div class="card-title">Java-Grundlagen</div>
+      <div class="card-sub">Datentypen · Schleifen · Arrays · Methoden · Strings</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html" class="topic-card tc10">
+      <div class="card-num">10</div>
+      <div class="card-title">Softwareentwicklung</div>
+      <div class="card-sub">Wasserfallmodell · Phasen · Agil · Scrum · Sprints</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema11_Objektorientierung.html" class="topic-card tc11">
+      <div class="card-num">11</div>
+      <div class="card-title">Objektorientierung</div>
+      <div class="card-sub">Klassen · Objekte · Kapselung · Vererbung · Polymorphismus</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema12_Struktogramme_und_Ablaufplaene.html" class="topic-card tc12">
+      <div class="card-num">12</div>
+      <div class="card-title">Struktogramme</div>
+      <div class="card-sub">Nassi-Shneiderman · Ablaufpläne · DIN 66001 / 66261</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="Thema13_Sortieralgorithmen.html" class="topic-card tc13">
+      <div class="card-num">13</div>
+      <div class="card-title">Sortieralgorithmen</div>
+      <div class="card-sub">Insertion · Selection · Quick · Merge · Heap · Bucket · O-Notation</div>
+      <div class="card-arrow">→</div>
+    </a>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  Informatik LK · Gymnasium J2 · Hannah's Skript ·
+  <a href="https://github.com/dirk-mayrock/informatik-skript" target="_blank">GitHub</a>
+</footer>
+
+<script src="lk-script.js"></script>
+</body>
+</html>

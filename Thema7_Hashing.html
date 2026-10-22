@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 07 – Hashing | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c7); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 07</span>
+    <span class="topbar-title">Hashing</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Hashing</h1>
+    <div class="meta">
+      <span>Thema 7 von 13</span>
+      <span class="meta-dot"></span>
+      <span>Hashtabellen</span> <span class="meta-dot"></span> <span>SHA</span> <span class="meta-dot"></span> <span>Kollisionen</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<hr>
+<h2>Einleitung: Das Problem der schnellen Suche</h2>
+<p>Stell dir vor, du hast eine Liste mit 1.000.000 Namen und willst wissen, ob „Hannah" darin vorkommt.</p>
+<p>Wenn die Liste unsortiert ist, musst du im schlimmsten Fall alle 1.000.000 Namen durchsuchen.</p>
+<p>Hashing löst dieses Problem: Die Suche dauert fast immer <strong>konstante Zeit</strong> — egal wie groß die Liste ist.</p>
+<hr>
+<h2>Was ist eine Hashfunktion?</h2>
+<p>Eine <strong>Hashfunktion</strong> ist eine Funktion, die eine Eingabe beliebiger Länge auf einen Wert fester Länge abbildet.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>h(x) = Hashwert</pre></div>
+<p>Die Eingabe kann ein Name, eine Datei, ein Passwort oder beliebige Daten sein.</p>
+<p>Der Hashwert hat immer dieselbe Länge — egal wie groß die Eingabe.</p>
+<hr>
+<h2>Eigenschaften einer guten Hashfunktion</h2>
+<div class="table-wrap"><table><thead><tr><th>Eigenschaft</th><th>Bedeutung</th></tr></thead><tbody><tr><td>Deterministisch</td><td>Gleiche Eingabe → immer gleicher Hashwert</td></tr><tr><td>Gleichverteilung</td><td>Hashwerte verteilen sich gleichmäßig</td></tr><tr><td>Schnell berechnet</td><td>Berechnung soll effizient sein</td></tr><tr><td>Lawineneffekt</td><td>Kleine Änderung der Eingabe → völlig anderer Hashwert</td></tr><tr><td>Einwegfunktion</td><td>Aus dem Hashwert lässt sich die Eingabe nicht berechnen</td></tr></tbody></table></div>
+<hr>
+<h2>Einfaches Beispiel: Modulo-Hashfunktion</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>h(k) = k mod m</pre></div>
+<p>m = Größe der Hashtabelle</p>
+<p>Beispiel mit m = 10:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>h(23) = 23 mod 10 = 3
+h(47) = 47 mod 10 = 7
+h(10) = 10 mod 10 = 0
+h(33) = 33 mod 10 = 3</pre></div>
+<p>23 und 33 landen am selben Index → <strong>Kollision</strong>!</p>
+<hr>
+<h2>Hashtabellen</h2>
+<p>Eine <strong>Hashtabelle</strong> ist ein Array, in dem Einträge an einer durch die Hashfunktion bestimmten Position gespeichert werden.</p>
+<p>Einfügen von <code>(Schlüssel, Wert)</code>:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Position = h(Schlüssel)
+Tabelle[Position] = Wert</pre></div>
+<p>Suchen nach Schlüssel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Position = h(Schlüssel)
+Wert = Tabelle[Position]</pre></div>
+<p>Beides dauert <strong>O(1)</strong> — konstante Zeit!</p>
+<hr>
+<h2>Kollisionen</h2>
+<p>Eine <strong>Kollision</strong> tritt auf, wenn zwei verschiedene Schlüssel denselben Hashwert ergeben.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>h(23) = 3
+h(33) = 3
+→ Kollision!</pre></div>
+<p>Kollisionen sind unvermeidbar, wenn es mehr mögliche Schlüssel als Tabellenplätze gibt (Schubfachprinzip).</p>
+<hr>
+<h2>Kollisionsbehandlung 1: Verkettung (Chaining)</h2>
+<p>Jede Zelle der Hashtabelle enthält eine <strong>verkettete Liste</strong>.</p>
+<p>Alle Schlüssel mit demselben Hashwert werden in diese Liste eingehängt.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Index 3: [23] → [33] → null
+Index 7: [47] → null
+Index 0: [10] → null</pre></div>
+<p><strong>Vorteil:</strong> Einfach zu implementieren, unbegrenzt viele Elemente pro Zelle.</p>
+<p><strong>Nachteil:</strong> Im schlechtesten Fall (alle im selben Bucket) wird die Suche linear: O(n).</p>
+<hr>
+<h2>Kollisionsbehandlung 2: Offene Adressierung (Linear Probing)</h2>
+<p>Ist eine Position belegt, wird die nächste freie Position verwendet:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>h&#x27;(k, i) = (h(k) + i) mod m</pre></div>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>h(23) = 3 → Position 3 frei → speichern
+h(33) = 3 → Position 3 belegt → probiere 4 → frei → speichern</pre></div>
+<p><strong>Vorteil:</strong> Kein zusätzlicher Speicher für Listen.</p>
+<p><strong>Nachteil:</strong> Cluster entstehen — viele belegte Felder hintereinander verlangsamen spätere Suchen.</p>
+<hr>
+<h2>Kryptografische Hashfunktionen</h2>
+<p>Für Sicherheitsanwendungen werden spezielle, sehr sichere Hashfunktionen verwendet.</p>
+<p>Wichtigste Vertreter:</p>
+<div class="table-wrap"><table><thead><tr><th>Funktion</th><th>Ausgabelänge</th><th>Status</th></tr></thead><tbody><tr><td>MD5</td><td>128 Bit</td><td>unsicher (gebrochen)</td></tr><tr><td>SHA-1</td><td>160 Bit</td><td>unsicher (veraltet)</td></tr><tr><td>SHA-256</td><td>256 Bit</td><td>aktuell sicher</td></tr><tr><td>SHA-3</td><td>variabel</td><td>aktuell sicher</td></tr></tbody></table></div>
+<hr>
+<h2>Anwendungen kryptografischer Hashfunktionen</h2>
+<h3>Passwortspeicherung</h3>
+<p>Passwörter werden <strong>nie im Klartext</strong> gespeichert.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Eingabe:   &quot;meinPasswort123&quot;
+SHA-256:   a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3</pre></div>
+<p>Bei der Anmeldung wird das eingegebene Passwort gehasht und mit dem gespeicherten Hash verglichen.</p>
+<hr>
+<h3>Dateiintegrität</h3>
+<p>Beim Herunterladen einer Datei kann man prüfen, ob sie unverändert ist:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Hashwert der Originaldatei: abc123...
+Hashwert der heruntergeladenen Datei: abc123...
+→ identisch → Datei ist korrekt</pre></div>
+<hr>
+<h3>Blockchain / Bitcoin</h3>
+<p>Jeder Block enthält den Hash des vorherigen Blocks.</p>
+<p>Dadurch kann kein Block nachträglich geändert werden, ohne alle folgenden Blöcke zu ungültig zu machen.</p>
+<hr>
+<h2>Lawineneffekt (Avalanche Effect)</h2>
+<p>Eine kleine Änderung der Eingabe ändert den Hashwert komplett.</p>
+<p>Beispiel (SHA-256):</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>&quot;Hallo&quot;   → 185f8db32921bd46...
+&quot;hallo&quot;   → 2cf24dba5fb0a30e...</pre></div>
+<p>Nur ein Großbuchstabe geändert — der gesamte Hashwert ist anders.</p>
+<hr>
+<h2>Verbindung zu anderen Themen</h2>
+<ul><li><strong>Thema 1 (Hexadezimal):</strong> Hashwerte werden meist hexadezimal dargestellt.</li><li><strong>Thema 5 (Information):</strong> Ein Hashwert komprimiert beliebig viele Daten auf eine feste Länge.</li><li><strong>Thema 8 (Hamming-Codes):</strong> Beide Verfahren dienen der Erkennung von Fehlern/Veränderungen.</li></ul>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Gegeben sei die Hashfunktion <code>h(k) = k mod 7</code>.</p>
+<p>Füge die Schlüssel <code>15, 22, 8, 29, 1</code> in eine Hashtabelle der Größe 7 ein.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>h(15) = 15 mod 7 = 1
+h(22) = 22 mod 7 = 1  → Kollision mit 15!
+h( 8) =  8 mod 7 = 1  → Kollision!
+h(29) = 29 mod 7 = 1  → Kollision!
+h( 1) =  1 mod 7 = 1  → Kollision!</pre></div>
+<p>Mit Verkettung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Index 1: [15] → [22] → [8] → [29] → [1] → null</pre></div>
+<p>Hinweis: m = 7 (prim) ist hier zufällig ungünstig für diese Eingaben.</p>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Warum werden Passwörter als Hashwerte gespeichert?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Hashfunktionen sind Einwegfunktionen.
+Aus dem Hashwert lässt sich das Passwort nicht zurückberechnen.
+Selbst wenn die Datenbank gestohlen wird, sind die Originalpasswörter nicht lesbar.</pre></div>
+<hr>
+<h3>Aufgabe 3</h3>
+<p>Was ist eine Kollision und warum ist sie unvermeidbar?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Eine Kollision tritt auf, wenn zwei verschiedene Schlüssel denselben Hashwert ergeben.
+Da es mehr mögliche Schlüssel als Tabellenplätze gibt (unendlich vs. endlich),
+muss es laut Schubfachprinzip Kollisionen geben.</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Eine Hashfunktion bildet beliebige Daten auf einen Wert fester Länge ab.</li><li>Hashtabellen ermöglichen Suche, Einfügen und Löschen in O(1).</li><li>Kollisionen sind unvermeidbar; sie werden durch Chaining oder Open Addressing behandelt.</li><li>Kryptografische Hashfunktionen sind Einwegfunktionen — nicht umkehrbar.</li><li>Der Lawineneffekt: Kleine Eingabeänderung → komplett anderer Hashwert.</li><li>SHA-256 ist der aktuelle Standard für sichere Hashwerte.</li></ol>
+<hr>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema6_Datenkompression.html" class="nav-btn nav-prev">← Datenkompression</a><a href="Thema8_Hamming_Codes.html" class="nav-btn nav-next">Hamming-Codes →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

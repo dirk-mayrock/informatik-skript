@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 02 – Binäre Arithmetik | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c2); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 02</span>
+    <span class="topbar-title">Binäre Arithmetik</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Binäre Arithmetik</h1>
+    <div class="meta">
+      <span>Thema 2 von 13</span>
+      <span class="meta-dot"></span>
+      <span>Rechnen</span> <span class="meta-dot"></span> <span>ALU</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<p>Ein Computer rechnet nicht nur bei Mathematikaufgaben.</p>
+<p>Sobald ein Bild angezeigt, ein Video abgespielt, eine Nachricht verschickt oder ein Spiel gestartet wird, führt der Computer Berechnungen durch.</p>
+<p>Alle diese Berechnungen basieren letztlich auf Binärzahlen.</p>
+<p>Aus diesem Grund ist das Verständnis der Binärarithmetik eine der wichtigsten Grundlagen der Informatik.</p>
+<hr>
+<p>In Thema 1 wurde erklärt, warum Computer Binärzahlen verwenden.</p>
+<p>Jetzt geht es darum, mit diesen Zahlen zu rechnen.</p>
+<p>Der Übergang lautet:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Zahl darstellen
+→
+Zahl verarbeiten</pre></div>
+<hr>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>128 64 32 16 8 4 2 1</pre></div>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>101101₂</pre></div>
+<p>Berechnung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1·32 + 0·16 + 1·8 + 1·4 + 0·2 + 1·1
+
+= 45</pre></div>
+<hr>
+<p>Wie im Dezimalsystem gibt es:</p>
+<ol><li>Addition</li><li>Subtraktion</li><li>Multiplikation</li><li>Division</li></ol>
+<p>Viele dieser Operationen können auf Additionen zurückgeführt werden.</p>
+<p>Moderne Prozessoren besitzen zusätzlich eigene Schaltungen für logische Operationen, Vergleiche und häufig auch Multiplikationen.</p>
+<hr>
+<p>Die ersten Rechenwerke eines Prozessors bestehen aus Addierern.</p>
+<p>Viele Berechnungen lassen sich damit durchführen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>4 × 3
+=
+4 + 4 + 4</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>12 ÷ 3</pre></div>
+<p>kann als wiederholte Subtraktion verstanden werden.</p>
+<p>Deshalb bildet die Addition das Fundament vieler Rechenschaltungen.</p>
+<hr>
+<h2>Grundregeln</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 + 0 = 0
+0 + 1 = 1
+1 + 0 = 1
+1 + 1 = 10</pre></div>
+<p>Die letzte Regel erzeugt einen Übertrag.</p>
+<hr>
+<h2>Warum entsteht ein Übertrag?</h2>
+<p>Vergleich mit dem Dezimalsystem:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>9 + 1 = 10</pre></div>
+<p>Im Binärsystem existieren nur die Ziffern 0 und 1.</p>
+<p>Deshalb gilt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 + 1 = 10</pre></div>
+<p>Die rechte 0 bleibt stehen.</p>
+<p>Die linke 1 wird in die nächste Stelle übertragen.</p>
+<hr>
+<h2>Beispiel 1</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre> 0101
++0011
+-----
+ 1000</pre></div>
+<p>Kontrolle:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>5 + 3 = 8</pre></div>
+<hr>
+<h2>Beispiel 2: Mehrere Überträge</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre> 1111
++1111
+------
+11110</pre></div>
+<p>Kontrolle:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>15 + 15 = 30</pre></div>
+<p>Dieses Beispiel zeigt, wie Überträge über mehrere Stellen weitergegeben werden.</p>
+<hr>
+<h2>Grundregeln</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 - 0 = 1
+1 - 1 = 0
+0 - 0 = 0</pre></div>
+<p>Problemfall:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 - 1</pre></div>
+<p>Hier muss ausgeliehen werden.</p>
+<hr>
+<h2>Warum wird ausgeliehen?</h2>
+<p>Im Dezimalsystem leiht man sich eine 10.</p>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>20 - 7</pre></div>
+<p>Im Binärsystem leiht man sich stattdessen eine 2.</p>
+<hr>
+<h2>Beispiel 1</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre> 1010
+-0011
+-----
+ 0111</pre></div>
+<p>Kontrolle:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10 - 3 = 7</pre></div>
+<hr>
+<h2>Beispiel 2: Mehrfaches Ausleihen</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10000
+-00001
+------
+01111</pre></div>
+<p>Kontrolle:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>16 - 1 = 15</pre></div>
+<hr>
+<h2>Grundregeln</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 × 0 = 0
+0 × 1 = 0
+1 × 0 = 0
+1 × 1 = 1</pre></div>
+<p>Deshalb ist die Multiplikation im Binärsystem einfacher als im Dezimalsystem.</p>
+<hr>
+<h2>Beispiel 1</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>   101
+×   11
+------
+   101
++1010
+------
+ 1111</pre></div>
+<p>Kontrolle:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>5 × 3 = 15</pre></div>
+<hr>
+<h2>Beispiel 2</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>    110
+×   101
+-------
+    110
+   000
++11000
+-------
+11110</pre></div>
+<p>Kontrolle:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>6 × 5 = 30</pre></div>
+<hr>
+<p>Bitverschiebungen gehören zu den wichtigsten Operationen eines Prozessors.</p>
+<hr>
+<h2>Nach links verschieben</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1011
+→
+10110</pre></div>
+<p>Warum?</p>
+<p>Jede Stelle rückt um eine Position nach links.</p>
+<p>Dadurch verdoppelt sich der Wert.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>11 × 2 = 22</pre></div>
+<hr>
+<h2>Nach rechts verschieben</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10110
+→
+1011</pre></div>
+<p>Dadurch halbiert sich der Wert.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>22 ÷ 2 = 11</pre></div>
+<hr>
+<h2>Warum nutzt die CPU Bitverschiebungen?</h2>
+<p>Bitverschiebungen benötigen weniger Hardware und sind oft schneller als eine vollständige Multiplikation.</p>
+<hr>
+<p>Die Division funktioniert ähnlich wie die schriftliche Division.</p>
+<hr>
+<h2>Beispiel ohne Rest</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1000₂ ÷ 10₂
+= 100₂</pre></div>
+<p>Kontrolle:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>8 ÷ 2 = 4</pre></div>
+<hr>
+<h2>Beispiel mit Rest</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111₂ ÷ 10₂</pre></div>
+<p>Kontrolle im Dezimalsystem:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>15 ÷ 2 = 7 Rest 1</pre></div>
+<p>Ergebnis:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>111 Rest 1</pre></div>
+<hr>
+<p>Im Prozessor befinden sich Milliarden Transistoren.</p>
+<p>Ein Transistor kann vereinfacht als elektronischer Schalter betrachtet werden.</p>
+<p>Aus vielen Transistoren entstehen logische Gatter.</p>
+<p>Aus logischen Gattern entstehen Addierer.</p>
+<p>Aus vielen Addierern entsteht schließlich das Rechenwerk.</p>
+<hr>
+<p>ALU bedeutet:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Arithmetic Logic Unit</pre></div>
+<p>Deutsch:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Arithmetisch-Logische Einheit</pre></div>
+<p>Die ALU führt unter anderem aus:</p>
+<ul><li>Addition</li><li>Subtraktion</li><li>Vergleiche</li><li>UND-Operationen</li><li>ODER-Operationen</li><li>XOR-Operationen</li><li>Bitverschiebungen</li></ul>
+<hr>
+<p>Ein Halbaddierer addiert zwei einzelne Bits.</p>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 + 1</pre></div>
+<p>Ergebnis:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Summe = 0
+Übertrag = 1</pre></div>
+<hr>
+<p>Sobald mehrere Stellen addiert werden, müssen Überträge berücksichtigt werden.</p>
+<p>Deshalb verwendet ein Prozessor Volladdierer.</p>
+<p>Diese können den Übertrag der vorherigen Stelle mitverarbeiten.</p>
+<hr>
+<p>Jeder Datentyp besitzt einen begrenzten Wertebereich.</p>
+<p>Beispiel:</p>
+<p>4 Bit:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111</pre></div>
+<p>entspricht:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>15</pre></div>
+<p>Wird nun 1 addiert:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111
++0001
+-----
+10000</pre></div>
+<p>Für einen 4-Bit-Speicher ist jedoch kein Platz für die fünfte Stelle vorhanden.</p>
+<p>Dies nennt man Overflow.</p>
+<hr>
+<p>Bisher wurden ausschließlich positive Zahlen betrachtet.</p>
+<p>Eine wichtige Frage bleibt offen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Wie speichert ein Computer -5?</pre></div>
+<p>Genau dieses Problem lösen Einerkomplement und Zweierkomplement.</p>
+<hr>
+<h2>Smartphones</h2>
+<p>Apps führen ständig Binärrechnungen aus.</p>
+<h2>Grafikkarten</h2>
+<p>Millionen bis Milliarden Berechnungen pro Sekunde.</p>
+<h2>Datenbanken</h2>
+<p>Vergleiche und Sortierungen basieren auf binären Operationen.</p>
+<h2>Künstliche Intelligenz</h2>
+<p>Moderne KI-Systeme führen enorme Mengen an Additionen und Multiplikationen aus.</p>
+<hr>
+<h2>Aufgabe 1</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1010
++0101</pre></div>
+<h2>Aufgabe 2</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111
++1111</pre></div>
+<h2>Aufgabe 3</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1001
+-0011</pre></div>
+<h2>Aufgabe 4</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10000
+-00001</pre></div>
+<h2>Aufgabe 5</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>101
+×11</pre></div>
+<h2>Aufgabe 6</h2>
+<p>Warum ist</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 + 1 = 10</pre></div>
+<p>kein Fehler?</p>
+<h2>Aufgabe 7</h2>
+<p>Warum sind Bitverschiebungen oft schneller als Multiplikationen?</p>
+<hr>
+<h2>Lösung 1</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111</pre></div>
+<h2>Lösung 2</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>11110</pre></div>
+<h2>Lösung 3</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0110</pre></div>
+<h2>Lösung 4</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>01111</pre></div>
+<h2>Lösung 5</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111</pre></div>
+<h2>Lösung 6</h2>
+<p>Im Binärsystem existiert keine Ziffer 2.</p>
+<p>Deshalb wird ein Übertrag erzeugt.</p>
+<h2>Lösung 7</h2>
+<p>Bitverschiebungen benötigen weniger Schaltungsaufwand und können sehr schnell ausgeführt werden.</p>
+<hr>
+<ul><li>Computer rechnen mit Binärzahlen.</li><li>Die Addition ist die wichtigste Rechenoperation.</li><li>Überträge entstehen bei 1 + 1.</li><li>Multiplikation mit 2 entspricht einer Linksverschiebung.</li><li>Division durch 2 entspricht einer Rechtsverschiebung.</li><li>Die ALU ist das Rechenwerk eines Prozessors.</li><li>Das Zweierkomplement erweitert die Binärarithmetik auf negative Zahlen.</li></ul>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema1_Binaer_und_Hexadezimalzahlen.html" class="nav-btn nav-prev">← Binär- &amp; Hexadezimalzahlen</a><a href="Thema3_Einer_und_Zweierkomplement.html" class="nav-btn nav-next">Einer- &amp; Zweierkomplement →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

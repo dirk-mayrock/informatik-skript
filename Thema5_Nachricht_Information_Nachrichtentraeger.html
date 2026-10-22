@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 05 – Nachricht &amp; Information | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c5); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 05</span>
+    <span class="topbar-title">Nachricht &amp; Information</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Nachricht &amp; Information</h1>
+    <div class="meta">
+      <span>Thema 5 von 13</span>
+      <span class="meta-dot"></span>
+      <span>Shannon</span> <span class="meta-dot"></span> <span>Entropie</span> <span class="meta-dot"></span> <span>Codierung</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<hr>
+<h2>Einleitung</h2>
+<p>Wenn man jemandem eine SMS schickt, passieren mehrere Dinge gleichzeitig:</p>
+<ul><li>Es gibt einen Inhalt (den Text der SMS).</li><li>Es gibt ein Medium, das den Text transportiert (das Mobilfunknetz).</li><li>Es gibt eine Bedeutung für den Empfänger.</li></ul>
+<p>Diese drei Dinge — Nachricht, Nachrichtenträger und Information — sind in der Informatik klar voneinander getrennt.</p>
+<hr>
+<h2>Grundbegriffe</h2>
+<h3>Zeichen</h3>
+<p>Ein <strong>Zeichen</strong> ist die kleinste bedeutungstragende Einheit.</p>
+<p>Beispiele:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>A  B  C  0  1  ?  !</pre></div>
+<hr>
+<h3>Alphabet</h3>
+<p>Ein <strong>Alphabet</strong> ist eine endliche Menge von Zeichen.</p>
+<p>Beispiele:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Lateinisches Alphabet: {A, B, C, ..., Z}
+Binäralphabet:         {0, 1}
+Dezimalalphabet:       {0, 1, 2, ..., 9}</pre></div>
+<hr>
+<h3>Zeichenkette / Wort</h3>
+<p>Eine Folge von Zeichen aus einem Alphabet.</p>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>&quot;HALLO&quot;
+&quot;1010011&quot;</pre></div>
+<hr>
+<h3>Nachricht</h3>
+<p>Eine <strong>Nachricht</strong> ist eine Zeichenfolge, die von einem Sender zu einem Empfänger übertragen wird.</p>
+<p>Wichtig: Eine Nachricht ist <strong>syntaktisch</strong> — sie hat eine Form, aber noch keine Bedeutung.</p>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>&quot;42&quot;</pre></div>
+<p>Das ist eine Nachricht. Ob 42 eine Temperatur, eine Hausnummer oder die Antwort auf alles ist, ist noch unklar.</p>
+<hr>
+<h3>Information</h3>
+<p><strong>Information</strong> ist der Teil einer Nachricht, der beim Empfänger <strong>Neuheit</strong> erzeugt.</p>
+<p>Wichtige Unterscheidung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Nachricht = die gesendeten Daten
+Information = das, was der Empfänger daraus lernt</pre></div>
+<p>Wenn Hannah schon weiß, dass Morgen kein Unterricht ist, und eine SMS „Kein Unterricht morgen" bekommt, dann enthält diese Nachricht für sie <strong>keine neue Information</strong>.</p>
+<hr>
+<h3>Nachrichtenträger (Medium)</h3>
+<p>Der <strong>Nachrichtenträger</strong> ist das physikalische Medium, auf dem die Nachricht übertragen oder gespeichert wird.</p>
+<p>Beispiele:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Kabel          → Strom
+Glasfaser      → Licht
+Funk / WLAN    → elektromagnetische Wellen
+USB-Stick      → Flash-Speicher
+Schallwellen   → Luft
+Papier         → Tinte</pre></div>
+<hr>
+<h2>Das Kommunikationsmodell nach Shannon</h2>
+<p>Claude Shannon (1948) hat das mathematische Grundmodell der Kommunikation entwickelt.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Informationsquelle → Sender → Kanal → Empfänger → Senke
+                                ↑
+                             Störquelle</pre></div>
+<div class="table-wrap"><table><thead><tr><th>Begriff</th><th>Erklärung</th></tr></thead><tbody><tr><td>Informationsquelle</td><td>Wo die Nachricht entsteht (z.B. ein Mensch)</td></tr><tr><td>Sender</td><td>Codiert die Nachricht in ein Signal</td></tr><tr><td>Kanal</td><td>Das Übertragungsmedium (Kabel, Luft...)</td></tr><tr><td>Störquelle</td><td>Alles, was das Signal verändert</td></tr><tr><td>Empfänger</td><td>Decodiert das Signal zurück</td></tr><tr><td>Senke</td><td>Endempfänger der Nachricht</td></tr></tbody></table></div>
+<h3>Beispiel: Telefongespräch</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Informationsquelle: Hannah spricht
+Sender:             Mikrofon im Telefon wandelt Schall in Signal um
+Kanal:              Mobilfunknetz
+Störquelle:         Rauschen, schlechter Empfang
+Empfänger:          Lautsprecher beim Gesprächspartner
+Senke:              Gesprächspartner hört</pre></div>
+<hr>
+<h2>Informationsgehalt und Entropie</h2>
+<h3>Informationsgehalt eines Zeichens</h3>
+<p>Je <strong>unwahrscheinlicher</strong> ein Ereignis ist, desto mehr Information trägt es.</p>
+<p>Formel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>I(x) = log₂(1 / P(x))
+     = -log₂(P(x))</pre></div>
+<p>Einheit: <strong>Bit</strong></p>
+<p>Beispiel:</p>
+<p>Eine faire Münze wird geworfen. P(Kopf) = 0,5</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>I = -log₂(0,5) = -(-1) = 1 Bit</pre></div>
+<p>Ein Würfel zeigt 6. P(6) = 1/6</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>I = -log₂(1/6) = log₂(6) ≈ 2,58 Bit</pre></div>
+<p>Die Sechs trägt mehr Information als Kopf bei der Münze — weil sie unwahrscheinlicher ist.</p>
+<hr>
+<h3>Shannon-Entropie</h3>
+<p>Die <strong>Entropie H</strong> ist der durchschnittliche Informationsgehalt einer Quelle.</p>
+<p>Formel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>H = -∑ P(xᵢ) · log₂(P(xᵢ))</pre></div>
+<p>Beispiel:</p>
+<p>Eine Quelle sendet zwei Zeichen A und B.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>P(A) = 0,5
+P(B) = 0,5</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>H = -(0,5 · log₂(0,5) + 0,5 · log₂(0,5))
+  = -(0,5 · (-1) + 0,5 · (-1))
+  = -(-0,5 - 0,5)
+  = 1 Bit</pre></div>
+<p>Wenn A viel häufiger vorkommt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>P(A) = 0,9
+P(B) = 0,1</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>H = -(0,9 · log₂(0,9) + 0,1 · log₂(0,1))
+  ≈ -(0,9 · (-0,152) + 0,1 · (-3,32))
+  ≈ -(−0,137 − 0,332)
+  ≈ 0,469 Bit</pre></div>
+<p>Je ungleicher die Verteilung, desto <strong>kleiner</strong> die Entropie — desto weniger Information steckt im Durchschnitt in einem Zeichen.</p>
+<hr>
+<h2>Codierung</h2>
+<p><strong>Codierung</strong> ist die Umwandlung einer Nachricht in eine andere Darstellungsform.</p>
+<p>Beispiele:</p>
+<div class="table-wrap"><table><thead><tr><th>Darstellung</th><th>Codierung</th></tr></thead><tbody><tr><td>Buchstabe A</td><td>ASCII: 65 = 01000001</td></tr><tr><td>Zahl 13</td><td>Binär: 1101</td></tr><tr><td>Emoji 😊</td><td>Unicode: U+1F60A</td></tr></tbody></table></div>
+<h3>ASCII</h3>
+<p>ASCII = American Standard Code for Information Interchange</p>
+<p>Ordnet jedem Zeichen eine 7-Bit-Zahl zu.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>&#x27;A&#x27; = 65 = 1000001
+&#x27;a&#x27; = 97 = 1100001
+&#x27;0&#x27; = 48 = 0110000</pre></div>
+<hr>
+<h2>Redundanz</h2>
+<p><strong>Redundanz</strong> ist der Teil einer Nachricht, der keine neue Information enthält.</p>
+<p>Redundanz kann nützlich sein:</p>
+<ul><li>Fehlerkorrektur (Hamming-Code, Thema 8)</li><li>Verständlichkeit (Kontext)</li></ul>
+<p>Redundanz kann stören:</p>
+<ul><li>Sie erhöht die Datenmenge ohne Informationsgewinn.</li><li>Datenkompression (Thema 6) reduziert Redundanz.</li></ul>
+<hr>
+<h2>Verbindung zu anderen Themen</h2>
+<ul><li><strong>Thema 6 (Datenkompression):</strong> Kompression entfernt Redundanz aus Nachrichten.</li><li><strong>Thema 7 (Hashing):</strong> Hashfunktionen arbeiten auf codierten Nachrichten.</li><li><strong>Thema 8 (Hamming-Codes):</strong> Redundanz wird gezielt hinzugefügt, um Fehler zu erkennen.</li><li><strong>Thema 1 (Binärzahlen):</strong> Das Binäralphabet {0, 1} ist die Grundlage aller Speicherung.</li></ul>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Was ist der Unterschied zwischen Nachricht und Information?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Eine Nachricht ist die übertragene Zeichenfolge (syntaktisch).
+Information ist der Neuheitswert der Nachricht für den Empfänger (semantisch).
+Dieselbe Nachricht kann für verschiedene Empfänger unterschiedlich viel Information enthalten.</pre></div>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Eine Quelle sendet vier Zeichen mit folgenden Wahrscheinlichkeiten:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>A: P = 0,5
+B: P = 0,25
+C: P = 0,125
+D: P = 0,125</pre></div>
+<p>Berechne den Informationsgehalt jedes Zeichens.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>I(A) = -log₂(0,5)    = 1 Bit
+I(B) = -log₂(0,25)   = 2 Bit
+I(C) = -log₂(0,125)  = 3 Bit
+I(D) = -log₂(0,125)  = 3 Bit</pre></div>
+<hr>
+<h3>Aufgabe 3</h3>
+<p>Berechne die Entropie der Quelle aus Aufgabe 2.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>H = 0,5·1 + 0,25·2 + 0,125·3 + 0,125·3
+  = 0,5 + 0,5 + 0,375 + 0,375
+  = 1,75 Bit</pre></div>
+<hr>
+<h3>Aufgabe 4</h3>
+<p>Nenne drei verschiedene Nachrichtenträger und die jeweils übertragene physikalische Größe.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Kupferkabel  → elektrische Spannung
+Glasfaser    → Licht (Photonen)
+WLAN         → elektromagnetische Wellen (Radiowellen)</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Zeichen → Alphabet → Zeichenkette → Nachricht ist die Hierarchie der Syntax.</li><li>Eine Nachricht wird erst zur Information, wenn sie dem Empfänger etwas Neues mitteilt.</li><li>Je unwahrscheinlicher ein Zeichen, desto größer sein Informationsgehalt.</li><li>Die Entropie ist der durchschnittliche Informationsgehalt einer Quelle.</li><li>Redundanz ist Überflüssiges — aber manchmal nützlich (Fehlerkorrektur).</li><li>Das Shannon-Modell beschreibt jede Kommunikation: Quelle → Kanal → Senke.</li></ol>
+<hr>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema4_Fest_und_Gleitkommazahlen.html" class="nav-btn nav-prev">← Fest- &amp; Gleitkommazahlen</a><a href="Thema6_Datenkompression.html" class="nav-btn nav-next">Datenkompression →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

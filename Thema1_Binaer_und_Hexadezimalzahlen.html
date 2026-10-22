@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 01 – Binär- &amp; Hexadezimalzahlen | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c1); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item active" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 01</span>
+    <span class="topbar-title">Binär- &amp; Hexadezimalzahlen</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Binär- &amp; Hexadezimalzahlen</h1>
+    <div class="meta">
+      <span>Thema 1 von 13</span>
+      <span class="meta-dot"></span>
+      <span>Zahlensysteme</span> <span class="meta-dot"></span> <span>Grundlagen</span>
+    </div>
+<h2>Warum gibt es überhaupt unterschiedliche Zahlensysteme?</h2>
+<p>Im Alltag benutzen Menschen das Dezimalsystem. Es besitzt zehn verschiedene Ziffern:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 1 2 3 4 5 6 7 8 9</pre></div>
+<p>Der Grund dafür ist vermutlich einfach: Menschen haben zehn Finger.</p>
+<p>Computer besitzen jedoch keine Finger. Ein Computer arbeitet mit elektronischen Bauteilen. Diese Bauteile können sehr zuverlässig zwischen nur zwei Zuständen unterscheiden:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Strom aus = 0
+Strom an  = 1</pre></div>
+<p>Deshalb verwendet ein Computer das Binärsystem.</p>
+<hr>
+<h2>Was ist das Binärsystem?</h2>
+<p>Das Binärsystem ist ein Zahlensystem mit nur zwei Ziffern:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 und 1</pre></div>
+<p>Das Wort „Binär“ bedeutet „aus zwei Teilen bestehend“.</p>
+<p>Während das Dezimalsystem auf Potenzen von 10 basiert, basiert das Binärsystem auf Potenzen von 2.</p>
+<h3>Vergleich</h3>
+<p>Dezimalsystem:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>345
+
+= 3 · 10² + 4 · 10¹ + 5 · 10⁰
+= 300 + 40 + 5</pre></div>
+<p>Binärsystem:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1101
+
+= 1 · 2³ + 1 · 2² + 0 · 2¹ + 1 · 2⁰
+= 8 + 4 + 0 + 1
+= 13</pre></div>
+<hr>
+<h2>Warum braucht ein Computer Binärzahlen?</h2>
+<h3>Grund 1: Zuverlässigkeit</h3>
+<p>Elektrische Signale sind nie perfekt.</p>
+<p>Wenn ein Computer zehn verschiedene Spannungswerte unterscheiden müsste, würden Fehler leicht auftreten.</p>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0,2 Volt
+0,4 Volt
+0,6 Volt
+0,8 Volt
+...</pre></div>
+<p>Kleine Störungen könnten dazu führen, dass eine Zahl falsch erkannt wird.</p>
+<p>Bei nur zwei Zuständen ist die Erkennung sehr einfach:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>unter Schwellwert -&gt; 0
+über Schwellwert -&gt; 1</pre></div>
+<p>Dadurch werden Computer sehr zuverlässig.</p>
+<h3>Grund 2: Einfache Hardware</h3>
+<p>Elektronische Schalter (Transistoren) können leicht zwischen AN und AUS wechseln.</p>
+<p>Genau das entspricht:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 = AUS
+1 = AN</pre></div>
+<p>Moderne Prozessoren enthalten Milliarden solcher Transistoren.</p>
+<h3>Grund 3: Einfache Berechnungen</h3>
+<p>Alle Rechenoperationen können letztlich auf Kombinationen von 0 und 1 reduziert werden.</p>
+<p>Dadurch können Prozessoren sehr schnell arbeiten.</p>
+<hr>
+<h2>Was ist ein Bit?</h2>
+<p>Die kleinste Informationseinheit eines Computers heißt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Bit</pre></div>
+<p>Ein Bit kann lediglich zwei Zustände speichern:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0
+oder
+1</pre></div>
+<hr>
+<h2>Was ist ein Byte?</h2>
+<p>Acht Bits werden zu einem Byte zusammengefasst.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 Byte = 8 Bit</pre></div>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>01010110</pre></div>
+<p>Dieses Byte kann 256 verschiedene Zustände darstellen.</p>
+<p>Warum?</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>2⁸ = 256</pre></div>
+<hr>
+<h2>Wie zählt man im Binärsystem?</h2>
+<div class="table-wrap"><table><thead><tr><th>Dezimal</th><th>Binär</th></tr></thead><tbody><tr><td>0</td><td>0000</td></tr><tr><td>1</td><td>0001</td></tr><tr><td>2</td><td>0010</td></tr><tr><td>3</td><td>0011</td></tr><tr><td>4</td><td>0100</td></tr><tr><td>5</td><td>0101</td></tr><tr><td>6</td><td>0110</td></tr><tr><td>7</td><td>0111</td></tr><tr><td>8</td><td>1000</td></tr></tbody></table></div>
+<p>Man erkennt:</p>
+<p>Nach der 1 kommt nicht die 2.</p>
+<p>Stattdessen muss ein Übertrag durchgeführt werden.</p>
+<hr>
+<h2>Umrechnung Dezimal → Binär</h2>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>13</pre></div>
+<p>Durch wiederholte Division durch 2:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>13 : 2 = 6 Rest 1
+6 : 2 = 3 Rest 0
+3 : 2 = 1 Rest 1
+1 : 2 = 0 Rest 1</pre></div>
+<p>Von unten nach oben lesen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1101₂</pre></div>
+<p>Kontrolle:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>8 + 4 + 1 = 13</pre></div>
+<hr>
+<h2>Umrechnung Binär → Dezimal</h2>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>101101₂</pre></div>
+<p>Berechnung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 · 2⁵ = 32
+0 · 2⁴ = 0
+1 · 2³ = 8
+1 · 2² = 4
+0 · 2¹ = 0
+1 · 2⁰ = 1</pre></div>
+<p>Gesamt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>32 + 8 + 4 + 1
+= 45</pre></div>
+<hr>
+<p>Eine Speicheradresse oder Farbe könnte beispielsweise so aussehen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>11111110101011001010111110001100</pre></div>
+<p>Das ist für Menschen schwer lesbar.</p>
+<p>Deshalb wurde das Hexadezimalsystem eingeführt.</p>
+<hr>
+<p>Das Hexadezimalsystem besitzt 16 Zeichen.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 1 2 3 4 5 6 7 8 9 A B C D E F</pre></div>
+<p>Dabei gilt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>A = 10
+B = 11
+C = 12
+D = 13
+E = 14
+F = 15</pre></div>
+<hr>
+<h2>Warum braucht man Hexadezimalzahlen?</h2>
+<p>Hexadezimalzahlen sind nur eine kompaktere Schreibweise für Binärzahlen.</p>
+<p>Der große Vorteil:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>4 Bit = genau 1 Hex-Zeichen</pre></div>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111 = F</pre></div>
+<p>Dadurch werden lange Binärzahlen sehr viel kürzer.</p>
+<hr>
+<h2>Umrechnung Binär → Hexadezimal</h2>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>11111111</pre></div>
+<p>In Vierergruppen aufteilen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111 1111</pre></div>
+<p>Nun umwandeln:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111 = F
+1111 = F</pre></div>
+<p>Ergebnis:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>FF₁₆</pre></div>
+<hr>
+<h2>Wo wird Hexadezimal verwendet?</h2>
+<h3>Farben im Web</h3>
+<p>Rot:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>#FF0000</pre></div>
+<p>Grün:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>#00FF00</pre></div>
+<p>Blau:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>#0000FF</pre></div>
+<h3>Speicheradressen</h3>
+<p>Betriebssysteme und Prozessoren zeigen Speicheradressen häufig in Hexadezimaldarstellung an.</p>
+<h3>Debugging</h3>
+<p>Programmierer lesen Maschinendaten häufig in Hexadezimalform.</p>
+<hr>
+<h2>Verbindung zu Binärarithmetik</h2>
+<p>Bevor ein Computer rechnen kann, müssen Zahlen als Binärzahlen dargestellt werden.</p>
+<h2>Verbindung zum Zweierkomplement</h2>
+<p>Negative Zahlen werden durch spezielle Binärmuster dargestellt.</p>
+<h2>Verbindung zu Fest- und Gleitkommazahlen</h2>
+<p>Auch Kommazahlen bestehen intern aus Binärwerten.</p>
+<h2>Verbindung zu Hashing</h2>
+<p>Hashwerte werden meist in Hexadezimalform dargestellt.</p>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>A94A8FE5CCB1...</pre></div>
+<h2>Verbindung zur Datenkompression</h2>
+<p>Komprimierte Daten bestehen ebenfalls aus Bitfolgen.</p>
+<h2>Verbindung zu Java</h2>
+<p>Jede Variable im Speicher besteht am Ende aus Binärdaten.</p>
+<hr>
+<h2>Aufgabe 1</h2>
+<p>Wandle 25 in eine Binärzahl um.</p>
+<h3>Lösung</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>25 = 11001₂</pre></div>
+<hr>
+<h2>Aufgabe 2</h2>
+<p>Wandle 110101₂ in eine Dezimalzahl um.</p>
+<h3>Lösung</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>32 + 16 + 4 + 1
+= 53</pre></div>
+<hr>
+<h2>Aufgabe 3</h2>
+<p>Wandle die Binärzahl um:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10101111</pre></div>
+<h3>Lösung</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1010 1111
+
+1010 = A
+1111 = F
+
+AF₁₆</pre></div>
+<hr>
+<h2>Aufgabe 4</h2>
+<p>Wie viele Werte kann ein Byte speichern?</p>
+<h3>Lösung</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>2⁸ = 256</pre></div>
+<hr>
+<ol><li>Computer arbeiten mit Zuständen und deshalb mit Binärzahlen.</li><li>Ein Bit kann genau zwei Zustände speichern.</li><li>Ein Byte besteht aus 8 Bit.</li><li>Hexadezimal ist nur eine kompakte Schreibweise von Binärzahlen.</li><li>Ein Hex-Zeichen entspricht genau 4 Bit.</li><li>Fast alle späteren Themen im Informatikunterricht bauen auf dem Binärsystem auf.</li></ol>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><span></span><a href="Thema2_Binaere_Arithmetik_V2.html" class="nav-btn nav-next">Binäre Arithmetik →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

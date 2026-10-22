@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 11 – Objektorientierung | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c11); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 11</span>
+    <span class="topbar-title">Objektorientierung</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Objektorientierung</h1>
+    <div class="meta">
+      <span>Thema 11 von 13</span>
+      <span class="meta-dot"></span>
+      <span>OOP</span> <span class="meta-dot"></span> <span>Klassen</span> <span class="meta-dot"></span> <span>Vererbung</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<hr>
+<h2>Einleitung: Warum Objektorientierung?</h2>
+<p>Stell dir vor, du programmierst ein Schulverwaltungssystem.</p>
+<p>Ohne Objektorientierung würdest du alle Daten in einzelnen Variablen speichern:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String schueler1Name = &quot;Hannah&quot;;
+int schueler1Alter = 17;
+double schueler1Note = 1.7;
+
+String schueler2Name = &quot;Leon&quot;;
+int schueler2Alter = 16;
+double schueler2Note = 2.3;</pre></div>
+<p>Das wird schnell unübersichtlich und fehleranfällig.</p>
+<p><strong>Objektorientierung</strong> erlaubt, Daten und Methoden zu einer Einheit zusammenzufassen: dem <strong>Objekt</strong>.</p>
+<hr>
+<h2>Grundbegriffe</h2>
+<h3>Klasse</h3>
+<p>Eine <strong>Klasse</strong> ist der Bauplan für ein Objekt.</p>
+<p>Sie legt fest, welche Attribute (Eigenschaften) und Methoden (Fähigkeiten) ein Objekt haben soll.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Schueler {
+    String name;
+    int alter;
+    double note;
+}</pre></div>
+<hr>
+<h3>Objekt</h3>
+<p>Ein <strong>Objekt</strong> ist eine konkrete Instanz einer Klasse.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Schueler s1 = new Schueler();
+s1.name = &quot;Hannah&quot;;
+s1.alter = 17;
+s1.note = 1.7;</pre></div>
+<p>Vergleich:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Klasse   = Bauplan eines Hauses
+Objekt   = das fertige Haus</pre></div>
+<hr>
+<h3>Attribut</h3>
+<p>Attribute sind die <strong>Eigenschaften</strong> eines Objekts.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String name;
+int alter;
+double note;</pre></div>
+<hr>
+<h3>Methode</h3>
+<p>Methoden sind die <strong>Fähigkeiten</strong> eines Objekts.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public void begruesse() {
+    System.out.println(&quot;Hallo, ich bin &quot; + name);
+}</pre></div>
+<hr>
+<h2>Vollständiges Beispiel: Klasse Schueler</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Schueler {
+
+    // Attribute
+    private String name;
+    private int alter;
+    private double note;
+
+    // Konstruktor
+    public Schueler(String name, int alter, double note) {
+        this.name = name;
+        this.alter = alter;
+        this.note = note;
+    }
+
+    // Methode
+    public void begruesse() {
+        System.out.println(&quot;Hallo, ich bin &quot; + name + &quot; und bin &quot; + alter + &quot; Jahre alt.&quot;);
+    }
+
+    // Getter
+    public String getName() {
+        return name;
+    }
+
+    public double getNote() {
+        return note;
+    }
+
+    // Setter
+    public void setNote(double note) {
+        this.note = note;
+    }
+}</pre></div>
+<p>Objekt erzeugen und nutzen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Schueler s = new Schueler(&quot;Hannah&quot;, 17, 1.7);
+s.begruesse();
+System.out.println(s.getName());</pre></div>
+<p>Ausgabe:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Hallo, ich bin Hannah und bin 17 Jahre alt.
+Hannah</pre></div>
+<hr>
+<h2>Die vier Grundprinzipien der OOP</h2>
+<h3>1. Kapselung (Encapsulation)</h3>
+<p>Attribute werden <code>private</code> deklariert — von außen nicht direkt zugänglich.</p>
+<p>Der Zugriff erfolgt ausschließlich über Methoden (Getter/Setter).</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>private double note;
+
+public double getNote() { return note; }
+public void setNote(double note) { this.note = note; }</pre></div>
+<p><strong>Warum?</strong></p>
+<ul><li>Schutz vor ungewollten Änderungen</li><li>Interne Implementierung kann geändert werden, ohne den Rest zu beeinflussen</li></ul>
+<hr>
+<h3>2. Vererbung (Inheritance)</h3>
+<p>Eine Klasse kann Attribute und Methoden einer anderen Klasse <strong>erben</strong>.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Person {
+    protected String name;
+    protected int alter;
+
+    public void vorstellen() {
+        System.out.println(&quot;Ich bin &quot; + name);
+    }
+}
+
+public class Schueler extends Person {
+    private double note;
+
+    public void lerne() {
+        System.out.println(name + &quot; lernt.&quot;);
+    }
+}</pre></div>
+<p><code>Schueler</code> erbt <code>name</code>, <code>alter</code> und <code>vorstellen()</code> von <code>Person</code>.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Schueler s = new Schueler();
+s.name = &quot;Hannah&quot;;
+s.vorstellen();   // Methode von Person!
+s.lerne();        // Methode von Schueler</pre></div>
+<p><strong>UML-Darstellung:</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Person
+  ↑
+Schueler</pre></div>
+<p>Der Pfeil zeigt von der Unterklasse zur Oberklasse.</p>
+<hr>
+<h3>3. Polymorphismus (Polymorphism)</h3>
+<p>Eine Methode kann für verschiedene Objekte unterschiedlich verhalten.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Tier {
+    public void lautGeben() {
+        System.out.println(&quot;...&quot;);
+    }
+}
+
+public class Hund extends Tier {
+    @Override
+    public void lautGeben() {
+        System.out.println(&quot;Wau!&quot;);
+    }
+}
+
+public class Katze extends Tier {
+    @Override
+    public void lautGeben() {
+        System.out.println(&quot;Miau!&quot;);
+    }
+}</pre></div>
+<p>Nutzung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Tier[] tiere = {new Hund(), new Katze(), new Hund()};
+for (Tier t : tiere) {
+    t.lautGeben();
+}</pre></div>
+<p>Ausgabe:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Wau!
+Miau!
+Wau!</pre></div>
+<p>Obwohl der Typ <code>Tier</code> ist, wird die richtige Methode aufgerufen.</p>
+<hr>
+<h3>4. Abstraktion (Abstraction)</h3>
+<p>Abstraktion bedeutet, Details zu verstecken und nur das Wesentliche zu zeigen.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public abstract class Form {
+    public abstract double flaeche();  // muss überschrieben werden
+}
+
+public class Rechteck extends Form {
+    double breite, hoehe;
+
+    public Rechteck(double b, double h) {
+        breite = b;
+        hoehe = h;
+    }
+
+    @Override
+    public double flaeche() {
+        return breite * hoehe;
+    }
+}
+
+public class Kreis extends Form {
+    double radius;
+
+    public Kreis(double r) {
+        radius = r;
+    }
+
+    @Override
+    public double flaeche() {
+        return Math.PI * radius * radius;
+    }
+}</pre></div>
+<hr>
+<h2>Konstruktor</h2>
+<p>Ein <strong>Konstruktor</strong> initialisiert ein Objekt beim Erstellen.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public Schueler(String name, int alter) {
+    this.name = name;
+    this.alter = alter;
+}</pre></div>
+<p><code>this</code> verweist auf das aktuelle Objekt.</p>
+<hr>
+<h2>Zugriffsmodifizierer</h2>
+<div class="table-wrap"><table><thead><tr><th>Modifizierer</th><th>Sichtbar von</th></tr></thead><tbody><tr><td><code>private</code></td><td>Nur innerhalb der eigenen Klasse</td></tr><tr><td><code>protected</code></td><td>Eigene Klasse + Unterklassen</td></tr><tr><td><code>public</code></td><td>Überall</td></tr></tbody></table></div>
+<hr>
+<h2>UML-Klassendiagramm</h2>
+<p>Ein Klassendiagramm zeigt die Struktur von Klassen.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌─────────────────────┐
+│      Schueler       │
+├─────────────────────┤
+│ - name: String      │
+│ - alter: int        │
+│ - note: double      │
+├─────────────────────┤
+│ + getName(): String │
+│ + setNote(double)   │
+│ + begruesse()       │
+└─────────────────────┘</pre></div>
+<p>Legende:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>-  = private
++  = public
+#  = protected</pre></div>
+<hr>
+<h2>Verbindung zu anderen Themen</h2>
+<ul><li><strong>Thema 9 (Java-Grundlagen):</strong> OOP baut direkt auf Java-Grundlagen auf.</li><li><strong>Thema 10 (Softwareentwicklung):</strong> Das Systemdesign in Phase 2 des Wasserfallmodells enthält Klassendiagramme.</li><li><strong>Thema 12 (Struktogramme):</strong> Methoden können mit Struktogrammen beschrieben werden.</li></ul>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Was ist der Unterschied zwischen Klasse und Objekt?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Klasse = Bauplan / Vorlage
+Objekt = konkretes Exemplar, das nach dem Bauplan erstellt wurde
+Beispiel: &quot;Auto&quot; ist die Klasse, &quot;Hannahs roter VW&quot; ist ein Objekt.</pre></div>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Was versteht man unter Kapselung? Warum ist sie wichtig?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Kapselung = Attribute werden private gemacht, Zugriff nur über Methoden.
+Warum:
+- Interne Daten sind vor ungewollten Zugriffen geschützt.
+- Die interne Implementierung kann geändert werden,
+  ohne den Rest des Programms zu beeinflussen.</pre></div>
+<hr>
+<h3>Aufgabe 3</h3>
+<p>Erkläre Polymorphismus anhand eines Beispiels.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Polymorphismus bedeutet, dass eine Methode bei verschiedenen Objekten
+unterschiedlich ausgeführt wird.
+
+Beispiel: Die Methode lautGeben() verhält sich bei Hund anders als bei Katze,
+obwohl beide von Tier erben.
+Man kann beide über den Typ Tier ansprechen, aber die korrekte Methode
+wird automatisch aufgerufen.</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Klasse = Bauplan, Objekt = konkretes Exemplar.</li><li>Kapselung: <code>private</code> Attribute, Zugriff nur über Getter/Setter.</li><li>Vererbung: Unterklasse erbt Attribute und Methoden der Oberklasse.</li><li>Polymorphismus: Gleicher Methodenname, unterschiedliches Verhalten je nach Klasse.</li><li>Abstrakte Klassen können nicht direkt instanziiert werden.</li><li><code>this</code> verweist auf das aktuelle Objekt.</li></ol>
+<hr>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema10_Softwareentwicklung_Wasserfallmodell.html" class="nav-btn nav-prev">← Softwareentwicklung</a><a href="Thema12_Struktogramme_und_Ablaufplaene.html" class="nav-btn nav-next">Struktogramme →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

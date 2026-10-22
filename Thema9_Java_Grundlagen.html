@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 09 – Java-Grundlagen | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c9); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 09</span>
+    <span class="topbar-title">Java-Grundlagen</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Java-Grundlagen</h1>
+    <div class="meta">
+      <span>Thema 9 von 13</span>
+      <span class="meta-dot"></span>
+      <span>Syntax</span> <span class="meta-dot"></span> <span>Typen</span> <span class="meta-dot"></span> <span>Methoden</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<hr>
+<h2>Einleitung: Was ist Java?</h2>
+<p>Java ist eine der meistgenutzten Programmiersprachen der Welt.</p>
+<p>Besonderheiten von Java:</p>
+<ul><li><strong>Plattformunabhängig:</strong> Java-Programme laufen auf jedem System mit einer Java Virtual Machine (JVM).</li><li><strong>Objektorientiert:</strong> Alles ist in Klassen und Objekten organisiert (→ Thema 11).</li><li><strong>Streng typisiert:</strong> Jede Variable hat einen festen Datentyp.</li></ul>
+<hr>
+<h2>Das erste Programm</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Hallo {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hallo, Welt!&quot;);
+    }
+}</pre></div>
+<p>Was hier passiert:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Hallo      → Klasse mit dem Namen &quot;Hallo&quot;
+main(String[] args)     → Startpunkt des Programms
+System.out.println(...)→ Ausgabe in die Konsole</pre></div>
+<hr>
+<h2>Datentypen</h2>
+<p>Java kennt zwei Arten von Datentypen:</p>
+<h3>Primitive Datentypen</h3>
+<div class="table-wrap"><table><thead><tr><th>Typ</th><th>Größe</th><th>Wertebereich</th><th>Beispiel</th></tr></thead><tbody><tr><td><code>byte</code></td><td>8 Bit</td><td>-128 bis 127</td><td><code>byte b = 10;</code></td></tr><tr><td><code>short</code></td><td>16 Bit</td><td>-32768 bis 32767</td><td><code>short s = 1000;</code></td></tr><tr><td><code>int</code></td><td>32 Bit</td><td>-2.147.483.648 bis 2.147.483.647</td><td><code>int i = 42;</code></td></tr><tr><td><code>long</code></td><td>64 Bit</td><td>sehr großer Bereich</td><td><code>long l = 100L;</code></td></tr><tr><td><code>float</code></td><td>32 Bit</td><td>IEEE 754 Single Precision</td><td><code>float f = 3.14f;</code></td></tr><tr><td><code>double</code></td><td>64 Bit</td><td>IEEE 754 Double Precision</td><td><code>double d = 3.14;</code></td></tr><tr><td><code>char</code></td><td>16 Bit</td><td>Unicode-Zeichen (0 bis 65535)</td><td><code>char c = &#x27;A&#x27;;</code></td></tr><tr><td><code>boolean</code></td><td>1 Bit</td><td>true / false</td><td><code>boolean b = true;</code></td></tr></tbody></table></div>
+<p>Verbindung zu Thema 4: <code>float</code> und <code>double</code> sind IEEE-754-Gleitkommazahlen!</p>
+<h3>Referenztypen</h3>
+<p>Alles andere sind Objekte:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String name = &quot;Hannah&quot;;
+int[] zahlen = {1, 2, 3, 4};</pre></div>
+<hr>
+<h2>Variablen</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int alter = 17;
+double temperatur = 36.8;
+String name = &quot;Hannah&quot;;
+boolean istAnwesend = true;</pre></div>
+<p>Regeln:</p>
+<ul><li>Variablennamen beginnen mit Kleinbuchstabe.</li><li>Typ muss angegeben werden.</li><li>Wert kann sich ändern.</li></ul>
+<hr>
+<h2>Konstanten</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>final int MAX_PUNKTE = 100;</pre></div>
+<p><code>final</code> bedeutet: der Wert kann nicht mehr geändert werden.</p>
+<hr>
+<h2>Operatoren</h2>
+<h3>Arithmetisch</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int a = 10;
+int b = 3;
+
+System.out.println(a + b);   // 13
+System.out.println(a - b);   // 7
+System.out.println(a * b);   // 30
+System.out.println(a / b);   // 3 (Ganzzahldivision!)
+System.out.println(a % b);   // 1 (Rest, Modulo)</pre></div>
+<p>Achtung: <code>10 / 3 = 3</code> (nicht 3,33), weil beide <code>int</code> sind!</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>double ergebnis = 10.0 / 3;   // 3.3333...</pre></div>
+<hr>
+<h3>Vergleichsoperatoren</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>a == b    // gleich
+a != b    // ungleich
+a &gt; b     // größer
+a &lt; b     // kleiner
+a &gt;= b    // größer oder gleich
+a &lt;= b    // kleiner oder gleich</pre></div>
+<hr>
+<h3>Logische Operatoren</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>true &amp;&amp; false   // UND → false
+true || false   // ODER → true
+!true           // NICHT → false</pre></div>
+<hr>
+<h2>Bedingungen</h2>
+<h3>if / else if / else</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int punkte = 75;
+
+if (punkte &gt;= 90) {
+    System.out.println(&quot;Sehr gut&quot;);
+} else if (punkte &gt;= 75) {
+    System.out.println(&quot;Gut&quot;);
+} else if (punkte &gt;= 60) {
+    System.out.println(&quot;Befriedigend&quot;);
+} else {
+    System.out.println(&quot;Nicht bestanden&quot;);
+}</pre></div>
+<p>Ausgabe: <code>Gut</code></p>
+<hr>
+<h3>switch</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int tag = 3;
+
+switch (tag) {
+    case 1: System.out.println(&quot;Montag&quot;); break;
+    case 2: System.out.println(&quot;Dienstag&quot;); break;
+    case 3: System.out.println(&quot;Mittwoch&quot;); break;
+    default: System.out.println(&quot;Anderer Tag&quot;);
+}</pre></div>
+<hr>
+<h2>Schleifen</h2>
+<h3>while-Schleife</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int i = 0;
+while (i &lt; 5) {
+    System.out.println(i);
+    i++;
+}</pre></div>
+<p>Ausgabe: 0, 1, 2, 3, 4</p>
+<hr>
+<h3>for-Schleife</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>for (int i = 0; i &lt; 5; i++) {
+    System.out.println(i);
+}</pre></div>
+<p>Struktur:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>for (Initialisierung; Bedingung; Aktualisierung)</pre></div>
+<hr>
+<h3>do-while-Schleife</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int i = 0;
+do {
+    System.out.println(i);
+    i++;
+} while (i &lt; 5);</pre></div>
+<p>Unterschied: Der Schleifenrumpf wird mindestens <strong>einmal</strong> ausgeführt.</p>
+<hr>
+<h2>Arrays</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int[] zahlen = new int[5];       // 5 Felder, alle mit 0 initialisiert
+zahlen[0] = 10;
+zahlen[1] = 20;
+zahlen[2] = 30;</pre></div>
+<p>Oder direkt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int[] zahlen = {10, 20, 30, 40, 50};</pre></div>
+<p>Array durchlaufen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>for (int i = 0; i &lt; zahlen.length; i++) {
+    System.out.println(zahlen[i]);
+}</pre></div>
+<p>Oder kürzer:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>for (int z : zahlen) {
+    System.out.println(z);
+}</pre></div>
+<hr>
+<h2>Methoden</h2>
+<p>Methoden sind wiederverwendbare Codeblöcke.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static int addiere(int a, int b) {
+    return a + b;
+}</pre></div>
+<p>Aufrufen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int ergebnis = addiere(3, 4);   // ergebnis = 7</pre></div>
+<p>Aufbau:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Rückgabetyp  Name  (Parameter)
+     ↓        ↓        ↓
+public static int addiere(int a, int b)</pre></div>
+<p>Wenn eine Methode nichts zurückgibt: <code>void</code></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static void begruesze(String name) {
+    System.out.println(&quot;Hallo, &quot; + name + &quot;!&quot;);
+}</pre></div>
+<hr>
+<h2>Strings</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String s = &quot;Informatik&quot;;
+
+s.length()          // 10
+s.charAt(0)         // &#x27;I&#x27;
+s.toUpperCase()     // &quot;INFORMATIK&quot;
+s.toLowerCase()     // &quot;informatik&quot;
+s.substring(0, 4)   // &quot;Info&quot;
+s.contains(&quot;mat&quot;)   // true
+s.equals(&quot;Informatik&quot;)    // true (Inhalt vergleichen!)</pre></div>
+<p>Wichtig: Strings mit <code>equals()</code> vergleichen, nicht mit <code>==</code>!</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String a = &quot;Hallo&quot;;
+String b = &quot;Hallo&quot;;
+
+a == b        // kann false sein (vergleicht Referenz!)
+a.equals(b)   // true (vergleicht Inhalt)</pre></div>
+<hr>
+<h2>Verbindung zu anderen Themen</h2>
+<ul><li><strong>Thema 1 (Binärzahlen):</strong> <code>int</code> = 32-Bit-Zweierkomplement intern gespeichert.</li><li><strong>Thema 4 (Gleitkommazahlen):</strong> <code>float</code> und <code>double</code> = IEEE 754.</li><li><strong>Thema 11 (Objektorientierung):</strong> Java ist vollständig objektorientiert.</li><li><strong>Thema 13 (Sortieralgorithmen):</strong> Alle werden in Java implementiert.</li></ul>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Was gibt folgender Code aus?</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int x = 7;
+int y = 2;
+System.out.println(x / y);
+System.out.println(x % y);</pre></div>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>3
+1</pre></div>
+<p>(Ganzzahldivision: 7 / 2 = 3 Rest 1)</p>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Schreibe eine Methode <code>max</code>, die den größeren von zwei Integers zurückgibt.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static int max(int a, int b) {
+    if (a &gt; b) {
+        return a;
+    } else {
+        return b;
+    }
+}</pre></div>
+<hr>
+<h3>Aufgabe 3</h3>
+<p>Was ist der Unterschied zwischen <code>==</code> und <code>equals()</code> bei Strings?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>== vergleicht, ob beide Variablen auf dasselbe Objekt im Speicher zeigen.
+equals() vergleicht den Inhalt der Strings.
+Für Inhaltsvergleiche immer equals() verwenden!</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Java ist streng typisiert — jede Variable braucht einen deklarierten Typ.</li><li><code>int</code> ist 32-Bit-Zweierkomplement, <code>double</code> ist IEEE 754.</li><li>Ganzzahldivision: <code>7 / 2 = 3</code> (kein Rest!).</li><li><code>%</code> gibt den Rest der Division zurück.</li><li>Strings immer mit <code>equals()</code> vergleichen, nicht mit <code>==</code>.</li><li>Arrays sind nullindiziert: erstes Element ist <code>[0]</code>.</li><li>Methoden vermeiden Code-Wiederholung und erhöhen Lesbarkeit.</li></ol>
+<hr>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau:</span>
+            <span class="rating-score">8 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="80"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema8_Hamming_Codes.html" class="nav-btn nav-prev">← Hamming-Codes</a><a href="Thema10_Softwareentwicklung_Wasserfallmodell.html" class="nav-btn nav-next">Softwareentwicklung →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

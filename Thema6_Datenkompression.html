@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 06 – Datenkompression | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c6); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 06</span>
+    <span class="topbar-title">Datenkompression</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Datenkompression</h1>
+    <div class="meta">
+      <span>Thema 6 von 13</span>
+      <span class="meta-dot"></span>
+      <span>Huffman</span> <span class="meta-dot"></span> <span>LZW</span> <span class="meta-dot"></span> <span>RLE</span> <span class="meta-dot"></span> <span>Delta</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<hr>
+<h2>Einleitung</h2>
+<p>Ein unkomprimiertes Bild mit 1920×1080 Pixeln und 3 Byte pro Pixel benötigt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1920 × 1080 × 3 = 6.220.800 Byte ≈ 6 MB</pre></div>
+<p>Ein HD-Video besteht aus 24 solcher Bilder pro Sekunde.</p>
+<p>Ohne Kompression wäre Streaming undenkbar.</p>
+<p><strong>Datenkompression</strong> reduziert die Menge der benötigten Bits, um eine Information zu speichern oder zu übertragen.</p>
+<hr>
+<h2>Zwei Arten der Kompression</h2>
+<h3>Verlustfreie Kompression</h3>
+<p>Die Originaldaten können aus den komprimierten Daten <strong>vollständig wiederhergestellt</strong> werden.</p>
+<p>Verwendung: Text, Programme, Archivierung</p>
+<p>Verfahren: Lauflängencodierung, Huffman, LZW</p>
+<hr>
+<h3>Verlustbehaftete Kompression</h3>
+<p>Ein Teil der Daten wird bewusst weggelassen.</p>
+<p>Die Originaldaten lassen sich <strong>nicht mehr exakt</strong> rekonstruieren.</p>
+<p>Verwendung: Bilder (JPEG), Audio (MP3), Video (MP4)</p>
+<hr>
+<h2>Verfahren 1: Lauflängencodierung (RLE)</h2>
+<h3>Idee</h3>
+<p>Wenn dasselbe Zeichen mehrfach hintereinander vorkommt, wird es als Paar gespeichert:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>(Anzahl, Zeichen)</pre></div>
+<h3>Beispiel</h3>
+<p>Original:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>AAAABBBBBCCAAA</pre></div>
+<p>Komprimiert:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>(4,A)(5,B)(2,C)(3,A)</pre></div>
+<p>Unkomprimiert: 14 Zeichen Komprimiert: 4 Paare (je 2 Zeichen) = 8 Zeichen</p>
+<p><strong>Ersparnis: 43 %</strong></p>
+<hr>
+<h3>Wo funktioniert RLE gut?</h3>
+<ul><li>Bilder mit großen einfarbigen Flächen</li><li>Schwarz-Weiß-Faxe</li><li>Technische Zeichnungen</li></ul>
+<h3>Wo funktioniert RLE schlecht?</h3>
+<ul><li>Fotos mit vielen Farbwechseln</li><li>Texte</li></ul>
+<p>Gegenbeispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>ABCDEFG
+→ (1,A)(1,B)(1,C)(1,D)(1,E)(1,F)(1,G)</pre></div>
+<p>Aus 7 Zeichen werden 14 — die Datei wird <strong>größer</strong>!</p>
+<hr>
+<h2>Verfahren 2: Deltacodierung</h2>
+<h3>Idee</h3>
+<p>Statt absoluter Werte werden die <strong>Unterschiede</strong> (Deltas) zwischen aufeinanderfolgenden Werten gespeichert.</p>
+<h3>Beispiel: Temperaturreihe</h3>
+<p>Originaldaten:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>20, 21, 22, 21, 23, 24</pre></div>
+<p>Deltacodierung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>20, +1, +1, -1, +2, +1</pre></div>
+<p>Wenn die Werte sich wenig ändern, werden die Deltas klein — und kleine Zahlen brauchen weniger Bits.</p>
+<h3>Anwendung</h3>
+<ul><li>Audio (FLAC, Audiorekorder)</li><li>GPS-Daten (Koordinatenänderungen sind klein)</li><li>Temperatursensoren</li></ul>
+<hr>
+<h2>Verfahren 3: Huffman-Codierung</h2>
+<h3>Idee</h3>
+<p>Häufige Zeichen bekommen <strong>kurze</strong> Codes.</p>
+<p>Seltene Zeichen bekommen <strong>lange</strong> Codes.</p>
+<p>Damit braucht man im Durchschnitt weniger Bits.</p>
+<hr>
+<h3>Algorithmus</h3>
+<p><strong>Schritt 1:</strong> Häufigkeiten aller Zeichen zählen.</p>
+<p><strong>Schritt 2:</strong> Huffman-Baum aufbauen:</p>
+<ul><li>Alle Zeichen als Blätter (mit ihrer Häufigkeit) in eine Prioritätswarteschlange.</li><li>Immer die zwei kleinsten Knoten zusammenführen.</li><li>Der neue Knoten erhält die Summe der Häufigkeiten.</li><li>Wiederholen bis ein Baum entsteht.</li></ul>
+<p><strong>Schritt 3:</strong> Codes ableiten:</p>
+<ul><li>Links gehen = 0</li><li>Rechts gehen = 1</li></ul>
+<hr>
+<h3>Vollständiges Beispiel</h3>
+<p>Nachricht: <code>AABBBCDDDD</code></p>
+<p>Häufigkeiten:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>A: 2
+B: 3
+C: 1
+D: 4</pre></div>
+<p><strong>Baum aufbauen:</strong></p>
+<p>Start: vier Blätter <code>C(1)  A(2)  B(3)  D(4)</code></p>
+<p>Schritt 1: Kleinste zusammenführen: C(1) + A(2) = CA(3)</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  CA(3)
+ /     \
+C(1)  A(2)</pre></div>
+<p>Noch in Warteschlange: <code>B(3)  CA(3)  D(4)</code></p>
+<p>Schritt 2: Kleinste: B(3) + CA(3) = BCA(6)</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>    BCA(6)
+   /      \
+ B(3)    CA(3)
+         /    \
+        C(1)  A(2)</pre></div>
+<p>Noch in Warteschlange: <code>D(4)  BCA(6)</code></p>
+<p>Schritt 3: D(4) + BCA(6) = Root(10)</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>         Root(10)
+        /         \
+      D(4)       BCA(6)
+                /      \
+              B(3)    CA(3)
+                      /    \
+                    C(1)  A(2)</pre></div>
+<p><strong>Codes ableiten (links=0, rechts=1):</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>D → 0
+B → 10
+C → 110
+A → 111</pre></div>
+<p><strong>Codierung der Nachricht <code>AABBBCDDDD</code>:</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>A=111  A=111  B=10  B=10  B=10  C=110  D=0  D=0  D=0  D=0
+→ 111 111 10 10 10 110 0 0 0 0
+→ 22 Bit</pre></div>
+<p><strong>Vergleich mit fester 2-Bit-Codierung:</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10 Zeichen × 2 Bit = 20 Bit</pre></div>
+<p>In diesem kleinen Beispiel ist Huffman etwas schlechter, weil der Baum selbst mitgespeichert werden muss. Bei langen Texten ist Huffman deutlich besser.</p>
+<hr>
+<h2>Verfahren 4: LZW-Kompression</h2>
+<h3>Idee</h3>
+<p>LZW (Lempel-Ziv-Welch) baut während der Kompression ein <strong>Wörterbuch</strong> aus wiederkehrenden Mustern auf.</p>
+<hr>
+<h3>Algorithmus (vereinfacht)</h3>
+<ol><li>Starte mit einem Wörterbuch, das alle Einzelzeichen enthält.</li><li>Lies Zeichen, solange die aktuelle Zeichenkette im Wörterbuch steht.</li><li>Sobald die Kette nicht mehr im Wörterbuch ist:</li></ol>
+<p>   - Gib den Code der bisherigen (kürzeren) Kette aus.    - Füge die neue Kette dem Wörterbuch hinzu.    - Starte neu mit dem letzten Zeichen.</p>
+<hr>
+<h3>Beispiel</h3>
+<p>Eingabe: <code>ABABABAB</code></p>
+<p>Startwörterbuch: <code>{A=1, B=2}</code></p>
+<div class="table-wrap"><table><thead><tr><th>Schritt</th><th>Puffer</th><th>Nächstes Zeichen</th><th>Aktion</th><th>Ausgabe</th></tr></thead><tbody><tr><td>1</td><td>A</td><td>B</td><td>AB nicht im Dict → Ausgabe A, Dict: AB=3</td><td>1 (A)</td></tr><tr><td>2</td><td>B</td><td>A</td><td>BA nicht im Dict → Ausgabe B, Dict: BA=4</td><td>2 (B)</td></tr><tr><td>3</td><td>A</td><td>B</td><td>AB im Dict!</td></tr><tr><td>4</td><td>AB</td><td>A</td><td>ABA nicht im Dict → Ausgabe AB, Dict: ABA=5</td><td>3 (AB)</td></tr><tr><td>5</td><td>A</td><td>B</td><td>AB im Dict!</td></tr><tr><td>6</td><td>AB</td><td>A</td><td>ABA im Dict!</td></tr><tr><td>7</td><td>ABA</td><td>B</td><td>ABAB nicht im Dict → Ausgabe ABA, Dict: ABAB=6</td><td>5 (ABA)</td></tr><tr><td>8</td><td>B</td><td>Ende</td><td>Ausgabe B</td><td>2 (B)</td></tr></tbody></table></div>
+<p>Ausgabe: <code>1 2 3 5 2</code></p>
+<p>Statt 8 Zeichen werden nur 5 Codes gespeichert.</p>
+<p><strong>LZW ist der Kern vieler Formate:</strong> GIF, TIFF, PDF</p>
+<hr>
+<h2>Vergleich der Verfahren</h2>
+<div class="table-wrap"><table><thead><tr><th>Verfahren</th><th>Verlustfrei</th><th>Besonders gut bei</th><th>Typisches Format</th></tr></thead><tbody><tr><td>RLE</td><td>ja</td><td>einfarbige Flächen</td><td>BMP, Fax</td></tr><tr><td>Delta</td><td>ja</td><td>langsam ändernde Werte</td><td>Audio, GPS</td></tr><tr><td>Huffman</td><td>ja</td><td>ungleichmäßige Häufigkeiten</td><td>ZIP (Teil davon)</td></tr><tr><td>LZW</td><td>ja</td><td>wiederholende Muster</td><td>GIF, PDF</td></tr><tr><td>JPEG</td><td>nein</td><td>Fotos</td><td>Bilder</td></tr><tr><td>MP3</td><td>nein</td><td>Musik</td><td>Audio</td></tr></tbody></table></div>
+<hr>
+<h2>Verbindung zu anderen Themen</h2>
+<ul><li><strong>Thema 5 (Information):</strong> Kompression reduziert Redundanz — nicht den Informationsgehalt.</li><li><strong>Thema 1 (Binärzahlen):</strong> Alle Codes werden als Bitfolgen gespeichert.</li><li><strong>Huffman und Entropie:</strong> Der Huffman-Code kommt dem theoretischen Optimum (Entropie) sehr nahe.</li></ul>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Wende RLE auf folgende Zeichenkette an:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>WWWWSSSSSWWW</pre></div>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>(4,W)(5,S)(3,W)</pre></div>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Erstelle einen Huffman-Baum für:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>A: 4
+B: 2
+C: 1
+D: 1</pre></div>
+<h4>Lösung</h4>
+<p>Start: <code>C(1) D(1) B(2) A(4)</code></p>
+<p>Schritt 1: C+D = CD(2)</p>
+<p>Schritt 2: B(2)+CD(2) = BCD(4)</p>
+<p>Schritt 3: A(4)+BCD(4) = Root(8)</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>       Root(8)
+      /        \
+    A(4)      BCD(4)
+              /      \
+            B(2)    CD(2)
+                    /    \
+                  C(1)  D(1)</pre></div>
+<p>Codes:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>A → 0
+B → 10
+C → 110
+D → 111</pre></div>
+<hr>
+<h3>Aufgabe 3</h3>
+<p>Was ist der Unterschied zwischen verlustfreier und verlustbehafteter Kompression?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Verlustfrei: Original kann exakt wiederhergestellt werden.
+             Beispiele: ZIP, PNG, FLAC
+
+Verlustbehaftet: Teile der Daten werden unwiderruflich entfernt.
+                 Besser für Medien, wo kleine Qualitätsverluste nicht auffallen.
+                 Beispiele: JPEG, MP3, H.264</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Datenkompression reduziert Redundanz, nicht den Informationsgehalt.</li><li>RLE: Wiederholungen werden als (Anzahl, Zeichen) gespeichert.</li><li>Delta: Nur Unterschiede werden gespeichert.</li><li>Huffman: Häufige Zeichen = kurze Codes, seltene = lange Codes.</li><li>LZW: Baut ein Wörterbuch aus Mustern während der Kompression auf.</li><li>Verlustfrei: Exakte Rekonstruktion. Verlustbehaftet: Qualitätsverlust akzeptiert.</li></ol>
+<hr>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema5_Nachricht_Information_Nachrichtentraeger.html" class="nav-btn nav-prev">← Nachricht &amp; Information</a><a href="Thema7_Hashing.html" class="nav-btn nav-next">Hashing →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

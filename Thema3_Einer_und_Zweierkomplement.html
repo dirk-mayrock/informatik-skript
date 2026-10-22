@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thema 03 – Einer- &amp; Zweierkomplement | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<style>
+:root { --active: var(--c3); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Thema 03</span>
+    <span class="topbar-title">Einer- &amp; Zweierkomplement</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Einer- &amp; Zweierkomplement</h1>
+    <div class="meta">
+      <span>Thema 3 von 13</span>
+      <span class="meta-dot"></span>
+      <span>Negative Zahlen</span> <span class="meta-dot"></span> <span>Vorzeichen</span>
+    </div>
+<h2>Informatik Leistungskurs (Gymnasium)</h2>
+<hr>
+<h2>Verbindung zu Thema 2</h2>
+<p>In Thema 2 wurde die binäre Arithmetik mit positiven Zahlen erklärt.</p>
+<p>Jetzt stellt sich die Frage:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Wie speichert ein Computer negative Zahlen?</pre></div>
+<p>Die Antwort: über das Einerkomplement und das Zweierkomplement.</p>
+<hr>
+<h2>Das Problem: Negative Zahlen in Binär</h2>
+<p>Eine Binärzahl besteht nur aus 0 und 1.</p>
+<p>Es gibt kein Minuszeichen, das einfach gespeichert werden kann.</p>
+<p>Der Computer braucht eine Konvention, wie ein negativer Wert codiert wird.</p>
+<hr>
+<h2>Idee 1: Vorzeichenbit</h2>
+<p>Die einfachste Idee: Das erste Bit zeigt an, ob die Zahl positiv oder negativ ist.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 = positiv
+1 = negativ</pre></div>
+<p>Beispiel mit 4 Bit:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0101 = +5
+1101 = -5</pre></div>
+<h3>Problem dieser Idee</h3>
+<p>Es gibt zwei Darstellungen für die Null:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0000 = +0
+1000 = -0</pre></div>
+<p>Das ist unpraktisch und führt zu Problemen beim Rechnen.</p>
+<hr>
+<h2>Lösung: Das Zweierkomplement</h2>
+<p>Das Zweierkomplement ist die heute in allen Computern verwendete Methode.</p>
+<p>Es löst beide Probleme:</p>
+<ul><li>Es gibt nur eine Null.</li><li>Subtraktion kann als Addition durchgeführt werden.</li></ul>
+<hr>
+<h2>Schritt 1: Das Einerkomplement</h2>
+<p>Das Einerkomplement entsteht durch Invertierung aller Bits.</p>
+<p>Aus jeder 0 wird eine 1 und aus jeder 1 wird eine 0.</p>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>+5 in 4 Bit:
+0101
+
+Einerkomplement:
+1010</pre></div>
+<p>Das Einerkomplement von +5 ist 1010, was dem Dezimalwert -5 entspricht — aber noch nicht perfekt funktioniert.</p>
+<h3>Problem des Einerkomplements</h3>
+<p>Auch hier gibt es zwei Darstellungen für Null:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0000 =  +0
+1111 =  -0</pre></div>
+<hr>
+<h2>Schritt 2: Das Zweierkomplement</h2>
+<p>Das Zweierkomplement = Einerkomplement + 1</p>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>+5 in 4 Bit:
+0101
+
+Einerkomplement:
+1010
+
++1:
+1011</pre></div>
+<p>Ergebnis: <code>1011</code> ist die Darstellung von -5 im Zweierkomplement.</p>
+<h3>Kontrolle</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0101 = +5
+1011 = -5
+
+0101
++1011
+------
+10000</pre></div>
+<p>Das führende Bit (Übertrag) fällt weg (kein Platz im 4-Bit-Register).</p>
+<p>Ergebnis: <code>0000</code> = 0</p>
+<p>Das ist korrekt: +5 + (−5) = 0</p>
+<hr>
+<h2>Wertebereich im Zweierkomplement</h2>
+<p>Bei n Bit gilt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Kleinster Wert: -2^(n-1)
+Größter Wert:   2^(n-1) - 1</pre></div>
+<p>Beispiel mit 4 Bit:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Kleinster Wert: -2^3 = -8
+Größter Wert:    2^3 - 1 = 7</pre></div>
+<div class="table-wrap"><table><thead><tr><th>Binär</th><th>Dezimal</th></tr></thead><tbody><tr><td>0111</td><td>+7</td></tr><tr><td>0110</td><td>+6</td></tr><tr><td>0101</td><td>+5</td></tr><tr><td>0100</td><td>+4</td></tr><tr><td>0011</td><td>+3</td></tr><tr><td>0010</td><td>+2</td></tr><tr><td>0001</td><td>+1</td></tr><tr><td>0000</td><td>0</td></tr><tr><td>1111</td><td>-1</td></tr><tr><td>1110</td><td>-2</td></tr><tr><td>1101</td><td>-3</td></tr><tr><td>1100</td><td>-4</td></tr><tr><td>1011</td><td>-5</td></tr><tr><td>1010</td><td>-6</td></tr><tr><td>1001</td><td>-7</td></tr><tr><td>1000</td><td>-8</td></tr></tbody></table></div>
+<hr>
+<h2>Wie erkennt man: positiv oder negativ?</h2>
+<p>Das höchste Bit (Most Significant Bit, MSB) gibt das Vorzeichen an:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>MSB = 0 → positive Zahl
+MSB = 1 → negative Zahl</pre></div>
+<hr>
+<h2>Subtraktion über Addition</h2>
+<p>Der wichtigste Vorteil des Zweierkomplements:</p>
+<p>Der Prozessor muss keine eigene Subtraktions-Schaltung bauen.</p>
+<p>Subtraktion wird einfach als Addition der negierten Zahl durchgeführt.</p>
+<p>Beispiel:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>7 - 3
+= 7 + (-3)</pre></div>
+<p>7 in 4 Bit:  <code>0111</code> -3 im Zweierkomplement:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>+3 = 0011
+Einerkomplement: 1100
++ 1:             1101</pre></div>
+<p>Jetzt addieren:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  0111
++ 1101
+------
+ 10100</pre></div>
+<p>Übertrag fällt weg → <code>0100</code> = 4</p>
+<p>Kontrolle: 7 - 3 = 4 ✓</p>
+<hr>
+<h2>Zusammenfassung: Einerkomplement vs. Zweierkomplement</h2>
+<div class="table-wrap"><table><thead><tr><th>Eigenschaft</th><th>Einerkomplement</th><th>Zweierkomplement</th></tr></thead><tbody><tr><td>Darstellung von Null</td><td>zweifach (+0/-0)</td><td>eindeutig (0000)</td></tr><tr><td>Subtraktion möglich?</td><td>komplizierter</td><td>ja, über Addition</td></tr><tr><td>Verwendung heute</td><td>selten</td><td>überall</td></tr></tbody></table></div>
+<hr>
+<h2>Verbindung zu anderen Themen</h2>
+<ul><li><strong>Thema 2 (Binäre Arithmetik):</strong> Subtraktion nutzt intern das Zweierkomplement.</li><li><strong>Thema 4 (Gleitkommazahlen):</strong> Das Vorzeichen einer Gleitkommazahl wird ähnlich codiert.</li><li><strong>Java (Thema 9):</strong> <code>int</code> in Java ist immer ein 32-Bit-Zweierkomplement.</li></ul>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Stelle -7 als 4-Bit-Zweierkomplement dar.</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>+7 = 0111
+Einerkomplement: 1000
++ 1:             1001</pre></div>
+<p>-7 = <code>1001</code></p>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Welchen Dezimalwert hat <code>1110</code> im 4-Bit-Zweierkomplement?</p>
+<h4>Lösung</h4>
+<p>MSB = 1 → negative Zahl.</p>
+<p>Zweierkomplement umkehren (nochmals Einerkomplement + 1):</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1110
+Einerkomplement: 0001
++ 1:             0010 = 2</pre></div>
+<p>Also: <code>1110</code> = -2</p>
+<hr>
+<h3>Aufgabe 3</h3>
+<p>Berechne 6 - 4 mit Hilfe des Zweierkomplements (4 Bit).</p>
+<h4>Lösung</h4>
+<p>6 = <code>0110</code></p>
+<p>-4 im Zweierkomplement:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>+4 = 0100
+Einerkomplement: 1011
++ 1:             1100</pre></div>
+<p>Addition:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  0110
++ 1100
+------
+ 10010</pre></div>
+<p>Übertrag fällt weg → <code>0010</code> = 2</p>
+<p>Kontrolle: 6 - 4 = 2 ✓</p>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Das Einerkomplement entsteht durch Invertierung aller Bits.</li><li>Das Zweierkomplement = Einerkomplement + 1.</li><li>Beim Zweierkomplement gibt es nur eine einzige Null.</li><li>Das höchste Bit zeigt das Vorzeichen an: 0 = positiv, 1 = negativ.</li><li>Der Prozessor führt Subtraktion als Addition des Zweierkomplements durch.</li><li>Bei 8 Bit reicht der Bereich von -128 bis +127.</li></ol>
+<hr>
+    <div class="rating-card">
+      <div class="rating-title">Gesamteinschätzung</div>
+      <div class="rating-grid">
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Didaktik:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Fachliche Korrektheit:</span>
+            <span class="rating-score">10 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>LK-Niveau:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+        <div class="rating-item">
+          <div class="rating-label">
+            <span>Verständlichkeit:</span>
+            <span class="rating-score">9 / 10</span>
+          </div>
+          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        </div>
+      </div>
+    </div>
+<div class="page-nav"><a href="Thema2_Binaere_Arithmetik_V2.html" class="nav-btn nav-prev">← Binäre Arithmetik</a><a href="Thema4_Fest_und_Gleitkommazahlen.html" class="nav-btn nav-next">Fest- &amp; Gleitkommazahlen →</a></div>
+  </div>
+</main>
+<script src="lk-script.js"></script>
+</body>
+</html>

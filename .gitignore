@@ -1,0 +1,7 @@
+# Keine PDFs und Python-Bytecode
+*.pdf
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

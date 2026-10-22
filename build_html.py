@@ -569,30 +569,36 @@ VIZUALIZATIONS = {
 <!-- VIZ 1: Struktogramm-Trace -->
 <div class="viz-box">
   <div class="viz-title">Struktogramm-Trace – Summe 1 bis n</div>
-  <p class="viz-note">Klicke "Starten" – der aktuelle Ausführungsschritt leuchtet im Struktogramm auf.</p>
+  <p class="viz-note">Wähle n, klicke "Aufbauen" – dann Schritt für Schritt vor und zurück navigieren.</p>
   <div class="viz-row">
     <span class="viz-label">n:</span>
     <input id="viz-t12-trace-n" class="viz-input" type="number" min="1" max="10" value="4" style="width:70px">
-    <button id="viz-t12-trace-btn" class="viz-btn">▶ Starten</button>
+    <button id="viz-t12-build-btn" class="viz-btn">Aufbauen</button>
   </div>
   <div style="margin-top:16px;font-family:var(--font-code);font-size:13px">
-    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s">
+    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s,border-color .2s">
       Lies n &nbsp;·&nbsp; summe = 0 &nbsp;·&nbsp; i = 1
     </div>
-    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px 8px 24px;margin:2px 0;border-left:4px solid var(--active);transition:background .2s">
+    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px 8px 24px;margin:2px 0;border-left:4px solid var(--active);transition:background .2s,border-color .2s">
       SOLANGE i ≤ n: &nbsp; summe = summe + i &nbsp;·&nbsp; i = i + 1
     </div>
-    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s">
+    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s,border-color .2s">
       Ausgabe: summe
     </div>
   </div>
-  <div class="viz-row" style="margin-top:12px">
+  <div class="viz-row" style="margin-top:10px">
     <span class="viz-label">Variablen:</span>
-    <span id="viz-t12-vars" class="viz-result" style="font-size:13px"></span>
+    <span id="viz-t12-vars" class="viz-result" style="font-size:12px;font-weight:500"></span>
+  </div>
+  <div class="viz-nav">
+    <button id="viz-t12-prev-btn" class="viz-btn viz-btn-ghost" disabled>◀ Zurück</button>
+    <span   id="viz-t12-counter"  class="viz-step-counter">–</span>
+    <button id="viz-t12-next-btn" class="viz-btn">Weiter ▶</button>
+    <button id="viz-t12-reset-btn" class="viz-btn viz-btn-ghost">↺ Reset</button>
   </div>
 </div>
 <style>
-  .struk-active { background: color-mix(in srgb, var(--active) 12%, var(--bg-card)) !important; border-color: var(--active) !important; }
+  .struk-active { background: color-mix(in srgb, var(--active) 12%, var(--bg-card)) !important; border-color: var(--active) !important; color: var(--text-primary); }
 </style>
 """,
 
@@ -602,28 +608,44 @@ VIZUALIZATIONS = {
 <!-- VIZ 1: Sortier-Rennen -->
 <div class="viz-box">
   <div class="viz-title">Sortier-Rennen – 4 Algorithmen gleichzeitig</div>
-  <p class="viz-note">Alle starten mit demselben zufälligen Array. <span style="color:#ffa047">■</span> Vergleich &nbsp;<span style="color:#ff4f6a">■</span> Tausch &nbsp;<span style="color:#4de8b2">■</span> Fertig</p>
-  <button id="viz-t13-sort-btn" class="viz-btn" style="margin-bottom:18px">▶ Start</button>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <p class="viz-note">
+    <span style="color:#ffa047">■</span> Vergleich &nbsp;
+    <span style="color:#ff4f6a">■</span> Tausch &nbsp;
+    <span style="color:#4de8b2">■</span> Fertig
+  </p>
+  <div class="viz-nav" style="margin-bottom:16px">
+    <button id="viz-t13-build-btn" class="viz-btn">▶ Simulation starten</button>
+    <button id="viz-t13-prev-btn"  class="viz-btn viz-btn-ghost" disabled>◀ Zurück</button>
+    <span   id="viz-t13-counter"   class="viz-step-counter">– (Simulation starten)</span>
+    <button id="viz-t13-next-btn"  class="viz-btn">Weiter ▶</button>
+    <button id="viz-t13-auto-btn"  class="viz-btn viz-btn-ghost">⏩ Auto</button>
+    <button id="viz-t13-new-btn"   class="viz-btn viz-btn-ghost">↺ Neues Array</button>
+  </div>
+  <div class="viz-speed-row">
+    <span>Geschwindigkeit:</span>
+    <input id="viz-t13-speed" class="viz-range" type="range" min="1" max="100" value="60" style="width:120px">
+    <span>schnell</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
     <div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Insertion Sort</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:600">Insertion Sort</div>
       <div id="viz-t13-arena-ins"   class="sort-arena"></div>
-      <div id="viz-t13-stats-ins"   class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+      <div id="viz-t13-stats-ins"   class="sort-stats">Vergleiche: <span>0</span>&nbsp;&nbsp;Tausche: <span>0</span></div>
     </div>
     <div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Selection Sort</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:600">Selection Sort</div>
       <div id="viz-t13-arena-sel"   class="sort-arena"></div>
-      <div id="viz-t13-stats-sel"   class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+      <div id="viz-t13-stats-sel"   class="sort-stats">Vergleiche: <span>0</span>&nbsp;&nbsp;Tausche: <span>0</span></div>
     </div>
     <div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Quicksort</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:600">Quicksort</div>
       <div id="viz-t13-arena-quick" class="sort-arena"></div>
-      <div id="viz-t13-stats-quick" class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+      <div id="viz-t13-stats-quick" class="sort-stats">Vergleiche: <span>0</span>&nbsp;&nbsp;Tausche: <span>0</span></div>
     </div>
     <div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Mergesort</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:600">Mergesort</div>
       <div id="viz-t13-arena-merge" class="sort-arena"></div>
-      <div id="viz-t13-stats-merge" class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+      <div id="viz-t13-stats-merge" class="sort-stats">Vergleiche: <span>0</span>&nbsp;&nbsp;Tausche: <span>0</span></div>
     </div>
   </div>
 </div>

@@ -394,28 +394,44 @@ Gesamtaufwand: O(n + k).</pre></div>
 <!-- VIZ 1: Sortier-Rennen -->
 <div class="viz-box">
   <div class="viz-title">Sortier-Rennen – 4 Algorithmen gleichzeitig</div>
-  <p class="viz-note">Alle starten mit demselben zufälligen Array. <span style="color:#ffa047">■</span> Vergleich &nbsp;<span style="color:#ff4f6a">■</span> Tausch &nbsp;<span style="color:#4de8b2">■</span> Fertig</p>
-  <button id="viz-t13-sort-btn" class="viz-btn" style="margin-bottom:18px">▶ Start</button>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <p class="viz-note">
+    <span style="color:#ffa047">■</span> Vergleich &nbsp;
+    <span style="color:#ff4f6a">■</span> Tausch &nbsp;
+    <span style="color:#4de8b2">■</span> Fertig
+  </p>
+  <div class="viz-nav" style="margin-bottom:16px">
+    <button id="viz-t13-build-btn" class="viz-btn">▶ Simulation starten</button>
+    <button id="viz-t13-prev-btn"  class="viz-btn viz-btn-ghost" disabled>◀ Zurück</button>
+    <span   id="viz-t13-counter"   class="viz-step-counter">– (Simulation starten)</span>
+    <button id="viz-t13-next-btn"  class="viz-btn">Weiter ▶</button>
+    <button id="viz-t13-auto-btn"  class="viz-btn viz-btn-ghost">⏩ Auto</button>
+    <button id="viz-t13-new-btn"   class="viz-btn viz-btn-ghost">↺ Neues Array</button>
+  </div>
+  <div class="viz-speed-row">
+    <span>Geschwindigkeit:</span>
+    <input id="viz-t13-speed" class="viz-range" type="range" min="1" max="100" value="60" style="width:120px">
+    <span>schnell</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
     <div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Insertion Sort</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:600">Insertion Sort</div>
       <div id="viz-t13-arena-ins"   class="sort-arena"></div>
-      <div id="viz-t13-stats-ins"   class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+      <div id="viz-t13-stats-ins"   class="sort-stats">Vergleiche: <span>0</span>&nbsp;&nbsp;Tausche: <span>0</span></div>
     </div>
     <div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Selection Sort</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:600">Selection Sort</div>
       <div id="viz-t13-arena-sel"   class="sort-arena"></div>
-      <div id="viz-t13-stats-sel"   class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+      <div id="viz-t13-stats-sel"   class="sort-stats">Vergleiche: <span>0</span>&nbsp;&nbsp;Tausche: <span>0</span></div>
     </div>
     <div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Quicksort</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:600">Quicksort</div>
       <div id="viz-t13-arena-quick" class="sort-arena"></div>
-      <div id="viz-t13-stats-quick" class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+      <div id="viz-t13-stats-quick" class="sort-stats">Vergleiche: <span>0</span>&nbsp;&nbsp;Tausche: <span>0</span></div>
     </div>
     <div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Mergesort</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-weight:600">Mergesort</div>
       <div id="viz-t13-arena-merge" class="sort-arena"></div>
-      <div id="viz-t13-stats-merge" class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+      <div id="viz-t13-stats-merge" class="sort-stats">Vergleiche: <span>0</span>&nbsp;&nbsp;Tausche: <span>0</span></div>
     </div>
   </div>
 </div>

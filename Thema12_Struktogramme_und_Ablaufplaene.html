@@ -354,30 +354,36 @@ System.out.println(max);</pre></div>
 <!-- VIZ 1: Struktogramm-Trace -->
 <div class="viz-box">
   <div class="viz-title">Struktogramm-Trace – Summe 1 bis n</div>
-  <p class="viz-note">Klicke "Starten" – der aktuelle Ausführungsschritt leuchtet im Struktogramm auf.</p>
+  <p class="viz-note">Wähle n, klicke "Aufbauen" – dann Schritt für Schritt vor und zurück navigieren.</p>
   <div class="viz-row">
     <span class="viz-label">n:</span>
     <input id="viz-t12-trace-n" class="viz-input" type="number" min="1" max="10" value="4" style="width:70px">
-    <button id="viz-t12-trace-btn" class="viz-btn">▶ Starten</button>
+    <button id="viz-t12-build-btn" class="viz-btn">Aufbauen</button>
   </div>
   <div style="margin-top:16px;font-family:var(--font-code);font-size:13px">
-    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s">
+    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s,border-color .2s">
       Lies n &nbsp;·&nbsp; summe = 0 &nbsp;·&nbsp; i = 1
     </div>
-    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px 8px 24px;margin:2px 0;border-left:4px solid var(--active);transition:background .2s">
+    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px 8px 24px;margin:2px 0;border-left:4px solid var(--active);transition:background .2s,border-color .2s">
       SOLANGE i ≤ n: &nbsp; summe = summe + i &nbsp;·&nbsp; i = i + 1
     </div>
-    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s">
+    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s,border-color .2s">
       Ausgabe: summe
     </div>
   </div>
-  <div class="viz-row" style="margin-top:12px">
+  <div class="viz-row" style="margin-top:10px">
     <span class="viz-label">Variablen:</span>
-    <span id="viz-t12-vars" class="viz-result" style="font-size:13px"></span>
+    <span id="viz-t12-vars" class="viz-result" style="font-size:12px;font-weight:500"></span>
+  </div>
+  <div class="viz-nav">
+    <button id="viz-t12-prev-btn" class="viz-btn viz-btn-ghost" disabled>◀ Zurück</button>
+    <span   id="viz-t12-counter"  class="viz-step-counter">–</span>
+    <button id="viz-t12-next-btn" class="viz-btn">Weiter ▶</button>
+    <button id="viz-t12-reset-btn" class="viz-btn viz-btn-ghost">↺ Reset</button>
   </div>
 </div>
 <style>
-  .struk-active { background: color-mix(in srgb, var(--active) 12%, var(--bg-card)) !important; border-color: var(--active) !important; }
+  .struk-active { background: color-mix(in srgb, var(--active) 12%, var(--bg-card)) !important; border-color: var(--active) !important; color: var(--text-primary); }
 </style>
 
 <div class="page-nav"><a href="Thema11_Objektorientierung.html" class="nav-btn nav-prev">← Objektorientierung</a><a href="Thema13_Sortieralgorithmen.html" class="nav-btn nav-next">Sortieralgorithmen →</a></div>

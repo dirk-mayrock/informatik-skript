@@ -785,36 +785,75 @@ function initT11Polymorphism() {
 ══════════════════════════════════════════════════════════ */
 
 function initT12Trace() {
-  const btn = document.getElementById('viz-t12-trace-btn');
-  if (!btn) return;
-  const nInp  = document.getElementById('viz-t12-trace-n');
-  const rows  = document.querySelectorAll('.struk-row');
-  const varEl = document.getElementById('viz-t12-vars');
-  let steps = [], stepIdx = 0;
+  const buildBtn = document.getElementById('viz-t12-build-btn');
+  const prevBtn  = document.getElementById('viz-t12-prev-btn');
+  const nextBtn  = document.getElementById('viz-t12-next-btn');
+  const resetBtn = document.getElementById('viz-t12-reset-btn');
+  if (!buildBtn) return;
 
-  btn.addEventListener('click', () => {
-    const n = Math.min(parseInt(nInp.value)||5, 10);
+  const nInp    = document.getElementById('viz-t12-trace-n');
+  const rows    = document.querySelectorAll('.struk-row');
+  const varEl   = document.getElementById('viz-t12-vars');
+  const counter = document.getElementById('viz-t12-counter');
+
+  let steps = [], stepIdx = -1;
+
+  function buildSteps() {
+    const n = Math.min(parseInt(nInp.value) || 5, 10);
     steps = [];
-    steps.push({ row:0, vars:'n = '+n+', summe = 0, i = 1' });
+    steps.push({ row: 0, vars: 'n = ' + n + ',  summe = 0,  i = 1', label: 'Initialisierung' });
     let summe = 0;
-    for (let i=1; i<=n; i++) {
+    for (let i = 1; i <= n; i++) {
+      steps.push({ row: 1, vars: `i = ${i},  summe (vorher) = ${summe},  Bedingung: ${i} ≤ ${n} ✓`, label: `Schleife i=${i}` });
       summe += i;
-      steps.push({ row:1, vars:`i = ${i}, summe = ${summe}` });
+      steps.push({ row: 1, vars: `i = ${i},  summe = ${summe}  (nach Addition)`, label: `i=${i} addiert` });
     }
-    steps.push({ row:2, vars:`Ausgabe: summe = ${summe}` });
+    steps.push({ row: 1, vars: `i = ${n+1},  Bedingung: ${n+1} ≤ ${n} ✗ → Schleife endet`, label: 'Schleife Ende' });
+    steps.push({ row: 2, vars: `Ausgabe: summe = ${summe}`, label: 'Ausgabe' });
+  }
+
+  function showStep() {
+    rows.forEach(r => r.classList.remove('struk-active'));
+    if (stepIdx < 0 || stepIdx >= steps.length) {
+      if (counter) counter.textContent = steps.length ? '– / ' + steps.length : '–';
+      if (varEl)   varEl.textContent = '';
+      if (prevBtn) prevBtn.disabled = true;
+      if (nextBtn) nextBtn.disabled = steps.length === 0;
+      return;
+    }
+    const s = steps[stepIdx];
+    if (rows[s.row]) rows[s.row].classList.add('struk-active');
+    if (varEl)   varEl.textContent = s.vars;
+    if (counter) counter.textContent = (stepIdx + 1) + ' / ' + steps.length + '  · ' + s.label;
+    if (prevBtn) prevBtn.disabled = stepIdx <= 0;
+    if (nextBtn) nextBtn.disabled = stepIdx >= steps.length - 1;
+  }
+
+  buildBtn.addEventListener('click', () => {
+    buildSteps();
     stepIdx = 0;
-    nextStep();
+    showStep();
   });
 
-  function nextStep() {
-    if (!steps.length) return;
+  nextBtn && nextBtn.addEventListener('click', () => {
+    if (stepIdx < steps.length - 1) { stepIdx++; showStep(); }
+  });
+
+  prevBtn && prevBtn.addEventListener('click', () => {
+    if (stepIdx > 0) { stepIdx--; showStep(); }
+  });
+
+  resetBtn && resetBtn.addEventListener('click', () => {
+    stepIdx = -1;
     rows.forEach(r => r.classList.remove('struk-active'));
-    const s = steps[stepIdx % steps.length];
-    if (rows[s.row]) rows[s.row].classList.add('struk-active');
-    if (varEl) varEl.textContent = s.vars;
-    stepIdx++;
-    if (stepIdx < steps.length) setTimeout(nextStep, 600);
-  }
+    if (varEl)   varEl.textContent = '';
+    if (counter) counter.textContent = '–';
+    if (prevBtn) prevBtn.disabled = true;
+    if (nextBtn) nextBtn.disabled = false;
+  });
+
+  // initial state
+  if (prevBtn) prevBtn.disabled = true;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -822,8 +861,16 @@ function initT12Trace() {
 ══════════════════════════════════════════════════════════ */
 
 function initT13SortRace() {
-  const btn = document.getElementById('viz-t13-sort-btn');
-  if (!btn) return;
+  const buildBtn = document.getElementById('viz-t13-build-btn');
+  if (!buildBtn) return;
+
+  const prevBtn  = document.getElementById('viz-t13-prev-btn');
+  const nextBtn  = document.getElementById('viz-t13-next-btn');
+  const autoBtn  = document.getElementById('viz-t13-auto-btn');
+  const newBtn   = document.getElementById('viz-t13-new-btn');
+  const speedSl  = document.getElementById('viz-t13-speed');
+  const counter  = document.getElementById('viz-t13-counter');
+
   const arenas = {
     insertion: document.getElementById('viz-t13-arena-ins'),
     selection: document.getElementById('viz-t13-arena-sel'),
@@ -837,107 +884,212 @@ function initT13SortRace() {
     merge:     document.getElementById('viz-t13-stats-merge'),
   };
 
-  function makeArray() {
-    return Array.from({length:16}, () => Math.floor(Math.random()*95)+5);
+  // ── Frame recording ──────────────────────────────────
+  // Each algorithm independently records frames.
+  // A frame = { arr:[], comparing:[], swapping:[], sorted:[], comparisons, swaps }
+  const allFrames = { insertion:[], selection:[], quick:[], merge:[] };
+  let frameIdx = 0;
+  let maxFrames = 0;
+  let autoTimer = null;
+
+  function makeArray(n=14) {
+    return Array.from({length:n}, () => Math.floor(Math.random()*90)+8);
   }
 
-  function renderBars(arena, arr, comparing=[], swapping=[], sorted=[]) {
-    if (!arena) return;
-    const max = Math.max(...arr);
-    arena.innerHTML = arr.map((v,i) => {
+  function recordFrame(frames, arr, comparing, swapping, sorted, comparisons, swaps) {
+    frames.push({ arr:[...arr], comparing:[...comparing], swapping:[...swapping], sorted:[...sorted], comparisons, swaps });
+  }
+
+  // ── Simulate all algorithms synchronously ────────────
+  function simulateInsertion(arr) {
+    const frames = [];
+    const a = [...arr];
+    let comparisons = 0, swaps = 0;
+    recordFrame(frames, a, [], [], [], comparisons, swaps);
+    for (let i = 1; i < a.length; i++) {
+      let j = i;
+      while (j > 0) {
+        comparisons++;
+        recordFrame(frames, a, [j, j-1], [], [], comparisons, swaps);
+        if (a[j] < a[j-1]) {
+          [a[j], a[j-1]] = [a[j-1], a[j]]; swaps++;
+          recordFrame(frames, a, [], [j, j-1], [], comparisons, swaps);
+          j--;
+        } else break;
+      }
+    }
+    recordFrame(frames, a, [], [], a.map((_,k)=>k), comparisons, swaps);
+    return frames;
+  }
+
+  function simulateSelection(arr) {
+    const frames = [];
+    const a = [...arr];
+    let comparisons = 0, swaps = 0;
+    recordFrame(frames, a, [], [], [], comparisons, swaps);
+    for (let i = 0; i < a.length - 1; i++) {
+      let minIdx = i;
+      for (let j = i+1; j < a.length; j++) {
+        comparisons++;
+        recordFrame(frames, a, [j, minIdx], [], Array.from({length:i},(_,k)=>k), comparisons, swaps);
+        if (a[j] < a[minIdx]) minIdx = j;
+      }
+      if (minIdx !== i) { [a[i], a[minIdx]] = [a[minIdx], a[i]]; swaps++; }
+      recordFrame(frames, a, [], [], Array.from({length:i+1},(_,k)=>k), comparisons, swaps);
+    }
+    recordFrame(frames, a, [], [], a.map((_,k)=>k), comparisons, swaps);
+    return frames;
+  }
+
+  function simulateQuick(arr) {
+    const frames = [];
+    const a = [...arr];
+    let comparisons = 0, swaps = 0;
+    recordFrame(frames, a, [], [], [], comparisons, swaps);
+    function qsort(lo, hi) {
+      if (lo >= hi) return;
+      const pivot = a[hi];
+      let pi = lo;
+      for (let j = lo; j < hi; j++) {
+        comparisons++;
+        recordFrame(frames, a, [j, hi], [], [], comparisons, swaps);
+        if (a[j] <= pivot) {
+          [a[j], a[pi]] = [a[pi], a[j]]; swaps++;
+          recordFrame(frames, a, [], [j, pi], [], comparisons, swaps);
+          pi++;
+        }
+      }
+      [a[pi], a[hi]] = [a[hi], a[pi]]; swaps++;
+      recordFrame(frames, a, [], [pi, hi], [], comparisons, swaps);
+      qsort(lo, pi-1);
+      qsort(pi+1, hi);
+    }
+    qsort(0, a.length-1);
+    recordFrame(frames, a, [], [], a.map((_,k)=>k), comparisons, swaps);
+    return frames;
+  }
+
+  function simulateMerge(arr) {
+    const frames = [];
+    const a = [...arr];
+    let comparisons = 0, swaps = 0;
+    recordFrame(frames, a, [], [], [], comparisons, swaps);
+    function msort(lo, hi) {
+      if (lo >= hi) return;
+      const mid = Math.floor((lo+hi)/2);
+      msort(lo, mid);
+      msort(mid+1, hi);
+      const left  = a.slice(lo, mid+1);
+      const right = a.slice(mid+1, hi+1);
+      let i=0, j=0, k=lo;
+      while (i < left.length && j < right.length) {
+        comparisons++;
+        recordFrame(frames, a, [k], [], [], comparisons, swaps);
+        if (left[i] <= right[j]) a[k++] = left[i++];
+        else { a[k++] = right[j++]; swaps++; }
+      }
+      while (i < left.length)  a[k++] = left[i++];
+      while (j < right.length) a[k++] = right[j++];
+      recordFrame(frames, a, [], [], Array.from({length: hi-lo+1},(_,x)=>lo+x), comparisons, swaps);
+    }
+    msort(0, a.length-1);
+    recordFrame(frames, a, [], [], a.map((_,k)=>k), comparisons, swaps);
+    return frames;
+  }
+
+  // ── Render a single frame ────────────────────────────
+  function renderBars(arena, frame) {
+    if (!arena || !frame) return;
+    const max = Math.max(...frame.arr);
+    arena.innerHTML = frame.arr.map((v, i) => {
       let cls = 'sort-bar';
-      if (sorted.includes(i))   cls += ' sorted';
-      else if (swapping.includes(i))  cls += ' swapping';
-      else if (comparing.includes(i)) cls += ' comparing';
-      return `<div class="${cls}" style="height:${(v/max*130)}px"></div>`;
+      if (frame.sorted.includes(i))    cls += ' sorted';
+      else if (frame.swapping.includes(i))  cls += ' swapping';
+      else if (frame.comparing.includes(i)) cls += ' comparing';
+      return `<div class="${cls}" style="height:${Math.max(4, (v/max*130))}px" title="${v}"></div>`;
     }).join('');
   }
 
-  async function animateSort(name, arr) {
-    const arena = arenas[name];
-    const statsEl = statsEls[name];
-    let comparisons = 0, swaps = 0;
-    const a = [...arr];
-
-    function setStats() { if (statsEl) statsEl.innerHTML = `Vergleiche: <span>${comparisons}</span> Tausche: <span>${swaps}</span>`; }
-    function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-    if (name === 'insertion') {
-      for (let i=1; i<a.length; i++) {
-        let j = i;
-        while (j>0) {
-          comparisons++;
-          renderBars(arena, a, [j,j-1]);
-          setStats();
-          await delay(60);
-          if (a[j]<a[j-1]) { [a[j],a[j-1]] = [a[j-1],a[j]]; swaps++; j--; }
-          else break;
-        }
-      }
-    } else if (name === 'selection') {
-      for (let i=0; i<a.length-1; i++) {
-        let minIdx = i;
-        for (let j=i+1; j<a.length; j++) {
-          comparisons++;
-          renderBars(arena, a, [j, minIdx]);
-          setStats();
-          await delay(50);
-          if (a[j]<a[minIdx]) minIdx = j;
-        }
-        if (minIdx !== i) { [a[i],a[minIdx]] = [a[minIdx],a[i]]; swaps++; }
-        renderBars(arena, a, [], [], Array.from({length:i+1},(_,k)=>k));
-      }
-    } else if (name === 'quick') {
-      async function qsort(lo, hi) {
-        if (lo >= hi) return;
-        const pivot = a[hi];
-        let pi = lo;
-        for (let j=lo; j<hi; j++) {
-          comparisons++;
-          renderBars(arena, a, [j, hi]);
-          setStats();
-          await delay(40);
-          if (a[j]<=pivot) { [a[j],a[pi]]=[a[pi],a[j]]; swaps++; pi++; }
-        }
-        [a[pi],a[hi]] = [a[hi],a[pi]]; swaps++;
-        await qsort(lo, pi-1);
-        await qsort(pi+1, hi);
-      }
-      await qsort(0, a.length-1);
-    } else if (name === 'merge') {
-      async function msort(lo, hi) {
-        if (lo >= hi) return;
-        const mid = Math.floor((lo+hi)/2);
-        await msort(lo, mid);
-        await msort(mid+1, hi);
-        const left  = a.slice(lo, mid+1);
-        const right = a.slice(mid+1, hi+1);
-        let i=0, j=0, k=lo;
-        while (i<left.length && j<right.length) {
-          comparisons++;
-          renderBars(arena, a, [k]);
-          setStats();
-          await delay(35);
-          if (left[i]<=right[j]) a[k++]=left[i++];
-          else { a[k++]=right[j++]; swaps++; }
-        }
-        while (i<left.length) a[k++]=left[i++];
-        while (j<right.length) a[k++]=right[j++];
-      }
-      await msort(0, a.length-1);
-    }
-
-    renderBars(arena, a, [], [], a.map((_,i)=>i));
-    setStats();
+  function renderStats(statsEl, frame) {
+    if (!statsEl || !frame) return;
+    statsEl.innerHTML = `Vergleiche: <span>${frame.comparisons}</span>&nbsp;&nbsp;Tausche: <span>${frame.swaps}</span>`;
   }
 
-  btn.addEventListener('click', () => {
-    const arr = makeArray();
-    Object.keys(arenas).forEach(name => animateSort(name, arr));
+  function showFrame(idx) {
+    frameIdx = Math.max(0, Math.min(idx, maxFrames - 1));
+    Object.keys(arenas).forEach(name => {
+      const frames = allFrames[name];
+      const fi = Math.min(frameIdx, frames.length - 1);
+      renderBars(arenas[name], frames[fi]);
+      renderStats(statsEls[name], frames[fi]);
+    });
+    if (counter) counter.textContent = (frameIdx + 1) + ' / ' + maxFrames;
+    if (prevBtn) prevBtn.disabled = frameIdx <= 0;
+    if (nextBtn) nextBtn.disabled = frameIdx >= maxFrames - 1;
+  }
+
+  // ── Build simulation from current array ─────────────
+  let currentArr = makeArray();
+
+  function runSimulation() {
+    stopAuto();
+    allFrames.insertion = simulateInsertion(currentArr);
+    allFrames.selection = simulateSelection(currentArr);
+    allFrames.quick     = simulateQuick(currentArr);
+    allFrames.merge     = simulateMerge(currentArr);
+    maxFrames = Math.max(...Object.values(allFrames).map(f => f.length));
+    frameIdx  = 0;
+    showFrame(0);
+    if (autoBtn) autoBtn.textContent = '⏩ Auto';
+  }
+
+  // ── Auto-play ────────────────────────────────────────
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    if (autoBtn) autoBtn.textContent = '⏩ Auto';
+  }
+
+  function startAuto() {
+    if (frameIdx >= maxFrames - 1) frameIdx = 0;
+    const speed = speedSl ? Math.max(30, 510 - parseInt(speedSl.value) * 5) : 120;
+    autoTimer = setInterval(() => {
+      if (frameIdx >= maxFrames - 1) { stopAuto(); return; }
+      showFrame(frameIdx + 1);
+    }, speed);
+    if (autoBtn) autoBtn.textContent = '⏸ Pause';
+  }
+
+  // ── Button events ────────────────────────────────────
+  buildBtn.addEventListener('click', runSimulation);
+
+  newBtn && newBtn.addEventListener('click', () => {
+    currentArr = makeArray();
+    runSimulation();
   });
-  // Initial display
-  const arr = makeArray();
-  Object.keys(arenas).forEach(name => renderBars(arenas[name], arr));
+
+  nextBtn && nextBtn.addEventListener('click', () => {
+    stopAuto(); showFrame(frameIdx + 1);
+  });
+
+  prevBtn && prevBtn.addEventListener('click', () => {
+    stopAuto(); showFrame(frameIdx - 1);
+  });
+
+  autoBtn && autoBtn.addEventListener('click', () => {
+    if (autoTimer) stopAuto(); else startAuto();
+  });
+
+  // initial render without simulation
+  Object.keys(arenas).forEach(name => {
+    const max = Math.max(...currentArr);
+    if (arenas[name]) {
+      arenas[name].innerHTML = currentArr.map(v =>
+        `<div class="sort-bar" style="height:${Math.max(4,(v/max*130))}px"></div>`
+      ).join('');
+    }
+  });
+  if (counter) counter.textContent = '–  (Simulation starten)';
+  if (prevBtn) prevBtn.disabled = true;
 }
 
 function initT13ONotation() {

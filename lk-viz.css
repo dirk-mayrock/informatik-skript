@@ -394,3 +394,162 @@
 .uml-private  { color: #ff6b9d; }
 .uml-public   { color: #4de8b2; }
 .uml-protected{ color: #ffa047; }
+
+/* ── Step navigation buttons ────────────────────────── */
+.viz-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.viz-step-counter {
+  font-family: var(--font-code);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  min-width: 90px;
+  text-align: center;
+}
+
+/* ── Speed slider label ─────────────────────────────── */
+.viz-speed-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════
+   LIGHT MODE OVERRIDES
+═══════════════════════════════════════════════════════ */
+body.light .viz-box {
+  background: #ffffff;
+  border-color: var(--border-hi);
+  box-shadow: 0 1px 4px rgba(0,0,0,.07);
+}
+
+body.light .viz-input {
+  background: #ffffff;
+  color: var(--text-primary);
+  border-color: var(--border-hi);
+}
+
+body.light .viz-input:focus {
+  border-color: var(--active);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--active) 15%, transparent);
+}
+
+body.light .viz-range {
+  background: var(--border-hi);
+}
+
+body.light .viz-step-counter {
+  background: #f0f2fa;
+  border-color: var(--border-hi);
+  color: var(--text-secondary);
+}
+
+body.light .bit-cell {
+  background: #f0f2fa;
+  color: var(--text-secondary);
+  border-color: var(--border-hi);
+}
+
+body.light .bit-cell.on {
+  background: color-mix(in srgb, var(--active) 18%, #f0f2fa);
+  border-color: var(--active);
+  color: var(--active);
+}
+
+body.light .bit-cell.parity {
+  background: color-mix(in srgb, #e06cff 12%, #f0f2fa);
+  border-color: #e06cff;
+  color: #c840e8;
+}
+
+body.light .bit-cell.data-bit {
+  background: color-mix(in srgb, #38bdf8 12%, #f0f2fa);
+  border-color: #38bdf8;
+  color: #0284c7;
+}
+
+body.light .bit-cell.error-bit {
+  background: color-mix(in srgb, #ff4f6a 15%, #f0f2fa);
+  border-color: #ff4f6a;
+  color: #dc2626;
+}
+
+body.light .step-row {
+  background: #f5f7ff;
+  color: var(--text-secondary);
+}
+
+body.light .step-row.highlight {
+  background: color-mix(in srgb, var(--active) 10%, #f5f7ff);
+}
+
+body.light .viz-table th {
+  background: #f0f2fa;
+  color: var(--text-muted);
+}
+
+body.light .viz-table td {
+  color: var(--text-secondary);
+}
+
+body.light .viz-table tr.active-row td {
+  background: color-mix(in srgb, var(--active) 10%, #ffffff);
+}
+
+body.light .sort-arena {
+  background: #f5f7ff;
+  border-radius: 6px;
+  padding: 4px 4px 0;
+}
+
+body.light .sort-stats {
+  color: var(--text-muted);
+}
+
+body.light .uml-box {
+  background: #ffffff;
+}
+
+body.light .uml-class-name {
+  background: color-mix(in srgb, var(--active) 12%, #ffffff);
+}
+
+body.light .uml-section {
+  background: #ffffff;
+  color: var(--text-secondary);
+}
+
+body.light .huff-bubble {
+  background: #f0f2fa;
+  color: var(--active);
+}
+
+body.light .color-preview {
+  border-color: var(--border-hi);
+}
+
+/* Struktogramm trace rows in light */
+body.light .struk-row {
+  background: #f5f7ff !important;
+  color: var(--text-secondary);
+  border-color: var(--border-hi) !important;
+}
+
+body.light .struk-active {
+  background: color-mix(in srgb, var(--active) 12%, #ffffff) !important;
+  border-color: var(--active) !important;
+  color: var(--text-primary) !important;
+}

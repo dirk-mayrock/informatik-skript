@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 02 – Binäre Arithmetik | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c2); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -413,42 +416,70 @@ Zahl verarbeiten</pre></div>
 <p>Bitverschiebungen benötigen weniger Schaltungsaufwand und können sehr schnell ausgeführt werden.</p>
 <hr>
 <ul><li>Computer rechnen mit Binärzahlen.</li><li>Die Addition ist die wichtigste Rechenoperation.</li><li>Überträge entstehen bei 1 + 1.</li><li>Multiplikation mit 2 entspricht einer Linksverschiebung.</li><li>Division durch 2 entspricht einer Rechtsverschiebung.</li><li>Die ALU ist das Rechenwerk eines Prozessors.</li><li>Das Zweierkomplement erweitert die Binärarithmetik auf negative Zahlen.</li></ul>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-      </div>
-    </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Binäre Addition -->
+<div class="viz-box">
+  <div class="viz-title">Binäre Addition mit Überträgen</div>
+  <div class="viz-row">
+    <span class="viz-label">A (binär):</span>
+    <input id="viz-t2-a" class="viz-input" type="text" value="01010101" maxlength="8" style="width:120px">
+    <span class="viz-label">B (binär):</span>
+    <input id="viz-t2-b" class="viz-input" type="text" value="00110011" maxlength="8" style="width:120px">
+    <button id="viz-t2-add-btn" class="viz-btn">Addieren ▶</button>
+  </div>
+  <div id="viz-t2-arena" style="margin-top:14px"></div>
+</div>
+
+<!-- VIZ 2: Bit-Verschiebung -->
+<div class="viz-box">
+  <div class="viz-title">Bit-Verschiebung (Shift)</div>
+  <p class="viz-note">Links-Shift = ×2, Rechts-Shift = ÷2</p>
+  <div class="viz-row">
+    <span class="viz-label">Startwert:</span>
+    <input id="viz-t2-shift-inp" class="viz-input" type="number" min="0" max="255" value="12" style="width:80px">
+  </div>
+  <div id="viz-t2-shift" class="bit-row" style="margin:12px 0">
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-sep">·</div>
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+  </div>
+  <div class="viz-row">
+    <span class="viz-label">Dezimal:</span><span class="viz-result" id="viz-t2-shift-dec">0</span>
+    <span class="viz-label" style="margin-left:16px">Letzte Op:</span><span class="viz-result" id="viz-t2-shift-op">–</span>
+  </div>
+  <div class="viz-row" style="margin-top:10px;gap:8px">
+    <button id="viz-t2-left"  class="viz-btn">◀ Links-Shift (×2)</button>
+    <button id="viz-t2-right" class="viz-btn viz-btn-ghost">Rechts-Shift (÷2) ▶</button>
+  </div>
+</div>
+
+<!-- VIZ 3: Overflow -->
+<div class="viz-box">
+  <div class="viz-title">Overflow – 4-Bit-Register</div>
+  <p class="viz-note">Klicke wiederholt auf "+1". Bei 1111+1 springt das Register auf 0000.</p>
+  <div id="viz-t2-overflow-bits" class="bit-row" style="margin:12px 0">
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+  </div>
+  <div class="viz-row">
+    <span class="viz-label">Dezimal:</span><span class="viz-result" id="viz-t2-overflow-dec">0</span>
+  </div>
+  <div id="viz-t2-overflow-msg" style="margin-top:8px;font-size:13px;font-family:var(--font-code)"></div>
+  <div class="viz-row" style="margin-top:10px;gap:8px">
+    <button id="viz-t2-overflow-btn"   class="viz-btn">+1</button>
+    <button id="viz-t2-overflow-reset" class="viz-btn viz-btn-ghost">↺ Reset</button>
+  </div>
+</div>
+
 <div class="page-nav"><a href="Thema1_Binaer_und_Hexadezimalzahlen.html" class="nav-btn nav-prev">← Binär- &amp; Hexadezimalzahlen</a><a href="Thema3_Einer_und_Zweierkomplement.html" class="nav-btn nav-next">Einer- &amp; Zweierkomplement →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 09 – Java-Grundlagen | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c9); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -358,42 +361,58 @@ Für Inhaltsvergleiche immer equals() verwenden!</pre></div>
 <h2>Merksätze</h2>
 <ol><li>Java ist streng typisiert — jede Variable braucht einen deklarierten Typ.</li><li><code>int</code> ist 32-Bit-Zweierkomplement, <code>double</code> ist IEEE 754.</li><li>Ganzzahldivision: <code>7 / 2 = 3</code> (kein Rest!).</li><li><code>%</code> gibt den Rest der Division zurück.</li><li>Strings immer mit <code>equals()</code> vergleichen, nicht mit <code>==</code>.</li><li>Arrays sind nullindiziert: erstes Element ist <code>[0]</code>.</li><li>Methoden vermeiden Code-Wiederholung und erhöhen Lesbarkeit.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">8 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="80"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-      </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Datentypen -->
+<div class="viz-box">
+  <div class="viz-title">Java-Datentypen – Wertebereich &amp; Speicher</div>
+  <div class="viz-row">
+    <span class="viz-label">Typ:</span>
+    <select id="viz-t9-type-sel" class="viz-input" style="width:auto">
+      <option value="byte">byte</option>
+      <option value="short">short</option>
+      <option value="int" selected>int</option>
+      <option value="long">long</option>
+      <option value="float">float</option>
+      <option value="double">double</option>
+    </select>
+  </div>
+  <div style="font-family:var(--font-code);font-size:13px;display:flex;flex-direction:column;gap:6px;margin-top:12px">
+    <div><span class="viz-label">Größe:    </span><span id="viz-t9-bits"  class="viz-result"></span></div>
+    <div><span class="viz-label">Minimum:  </span><span id="viz-t9-min"   class="viz-result"></span></div>
+    <div><span class="viz-label">Maximum:  </span><span id="viz-t9-max"   class="viz-result"></span></div>
+    <div><span class="viz-label">Intern:   </span><span id="viz-t9-note"  class="viz-result"></span></div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Speichergröße relativ zu 64 Bit:</div>
+    <div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden">
+      <div id="viz-t9-type-bar" style="height:100%;background:var(--active);border-radius:4px;transition:width .4s;width:50%"></div>
     </div>
+  </div>
+</div>
+
+<!-- VIZ 2: Schleifen-Trace -->
+<div class="viz-box">
+  <div class="viz-title">Schleifen-Trace – Summe 1 bis n</div>
+  <div class="viz-row">
+    <span class="viz-label">n:</span>
+    <input id="viz-t9-loop-n" class="viz-input" type="number" min="1" max="20" value="5" style="width:70px">
+    <button id="viz-t9-loop-btn" class="viz-btn">Ausführen ▶</button>
+  </div>
+  <div style="margin-top:14px;overflow-x:auto">
+    <table class="viz-table">
+      <thead><tr><th>i</th><th>summe (vorher)</th><th>summe (nachher)</th></tr></thead>
+      <tbody id="viz-t9-loop-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
 <div class="page-nav"><a href="Thema8_Hamming_Codes.html" class="nav-btn nav-prev">← Hamming-Codes</a><a href="Thema10_Softwareentwicklung_Wasserfallmodell.html" class="nav-btn nav-next">Softwareentwicklung →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

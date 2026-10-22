@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 01 – Binär- &amp; Hexadezimalzahlen | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c1); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -350,42 +353,85 @@ AF₁₆</pre></div>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>2⁸ = 256</pre></div>
 <hr>
 <ol><li>Computer arbeiten mit Zuständen und deshalb mit Binärzahlen.</li><li>Ein Bit kann genau zwei Zustände speichern.</li><li>Ein Byte besteht aus 8 Bit.</li><li>Hexadezimal ist nur eine kompakte Schreibweise von Binärzahlen.</li><li>Ein Hex-Zeichen entspricht genau 4 Bit.</li><li>Fast alle späteren Themen im Informatikunterricht bauen auf dem Binärsystem auf.</li></ol>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-      </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Bit-Schalter -->
+<div class="viz-box">
+  <div class="viz-title">Bit-Schalter – 8-Bit-Zahl erkunden</div>
+  <p class="viz-note">Klicke auf die Bits, um sie ein- oder auszuschalten. Dezimal- und Hex-Wert aktualisieren sich automatisch.</p>
+  <div id="viz-t1-bits" class="bit-row">
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-sep">·</div>
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+  </div>
+  <div class="viz-row" style="margin-top:14px">
+    <span class="viz-label">Dezimal:</span><span class="viz-result" id="viz-t1-dec">0</span>
+    <span class="viz-label" style="margin-left:20px">Hex:</span><span class="viz-result" id="viz-t1-hex">0x00</span>
+  </div>
+</div>
+
+<!-- VIZ 2: Divisions-Animation -->
+<div class="viz-box">
+  <div class="viz-title">Resteverfahren – Dezimal → Binär</div>
+  <div class="viz-row">
+    <span class="viz-label">Zahl (0–255):</span>
+    <input id="viz-t1-div-inp" class="viz-input" type="number" min="0" max="255" value="42" style="width:80px">
+    <button id="viz-t1-div-btn" class="viz-btn">Umrechnen ▶</button>
+  </div>
+  <div id="viz-t1-div-steps" class="step-list" style="margin-top:12px"></div>
+  <div class="viz-result" id="viz-t1-div-result" style="margin-top:10px"></div>
+</div>
+
+<!-- VIZ 3: Binärzähler -->
+<div class="viz-box">
+  <div class="viz-title">Binärzähler (4 Bit)</div>
+  <p class="viz-note">Beobachte wie Überträge durch die Stellen rollen.</p>
+  <div id="viz-t1-counter" class="bit-row">
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+  </div>
+  <div class="viz-row" style="margin-top:10px">
+    <span class="viz-label">Dezimal:</span><span class="viz-result" id="viz-t1-cnt-dec">0</span>
+  </div>
+  <div class="viz-row" style="margin-top:10px;gap:8px">
+    <button id="viz-t1-cnt-start" class="viz-btn">▶ Start</button>
+    <button id="viz-t1-cnt-stop"  class="viz-btn viz-btn-ghost">⏸ Stop</button>
+    <button id="viz-t1-cnt-reset" class="viz-btn viz-btn-ghost">↺ Reset</button>
+  </div>
+</div>
+
+<!-- VIZ 4: Farb-Mixer -->
+<div class="viz-box">
+  <div class="viz-title">RGB-Farbmixer – Hex-Farben verstehen</div>
+  <p class="viz-note">Verschiebe die Regler. Jeder Kanal ist ein Byte (0–255).</p>
+  <div id="viz-t1-color">
+    <div class="viz-row"><span class="viz-label" style="color:#ff6b9d">Rot:</span>
+      <input id="viz-t1-r" class="viz-range" type="range" min="0" max="255" value="255" style="flex:1">
+      <span id="viz-t1-bin-r" style="font-family:var(--font-code);font-size:11px;color:var(--text-muted);min-width:80px">11111111</span>
     </div>
+    <div class="viz-row"><span class="viz-label" style="color:#4de8b2">Grün:</span>
+      <input id="viz-t1-g" class="viz-range" type="range" min="0" max="255" value="0" style="flex:1">
+      <span id="viz-t1-bin-g" style="font-family:var(--font-code);font-size:11px;color:var(--text-muted);min-width:80px">00000000</span>
+    </div>
+    <div class="viz-row"><span class="viz-label" style="color:#38bdf8">Blau:</span>
+      <input id="viz-t1-b" class="viz-range" type="range" min="0" max="255" value="0" style="flex:1">
+      <span id="viz-t1-bin-b" style="font-family:var(--font-code);font-size:11px;color:var(--text-muted);min-width:80px">00000000</span>
+    </div>
+    <div id="viz-t1-preview" class="color-preview"></div>
+    <div class="viz-row" style="margin-top:8px">
+      <span class="viz-label">Hex-Code:</span><span class="viz-result" id="viz-t1-hexout">#FF0000</span>
+    </div>
+  </div>
+</div>
+
 <div class="page-nav"><span></span><a href="Thema2_Binaere_Arithmetik_V2.html" class="nav-btn nav-next">Binäre Arithmetik →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

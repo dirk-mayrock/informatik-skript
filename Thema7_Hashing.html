@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 07 – Hashing | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c7); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -282,42 +285,43 @@ muss es laut Schubfachprinzip Kollisionen geben.</pre></div>
 <h2>Merksätze</h2>
 <ol><li>Eine Hashfunktion bildet beliebige Daten auf einen Wert fester Länge ab.</li><li>Hashtabellen ermöglichen Suche, Einfügen und Löschen in O(1).</li><li>Kollisionen sind unvermeidbar; sie werden durch Chaining oder Open Addressing behandelt.</li><li>Kryptografische Hashfunktionen sind Einwegfunktionen — nicht umkehrbar.</li><li>Der Lawineneffekt: Kleine Eingabeänderung → komplett anderer Hashwert.</li><li>SHA-256 ist der aktuelle Standard für sichere Hashwerte.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-      </div>
-    </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Hashtabelle -->
+<div class="viz-box">
+  <div class="viz-title">Hashtabellen-Simulator  h(k) = k mod m</div>
+  <div class="viz-row">
+    <span class="viz-label">Schlüssel:</span>
+    <input id="viz-t7-key" class="viz-input" type="number" value="23" style="width:80px">
+    <span class="viz-label">m:</span>
+    <input id="viz-t7-m" class="viz-input" type="number" value="7" min="3" max="13" style="width:60px">
+    <button id="viz-t7-hash-btn"   class="viz-btn">Einfügen ▶</button>
+    <button id="viz-t7-hash-reset" class="viz-btn viz-btn-ghost">↺</button>
+  </div>
+  <div id="viz-t7-table" style="margin-top:14px"></div>
+</div>
+
+<!-- VIZ 2: Lawineneffekt -->
+<div class="viz-box">
+  <div class="viz-title">Lawineneffekt – kleine Änderung, großer Unterschied</div>
+  <div class="viz-row">
+    <input id="viz-t7-av-inp1" class="viz-input" type="text" value="Hallo" style="width:140px">
+    <input id="viz-t7-av-inp2" class="viz-input" type="text" value="hallo" style="width:140px">
+    <button id="viz-t7-av-btn" class="viz-btn">Hashen ▶</button>
+  </div>
+  <div style="font-family:var(--font-code);font-size:13px;margin-top:14px;display:flex;flex-direction:column;gap:6px">
+    <div>Hash 1: <span id="viz-t7-av-out1" class="viz-result"></span></div>
+    <div>Hash 2: <span id="viz-t7-av-out2" class="viz-result"></span></div>
+    <div id="viz-t7-av-diff" class="viz-note"></div>
+  </div>
+</div>
+
 <div class="page-nav"><a href="Thema6_Datenkompression.html" class="nav-btn nav-prev">← Datenkompression</a><a href="Thema8_Hamming_Codes.html" class="nav-btn nav-next">Hamming-Codes →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

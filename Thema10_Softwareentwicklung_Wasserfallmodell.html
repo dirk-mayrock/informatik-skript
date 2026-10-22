@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 10 – Softwareentwicklung | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c10); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -299,42 +302,36 @@ Fehler, die spät erkannt werden, sind sehr teuer zu korrigieren.</pre></div>
 <h2>Merksätze</h2>
 <ol><li>Das Wasserfallmodell durchläuft Phasen sequenziell — keine Phase kann übersprungen werden.</li><li>Jede Phase produziert ein Dokument als Ausgabe.</li><li>Der größte Nachteil: Änderungen sind teuer und erzwingen Rückschritte.</li><li>Agile Methoden sind flexibler und liefern früh erste Ergebnisse.</li><li>In der Praxis werden heute meist agile Methoden bevorzugt.</li><li>Das Pflichtenheft beschreibt, was das System leisten soll.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">8 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="80"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-      </div>
-    </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Wasserfall-Phasen -->
+<div class="viz-box">
+  <div class="viz-title">Wasserfallmodell – Phasen interaktiv</div>
+  <p class="viz-note">Klicke auf eine Phase für Details.</p>
+  <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:14px">
+    <div class="wf-phase" style="padding:10px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;border-left:3px solid #00d4ff">1. Anforderungsanalyse</div>
+    <div style="text-align:center;font-size:18px;color:var(--text-muted)">↓</div>
+    <div class="wf-phase" style="padding:10px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;border-left:3px solid #7c6aff">2. Entwurf</div>
+    <div style="text-align:center;font-size:18px;color:var(--text-muted)">↓</div>
+    <div class="wf-phase" style="padding:10px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;border-left:3px solid #ffa047">3. Implementierung</div>
+    <div style="text-align:center;font-size:18px;color:var(--text-muted)">↓</div>
+    <div class="wf-phase" style="padding:10px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;border-left:3px solid #ff4f6a">4. Test</div>
+    <div style="text-align:center;font-size:18px;color:var(--text-muted)">↓</div>
+    <div class="wf-phase" style="padding:10px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;border-left:3px solid #4de8b2">5. Einführung</div>
+    <div style="text-align:center;font-size:18px;color:var(--text-muted)">↓</div>
+    <div class="wf-phase" style="padding:10px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;border-left:3px solid #f472b6">6. Wartung</div>
+  </div>
+  <div id="viz-t10-detail" style="padding:14px;background:var(--bg-code);border-radius:8px;font-size:13px;color:var(--text-secondary);min-height:60px">
+    ← Klicke auf eine Phase
+  </div>
+</div>
+
 <div class="page-nav"><a href="Thema9_Java_Grundlagen.html" class="nav-btn nav-prev">← Java-Grundlagen</a><a href="Thema11_Objektorientierung.html" class="nav-btn nav-next">Objektorientierung →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

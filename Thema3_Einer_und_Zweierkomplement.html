@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 03 – Einer- &amp; Zweierkomplement | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c3); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -305,42 +308,56 @@ Einerkomplement: 1011
 <h2>Merksätze</h2>
 <ol><li>Das Einerkomplement entsteht durch Invertierung aller Bits.</li><li>Das Zweierkomplement = Einerkomplement + 1.</li><li>Beim Zweierkomplement gibt es nur eine einzige Null.</li><li>Das höchste Bit zeigt das Vorzeichen an: 0 = positiv, 1 = negativ.</li><li>Der Prozessor führt Subtraktion als Addition des Zweierkomplements durch.</li><li>Bei 8 Bit reicht der Bereich von -128 bis +127.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-      </div>
-    </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Bit-Inverter -->
+<div class="viz-box">
+  <div class="viz-title">Einer- &amp; Zweierkomplement live</div>
+  <p class="viz-note">Klicke auf die Bits oben. Einer- und Zweierkomplement werden sofort berechnet.</p>
+  <div class="viz-label" style="margin-bottom:6px">Eingabe (positiver Wert):</div>
+  <div id="viz-t3-inv" class="bit-row">
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-cell">0</div><div class="bit-cell">0</div>
+    <div class="bit-sep">·</div>
+    <div class="bit-cell">0</div><div class="bit-cell">1</div>
+    <div class="bit-cell">0</div><div class="bit-cell">1</div>
+  </div>
+  <div class="viz-row" style="margin-top:8px">
+    <span class="viz-label">Dezimal:</span><span class="viz-result" id="viz-t3-inv-dec">5</span>
+  </div>
+  <div id="viz-t3-ek" class="bit-row" style="margin-top:14px">
+    <div class="bit-cell" style="border-color:#ff6b9d">0</div><div class="bit-cell" style="border-color:#ff6b9d">0</div>
+    <div class="bit-cell" style="border-color:#ff6b9d">0</div><div class="bit-cell" style="border-color:#ff6b9d">0</div>
+    <div class="bit-sep">·</div>
+    <div class="bit-cell" style="border-color:#ff6b9d">0</div><div class="bit-cell" style="border-color:#ff6b9d">0</div>
+    <div class="bit-cell" style="border-color:#ff6b9d">0</div><div class="bit-cell" style="border-color:#ff6b9d">0</div>
+  </div>
+  <div class="viz-note" id="viz-t3-ek-dec">Einerkomplement = …</div>
+  <div id="viz-t3-zk" class="bit-row" style="margin-top:10px">
+    <div class="bit-cell" style="border-color:#ffa047">0</div><div class="bit-cell" style="border-color:#ffa047">0</div>
+    <div class="bit-cell" style="border-color:#ffa047">0</div><div class="bit-cell" style="border-color:#ffa047">0</div>
+    <div class="bit-sep">·</div>
+    <div class="bit-cell" style="border-color:#ffa047">0</div><div class="bit-cell" style="border-color:#ffa047">0</div>
+    <div class="bit-cell" style="border-color:#ffa047">0</div><div class="bit-cell" style="border-color:#ffa047">0</div>
+  </div>
+  <div class="viz-note" id="viz-t3-zk-dec">Zweierkomplement = …</div>
+</div>
+
+<!-- VIZ 2: Zahlenkreis -->
+<div class="viz-box">
+  <div class="viz-title">4-Bit-Zweierkomplement Zahlenkreis</div>
+  <p class="viz-note">Klicke auf einen Kreis, um den Binärwert und Dezimalwert zu sehen.</p>
+  <div style="display:flex;justify-content:center">
+    <canvas id="viz-t3-circle" width="280" height="280" style="cursor:pointer;border-radius:8px;background:var(--bg-code)"></canvas>
+  </div>
+</div>
+
 <div class="page-nav"><a href="Thema2_Binaere_Arithmetik_V2.html" class="nav-btn nav-prev">← Binäre Arithmetik</a><a href="Thema4_Fest_und_Gleitkommazahlen.html" class="nav-btn nav-next">Fest- &amp; Gleitkommazahlen →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

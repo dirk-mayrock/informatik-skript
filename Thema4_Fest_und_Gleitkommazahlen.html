@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 04 – Fest- &amp; Gleitkommazahlen | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c4); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -325,42 +328,62 @@
 <h2>Merksätze</h2>
 <ol><li>Festkommazahlen haben einen festen Kommastandort — einfach, aber begrenzt.</li><li>Gleitkommazahlen verwenden die Form: Vorzeichen · Mantisse · 2^Exponent.</li><li>Der IEEE-754-Standard wird in fast allen Computern verwendet.</li><li>Single Precision: 1 + 8 + 23 Bit = 32 Bit.</li><li>Double Precision: 1 + 11 + 52 Bit = 64 Bit.</li><li>Der Bias (127 bei Single) erlaubt negative Exponenten ohne Vorzeichen-Bit.</li><li>Rundungsfehler bei Dezimalbrüchen sind systembedingt, kein Programmfehler.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">8 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="80"></div></div>
-        </div>
-      </div>
-    </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: IEEE 754 Zerlegung -->
+<div class="viz-box">
+  <div class="viz-title">IEEE 754 – Dezimalzahl zerlegen</div>
+  <p class="viz-note"><span style="color:#ff6b9d">■ Vorzeichen</span> &nbsp;<span style="color:#ffa047">■ Exponent (8 Bit)</span> &nbsp;<span style="color:#4de8b2">■ Mantisse (23 Bit)</span></p>
+  <div class="viz-row">
+    <span class="viz-label">Zahl:</span>
+    <input id="viz-t4-ieee-inp" class="viz-input" type="number" value="13.5" step="any" style="width:120px">
+  </div>
+  <div id="viz-t4-ieee-bits" class="bit-row" style="margin:14px 0;flex-wrap:wrap;gap:2px">
+    <!-- 32 bits injected by JS -->
+  </div>
+  <div style="font-family:var(--font-code);font-size:12px;display:flex;flex-direction:column;gap:6px;margin-top:8px">
+    <div><span class="viz-label">Vorzeichen:</span> <span id="viz-t4-ieee-sign" class="viz-result"></span></div>
+    <div><span class="viz-label">Exponent:  </span> <span id="viz-t4-ieee-exp"  class="viz-result"></span></div>
+    <div><span class="viz-label">Mantisse:  </span> <span id="viz-t4-ieee-man"  class="viz-result"></span></div>
+    <div><span class="viz-label">Darstellung:</span><span id="viz-t4-ieee-info" class="viz-result"></span></div>
+  </div>
+</div>
+
+<!-- VIZ 2: Bias-Rechner -->
+<div class="viz-box">
+  <div class="viz-title">Exponent-Bias (127) erkunden</div>
+  <p class="viz-note">Verschiebe den Schieberegler für den gespeicherten Exponenten (0–255).</p>
+  <div class="viz-row">
+    <span class="viz-label">Gespeichert:</span>
+    <input id="viz-t4-bias-sl" class="viz-range" type="range" min="0" max="255" value="130" style="flex:1">
+  </div>
+  <div style="font-family:var(--font-code);font-size:13px;display:flex;flex-direction:column;gap:6px;margin-top:10px">
+    <div><span class="viz-label">Gespeicherter Wert:</span> <span id="viz-t4-bias-stored" class="viz-result"></span></div>
+    <div><span class="viz-label">Echter Exponent:  </span> <span id="viz-t4-bias-real"   class="viz-result"></span></div>
+    <div><span class="viz-label">Bedeutet:         </span> <span id="viz-t4-bias-pow"    class="viz-result"></span></div>
+  </div>
+</div>
+
 <div class="page-nav"><a href="Thema3_Einer_und_Zweierkomplement.html" class="nav-btn nav-prev">← Einer- &amp; Zweierkomplement</a><a href="Thema5_Nachricht_Information_Nachrichtentraeger.html" class="nav-btn nav-next">Nachricht &amp; Information →</a></div>
   </div>
 </main>
+
+<script>
+(function(){
+  const el = document.getElementById('viz-t4-ieee-bits');
+  if (!el) return;
+  for (let i=0;i<32;i++){
+    const c = document.createElement('div');
+    c.className = 'bit-cell';
+    c.textContent = '0';
+    c.style.width='22px'; c.style.height='22px'; c.style.fontSize='11px'; c.style.borderRadius='4px';
+    el.appendChild(c);
+  }
+})();
+</script>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 11 – Objektorientierung | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c11); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -415,42 +418,78 @@ wird automatisch aufgerufen.</pre></div>
 <h2>Merksätze</h2>
 <ol><li>Klasse = Bauplan, Objekt = konkretes Exemplar.</li><li>Kapselung: <code>private</code> Attribute, Zugriff nur über Getter/Setter.</li><li>Vererbung: Unterklasse erbt Attribute und Methoden der Oberklasse.</li><li>Polymorphismus: Gleicher Methodenname, unterschiedliches Verhalten je nach Klasse.</li><li>Abstrakte Klassen können nicht direkt instanziiert werden.</li><li><code>this</code> verweist auf das aktuelle Objekt.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Klasse → Objekt -->
+<div class="viz-box">
+  <div class="viz-title">Klasse instanziieren – new Schueler(...)</div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
+    <div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">KLASSE (Bauplan)</div>
+      <div class="uml-box" style="min-width:170px">
+        <div class="uml-class-name">Schueler</div>
+        <div class="uml-section">
+          <span class="uml-private">- name: String</span><br>
+          <span class="uml-private">- alter: int</span><br>
+          <span class="uml-private">- note: double</span>
         </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
+        <div class="uml-section">
+          <span class="uml-public">+ getName()</span><br>
+          <span class="uml-public">+ begruesse()</span>
         </div>
       </div>
     </div>
+    <div style="display:flex;flex-direction:column;gap:8px;align-self:center">
+      <input id="viz-t11-name"  class="viz-input" type="text"   placeholder="Name"  value="Hannah" style="width:120px">
+      <input id="viz-t11-alter" class="viz-input" type="number" placeholder="Alter" value="17"     style="width:120px">
+      <input id="viz-t11-note"  class="viz-input" type="number" placeholder="Note"  value="1.7" step="0.1" style="width:120px">
+      <button id="viz-t11-new-btn" class="viz-btn">new ▶</button>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">OBJEKT (Instanz)</div>
+      <div id="viz-t11-obj" class="uml-box" style="min-width:200px;opacity:.4">
+        <div class="uml-class-name">Schueler@????</div>
+        <div class="uml-section"><span class="uml-private">– noch nicht erstellt –</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIZ 2: Polymorphismus -->
+<div class="viz-box">
+  <div class="viz-title">Polymorphismus – lautGeben() auf verschiedenen Objekten</div>
+  <p class="viz-note">Klicke auf "Nächstes Tier" – obwohl alle vom Typ Tier sind, wird die richtige Methode aufgerufen.</p>
+  <div id="viz-t11-poly-arena" style="display:flex;gap:16px;flex-wrap:wrap;margin:14px 0;align-items:flex-end">
+    <div class="poly-item" style="text-align:center;position:relative">
+      <div class="poly-bubble" style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--bg-panel);border:1px solid #ffa047;border-radius:6px;padding:2px 8px;font-family:var(--font-code);font-size:11px;color:#ffa047;white-space:nowrap;opacity:0;transition:all .3s">Wau!</div>
+      <div style="font-size:32px">🐕</div><div style="font-size:11px;color:var(--text-muted)">Hund</div>
+    </div>
+    <div class="poly-item" style="text-align:center;position:relative">
+      <div class="poly-bubble" style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--bg-panel);border:1px solid #a78bfa;border-radius:6px;padding:2px 8px;font-family:var(--font-code);font-size:11px;color:#a78bfa;white-space:nowrap;opacity:0;transition:all .3s">Miau!</div>
+      <div style="font-size:32px">🐈</div><div style="font-size:11px;color:var(--text-muted)">Katze</div>
+    </div>
+    <div class="poly-item" style="text-align:center;position:relative">
+      <div class="poly-bubble" style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--bg-panel);border:1px solid #38bdf8;border-radius:6px;padding:2px 8px;font-family:var(--font-code);font-size:11px;color:#38bdf8;white-space:nowrap;opacity:0;transition:all .3s">Piep!</div>
+      <div style="font-size:32px">🐦</div><div style="font-size:11px;color:var(--text-muted)">Vogel</div>
+    </div>
+    <div class="poly-item" style="text-align:center;position:relative">
+      <div class="poly-bubble" style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--bg-panel);border:1px solid #ffa047;border-radius:6px;padding:2px 8px;font-family:var(--font-code);font-size:11px;color:#ffa047;white-space:nowrap;opacity:0;transition:all .3s">Wau!</div>
+      <div style="font-size:32px">🐕</div><div style="font-size:11px;color:var(--text-muted)">Hund</div>
+    </div>
+    <div class="poly-item" style="text-align:center;position:relative">
+      <div class="poly-bubble" style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--bg-panel);border:1px solid #a78bfa;border-radius:6px;padding:2px 8px;font-family:var(--font-code);font-size:11px;color:#a78bfa;white-space:nowrap;opacity:0;transition:all .3s">Miau!</div>
+      <div style="font-size:32px">🐈</div><div style="font-size:11px;color:var(--text-muted)">Katze</div>
+    </div>
+  </div>
+  <button id="viz-t11-poly-btn" class="viz-btn">Nächstes Tier ▶</button>
+</div>
+
 <div class="page-nav"><a href="Thema10_Softwareentwicklung_Wasserfallmodell.html" class="nav-btn nav-prev">← Softwareentwicklung</a><a href="Thema12_Struktogramme_und_Ablaufplaene.html" class="nav-btn nav-next">Struktogramme →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

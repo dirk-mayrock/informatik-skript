@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 06 – Datenkompression | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c6); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -332,42 +335,36 @@ Verlustbehaftet: Teile der Daten werden unwiderruflich entfernt.
 <h2>Merksätze</h2>
 <ol><li>Datenkompression reduziert Redundanz, nicht den Informationsgehalt.</li><li>RLE: Wiederholungen werden als (Anzahl, Zeichen) gespeichert.</li><li>Delta: Nur Unterschiede werden gespeichert.</li><li>Huffman: Häufige Zeichen = kurze Codes, seltene = lange Codes.</li><li>LZW: Baut ein Wörterbuch aus Mustern während der Kompression auf.</li><li>Verlustfrei: Exakte Rekonstruktion. Verlustbehaftet: Qualitätsverlust akzeptiert.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-      </div>
-    </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: RLE -->
+<div class="viz-box">
+  <div class="viz-title">Lauflängencodierung (RLE) – live</div>
+  <div class="viz-row">
+    <input id="viz-t6-rle-inp" class="viz-input" type="text" value="AAAABBBBBCCAAA" style="width:220px">
+    <button id="viz-t6-rle-btn" class="viz-btn">Codieren ▶</button>
+  </div>
+  <div id="viz-t6-rle-out"   style="font-family:var(--font-code);font-size:16px;margin-top:14px;letter-spacing:2px"></div>
+  <div id="viz-t6-rle-ratio" class="viz-note" style="margin-top:8px"></div>
+</div>
+
+<!-- VIZ 2: Huffman -->
+<div class="viz-box">
+  <div class="viz-title">Huffman-Codierung – Häufigkeiten & Codes</div>
+  <div class="viz-row">
+    <span class="viz-label">Text:</span>
+    <input id="viz-t6-huff-inp" class="viz-input" type="text" value="AABBBCDDDD" style="width:200px">
+    <button id="viz-t6-huff-btn" class="viz-btn">Huffman ▶</button>
+  </div>
+  <div id="viz-t6-huff-codes" style="margin-top:14px"></div>
+</div>
+
 <div class="page-nav"><a href="Thema5_Nachricht_Information_Nachrichtentraeger.html" class="nav-btn nav-prev">← Nachricht &amp; Information</a><a href="Thema7_Hashing.html" class="nav-btn nav-next">Hashing →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

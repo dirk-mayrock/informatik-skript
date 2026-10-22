@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 08 – Hamming-Codes | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c8); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -320,42 +323,61 @@ Position 2 und 3 unterschiedlich → Hamming-Abstand = 2</pre></div>
 <h2>Merksätze</h2>
 <ol><li>Prüfbits stehen an Positionen 1, 2, 4, 8, ... (Potenzen von 2).</li><li>Jedes Prüfbit sichert eine bestimmte Gruppe von Datenpositionen.</li><li>Die Fehlerposition ergibt sich aus der binären Summe der fehlerhaften Prüfbits.</li><li>Standard-Hamming-Code: 1 Fehler korrigierbar, 2 Fehler erkennbar.</li><li>Der Hamming-Abstand zweier Wörter = Anzahl der Stellen, die sich unterscheiden.</li><li>Für 4 Datenbits braucht man 3 Prüfbits → 7-Bit-Code.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">8 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="80"></div></div>
-        </div>
-      </div>
-    </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Hamming codieren -->
+<div class="viz-box">
+  <div class="viz-title">Hamming-Code erzeugen (4 Datenbits → 7 Bit)</div>
+  <p class="viz-note"><span style="color:#e06cff">■ Prüfbits (p₁,p₂,p₄)</span> &nbsp;<span style="color:#38bdf8">■ Datenbits</span></p>
+  <div class="viz-row">
+    <span class="viz-label">4 Datenbits:</span>
+    <input id="viz-t8-data-inp" class="viz-input" type="text" value="1011" maxlength="4" style="width:90px">
+    <button id="viz-t8-enc-btn" class="viz-btn">Codieren ▶</button>
+  </div>
+  <div id="viz-t8-enc-bits" class="bit-row" style="margin:14px 0">
+    <div class="bit-cell">?</div><div class="bit-cell">?</div>
+    <div class="bit-cell">?</div><div class="bit-cell">?</div>
+    <div class="bit-cell">?</div><div class="bit-cell">?</div>
+    <div class="bit-cell">?</div>
+  </div>
+  <div class="viz-row"><span class="viz-label">7-Bit-Code:</span><span class="viz-result" id="viz-t8-enc-out">–</span></div>
+</div>
+
+<!-- VIZ 2: Fehler erkennen -->
+<div class="viz-box">
+  <div class="viz-title">Fehler erkennen &amp; korrigieren</div>
+  <p class="viz-note">Gib einen empfangenen 7-Bit-Code ein (kann fehlerhaft sein).</p>
+  <div class="viz-row">
+    <span class="viz-label">Empfangen:</span>
+    <input id="viz-t8-err-inp" class="viz-input" type="text" value="0110111" maxlength="7" style="width:110px">
+    <button id="viz-t8-err-btn" class="viz-btn">Prüfen ▶</button>
+  </div>
+  <div id="viz-t8-err-bits" class="bit-row" style="margin:12px 0">
+    <div class="bit-cell">?</div><div class="bit-cell">?</div>
+    <div class="bit-cell">?</div><div class="bit-cell">?</div>
+    <div class="bit-cell">?</div><div class="bit-cell">?</div>
+    <div class="bit-cell">?</div>
+  </div>
+  <div id="viz-t8-err-out" style="font-family:var(--font-code);font-size:13px;margin-top:6px"></div>
+</div>
+
+<!-- VIZ 3: Hamming-Abstand -->
+<div class="viz-box">
+  <div class="viz-title">Hamming-Abstand zweier Bitketten</div>
+  <div class="viz-row">
+    <input id="viz-t8-dist-a" class="viz-input" type="text" value="11010" style="width:110px">
+    <input id="viz-t8-dist-b" class="viz-input" type="text" value="10110" style="width:110px">
+    <button id="viz-t8-dist-btn" class="viz-btn">Berechnen ▶</button>
+  </div>
+  <div id="viz-t8-dist-out" style="font-family:var(--font-code);font-size:14px;margin-top:12px"></div>
+</div>
+
 <div class="page-nav"><a href="Thema7_Hashing.html" class="nav-btn nav-prev">← Hashing</a><a href="Thema9_Java_Grundlagen.html" class="nav-btn nav-next">Java-Grundlagen →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

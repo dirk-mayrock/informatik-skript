@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 05 – Nachricht &amp; Information | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c5); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -316,42 +319,71 @@ WLAN         → elektromagnetische Wellen (Radiowellen)</pre></div>
 <h2>Merksätze</h2>
 <ol><li>Zeichen → Alphabet → Zeichenkette → Nachricht ist die Hierarchie der Syntax.</li><li>Eine Nachricht wird erst zur Information, wenn sie dem Empfänger etwas Neues mitteilt.</li><li>Je unwahrscheinlicher ein Zeichen, desto größer sein Informationsgehalt.</li><li>Die Entropie ist der durchschnittliche Informationsgehalt einer Quelle.</li><li>Redundanz ist Überflüssiges — aber manchmal nützlich (Fehlerkorrektur).</li><li>Das Shannon-Modell beschreibt jede Kommunikation: Quelle → Kanal → Senke.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-      </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Informationsgehalt -->
+<div class="viz-box">
+  <div class="viz-title">Informationsgehalt I(x) = −log₂(P)</div>
+  <p class="viz-note">Je unwahrscheinlicher ein Ereignis, desto mehr Information trägt es.</p>
+  <div class="viz-row">
+    <span class="viz-label">P(x):</span>
+    <input id="viz-t5-prob-sl" class="viz-range" type="range" min="0.01" max="1" step="0.01" value="0.5" style="flex:1">
+    <span id="viz-t5-prob-val" class="viz-result" style="min-width:50px">0.500</span>
+  </div>
+  <div class="viz-row" style="margin-top:8px">
+    <span class="viz-label">I(x):</span><span class="viz-result" id="viz-t5-info-val">1.000 Bit</span>
+  </div>
+</div>
+
+<!-- VIZ 2: Entropie -->
+<div class="viz-box">
+  <div class="viz-title">Shannon-Entropie – Zwei Zeichen A und B</div>
+  <p class="viz-note">Maximum bei P(A) = P(B) = 0.5 → H = 1 Bit</p>
+  <div class="viz-row">
+    <span class="viz-label">P(A):</span>
+    <input id="viz-t5-ent-a" class="viz-range" type="range" min="0.01" max="0.99" step="0.01" value="0.5" style="flex:1">
+  </div>
+  <div class="viz-row" style="margin-top:6px">
+    <span class="viz-label">P(A) = </span><span id="viz-t5-pa" class="viz-result">0.50</span>
+    <span class="viz-label" style="margin-left:16px">P(B) = </span><span id="viz-t5-pb" class="viz-result">0.50</span>
+    <span class="viz-label" style="margin-left:16px">H = </span><span id="viz-t5-h" class="viz-result">1.0000 Bit</span>
+  </div>
+  <div style="display:flex;align-items:flex-end;gap:16px;margin-top:14px;height:110px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+      <div id="viz-t5-bar-a" style="width:100%;background:#7c6aff;border-radius:4px 4px 0 0;transition:height .3s;height:50px"></div>
+      <span style="font-size:11px;color:var(--text-muted)">P(A)</span>
     </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+      <div id="viz-t5-bar-b" style="width:100%;background:#ff6b9d;border-radius:4px 4px 0 0;transition:height .3s;height:50px"></div>
+      <span style="font-size:11px;color:var(--text-muted)">P(B)</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:2">
+      <div id="viz-t5-bar-h" style="width:100%;background:var(--active);border-radius:4px 4px 0 0;transition:height .3s;height:100px"></div>
+      <span style="font-size:11px;color:var(--text-muted)">H (Entropie)</span>
+    </div>
+  </div>
+</div>
+
+<!-- VIZ 3: ASCII -->
+<div class="viz-box">
+  <div class="viz-title">ASCII-Codierung interaktiv</div>
+  <div class="viz-row">
+    <span class="viz-label">Zeichen:</span>
+    <input id="viz-t5-ascii-inp" class="viz-input" type="text" maxlength="1" value="A" style="width:60px;text-align:center;font-size:22px">
+  </div>
+  <div style="font-family:var(--font-code);font-size:13px;display:flex;flex-direction:column;gap:6px;margin-top:10px">
+    <div><span class="viz-label">Zeichen:  </span><span id="viz-t5-ascii-char" class="viz-result">"A"</span></div>
+    <div><span class="viz-label">Binär:    </span><span id="viz-t5-ascii-bin"  class="viz-result">1000001₂</span></div>
+    <div><span class="viz-label">Dezimal:  </span><span id="viz-t5-ascii-dec"  class="viz-result">65₁₀ (0x41)</span></div>
+  </div>
+</div>
+
 <div class="page-nav"><a href="Thema4_Fest_und_Gleitkommazahlen.html" class="nav-btn nav-prev">← Fest- &amp; Gleitkommazahlen</a><a href="Thema6_Datenkompression.html" class="nav-btn nav-next">Datenkompression →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

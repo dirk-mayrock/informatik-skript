@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 13 – Sortieralgorithmen | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c13); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -385,42 +388,53 @@ Gesamtaufwand: O(n + k).</pre></div>
 <h2>Merksätze</h2>
 <ol><li>O(n²)-Algorithmen sind für große n zu langsam.</li><li>Quicksort und Mergesort sind die wichtigsten O(n log n)-Verfahren.</li><li>Mergesort garantiert O(n log n) — Quicksort im Worst Case O(n²).</li><li>Insertion Sort ist ideal für fast sortierte Daten.</li><li>Bucketsort ist nur sinnvoll, wenn der Wertebereich bekannt und begrenzt ist.</li><li>Ein stabiler Algorithmus verändert die Reihenfolge gleicher Elemente nicht.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-      </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Sortier-Rennen -->
+<div class="viz-box">
+  <div class="viz-title">Sortier-Rennen – 4 Algorithmen gleichzeitig</div>
+  <p class="viz-note">Alle starten mit demselben zufälligen Array. <span style="color:#ffa047">■</span> Vergleich &nbsp;<span style="color:#ff4f6a">■</span> Tausch &nbsp;<span style="color:#4de8b2">■</span> Fertig</p>
+  <button id="viz-t13-sort-btn" class="viz-btn" style="margin-bottom:18px">▶ Start</button>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Insertion Sort</div>
+      <div id="viz-t13-arena-ins"   class="sort-arena"></div>
+      <div id="viz-t13-stats-ins"   class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
     </div>
+    <div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Selection Sort</div>
+      <div id="viz-t13-arena-sel"   class="sort-arena"></div>
+      <div id="viz-t13-stats-sel"   class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Quicksort</div>
+      <div id="viz-t13-arena-quick" class="sort-arena"></div>
+      <div id="viz-t13-stats-quick" class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Mergesort</div>
+      <div id="viz-t13-arena-merge" class="sort-arena"></div>
+      <div id="viz-t13-stats-merge" class="sort-stats">Vergleiche: <span>0</span> Tausche: <span>0</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- VIZ 2: O-Notation -->
+<div class="viz-box">
+  <div class="viz-title">O-Notation – Laufzeitwachstum</div>
+  <div class="viz-row">
+    <span class="viz-label">n = <span id="viz-t13-n-val">50</span>:</span>
+    <input id="viz-t13-n-sl" class="viz-range" type="range" min="5" max="150" value="50" style="flex:1">
+  </div>
+  <canvas id="viz-t13-canvas" class="viz-canvas" style="margin-top:12px;height:220px"></canvas>
+</div>
+
 <div class="page-nav"><a href="Thema12_Struktogramme_und_Ablaufplaene.html" class="nav-btn nav-prev">← Struktogramme</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

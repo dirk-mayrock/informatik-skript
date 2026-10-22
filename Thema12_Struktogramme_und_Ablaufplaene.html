@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thema 12 – Struktogramme | LK Informatik</title>
 <link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
 <style>
 :root { --active: var(--c12); }
 .page-nav {
@@ -35,6 +36,8 @@
   border-color: var(--active);
   background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
 }
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
 </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah's Skript</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
@@ -345,42 +348,43 @@ System.out.println(max);</pre></div>
 <h2>Merksätze</h2>
 <ol><li>Ablaufpläne verwenden standardisierte Symbole (Raute = Entscheidung).</li><li>Struktogramme haben keine Sprünge — der Ablauf ist immer von oben nach unten.</li><li>While-Schleife im Struktogramm: Bedingung steht oben.</li><li>Do-While-Schleife: Bedingung steht unten — Rumpf wird mindestens einmal ausgeführt.</li><li>Struktogramme eignen sich besonders gut für die Entwurfsphase.</li><li>Aus einem Struktogramm lässt sich direkt Java-Code ableiten.</li></ol>
 <hr>
-    <div class="rating-card">
-      <div class="rating-title">Gesamteinschätzung</div>
-      <div class="rating-grid">
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Didaktik:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Fachliche Korrektheit:</span>
-            <span class="rating-score">10 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="100"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>LK-Niveau:</span>
-            <span class="rating-score">8 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="80"></div></div>
-        </div>
-        <div class="rating-item">
-          <div class="rating-label">
-            <span>Verständlichkeit:</span>
-            <span class="rating-score">9 / 10</span>
-          </div>
-          <div class="rating-bar"><div class="rating-fill" data-val="90"></div></div>
-        </div>
-      </div>
+
+<h2>Interaktive Visualisierungen</h2>
+
+<!-- VIZ 1: Struktogramm-Trace -->
+<div class="viz-box">
+  <div class="viz-title">Struktogramm-Trace – Summe 1 bis n</div>
+  <p class="viz-note">Klicke "Starten" – der aktuelle Ausführungsschritt leuchtet im Struktogramm auf.</p>
+  <div class="viz-row">
+    <span class="viz-label">n:</span>
+    <input id="viz-t12-trace-n" class="viz-input" type="number" min="1" max="10" value="4" style="width:70px">
+    <button id="viz-t12-trace-btn" class="viz-btn">▶ Starten</button>
+  </div>
+  <div style="margin-top:16px;font-family:var(--font-code);font-size:13px">
+    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s">
+      Lies n &nbsp;·&nbsp; summe = 0 &nbsp;·&nbsp; i = 1
     </div>
+    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px 8px 24px;margin:2px 0;border-left:4px solid var(--active);transition:background .2s">
+      SOLANGE i ≤ n: &nbsp; summe = summe + i &nbsp;·&nbsp; i = i + 1
+    </div>
+    <div class="struk-row" style="border:1px solid var(--border);border-radius:4px;padding:8px 12px;margin:2px 0;transition:background .2s">
+      Ausgabe: summe
+    </div>
+  </div>
+  <div class="viz-row" style="margin-top:12px">
+    <span class="viz-label">Variablen:</span>
+    <span id="viz-t12-vars" class="viz-result" style="font-size:13px"></span>
+  </div>
+</div>
+<style>
+  .struk-active { background: color-mix(in srgb, var(--active) 12%, var(--bg-card)) !important; border-color: var(--active) !important; }
+</style>
+
 <div class="page-nav"><a href="Thema11_Objektorientierung.html" class="nav-btn nav-prev">← Objektorientierung</a><a href="Thema13_Sortieralgorithmen.html" class="nav-btn nav-next">Sortieralgorithmen →</a></div>
   </div>
 </main>
+
 <script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
 </body>
 </html>

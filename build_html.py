@@ -860,8 +860,10 @@ def sidebar_html(active_num):
     praxis_nav = "\n".join(praxis_items)
     return f'''<aside class="sidebar">
   <div class="sidebar-header">
-    <div class="sidebar-logo">LK Informatik</div>
-    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <a href="index.html" class="sidebar-home-link">
+      <div class="sidebar-logo">LK Informatik</div>
+      <div class="sidebar-title">Hannah&#39;s Skript</div>
+    </a>
     <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 07 – while | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c7); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 07</span>
+    <span class="topbar-title">while</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>while</h1>
+    <div class="meta">
+      <span>Schritt 7 von 11</span>
+      <span class="meta-dot"></span>
+      <span>while</span> <span class="meta-dot"></span> <span>do-while</span> <span class="meta-dot"></span> <span>break</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Arrays verwalten, Menü per Schleife ausgeben<br><strong>Heute lernen wir:</strong> while und do-while – Schleifen ohne feste Anzahl an Durchläufen<br><strong>Danach können wir:</strong> Münzen einwerfen bis der Nutzer "fertig" signalisiert, Abbruch ermöglichen</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>while-Schleife</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>while (Bedingung) {
+    // wird wiederholt solange Bedingung true ist
+}</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int i = 1;
+while (i &lt;= 5) {
+    System.out.println(i);
+    i++;
+}
+// Ausgabe: 1  2  3  4  5</pre></div>
+<p>Die Bedingung wird <strong>vor</strong> jedem Durchlauf geprüft. Ist sie von Anfang an <code>false</code>, wird der Block <strong>kein einziges Mal</strong> ausgeführt.</p>
+<h3>do-while-Schleife</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>do {
+    // wird mindestens einmal ausgeführt
+} while (Bedingung);</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int zahl;
+do {
+    System.out.print(&quot;Gib eine Zahl von 1-10 ein: &quot;);
+    zahl = scanner.nextInt();
+    scanner.nextLine();
+} while (zahl &lt; 1 || zahl &gt; 10);</pre></div>
+<p>Unterschied zu <code>while</code>: Der Block wird <strong>zuerst</strong> ausgeführt, dann wird die Bedingung geprüft.</p>
+<h3>Endlosschleife mit break</h3>
+<p>Manchmal ist unklar, wann die Schleife enden soll – dann wird <code>while (true)</code> mit <code>break</code> kombiniert:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>while (true) {
+    String eingabe = scanner.nextLine();
+    if (eingabe.equals(&quot;ende&quot;)) {
+        break;   // Schleife verlassen
+    }
+    System.out.println(&quot;Du sagtest: &quot; + eingabe);
+}</pre></div>
+<h3>Akkumulator-Muster</h3>
+<p>Werte in einer Variablen aufaddieren:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>double summe = 0.0;
+while (...) {
+    double wert = scanner.nextDouble();
+    summe += wert;   // entspricht: summe = summe + wert
+}</pre></div>
+<hr>
+<h2>Im Getränkeautomaten anwenden</h2>
+<p>Der Nutzer kann mehrere Münzen nacheinander einwerfen. Nach jeder Münze wird der aktuelle Betrag angezeigt. Eingabe <code>0</code> = fertig, <code>-1</code> = Abbruch.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>double gesamtBetrag = 0.0;
+boolean abbruch = false;
+
+System.out.println(&quot;Muenzen einwerfen (0 = fertig, -1 = Abbruch):&quot;);
+
+while (true) {                                          // NEU ←
+    System.out.print(&quot;  Aktuell: &quot; + gesamtBetrag
+        + &quot; EUR  |  Muenze: &quot;);
+    double muenze = scanner.nextDouble();
+    scanner.nextLine();
+
+    if (muenze == -1) {
+        abbruch = true;
+        break;                                          // NEU ←
+    } else if (muenze == 0) {
+        break;
+    } else if (muenze &gt; 0) {
+        gesamtBetrag += muenze;                         // NEU ← (Akkumulator)
+        gesamtBetrag = Math.round(gesamtBetrag * 100) / 100.0;
+    }
+}
+
+if (abbruch) {
+    System.out.println(&quot;Abbruch! Rueckgabe: &quot; + gesamtBetrag + &quot; EUR&quot;);
+} else {
+    System.out.println(&quot;Gesamtbetrag: &quot; + gesamtBetrag + &quot; EUR&quot;);
+    // ... weiter zur Getränkewahl
+}</pre></div>
+<p>Beispiel-Sitzung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Muenzen einwerfen (0 = fertig, -1 = Abbruch):
+  Aktuell: 0.0 EUR  |  Muenze: 1.00
+  Aktuell: 1.0 EUR  |  Muenze: 0.50
+  Aktuell: 1.5 EUR  |  Muenze: 0
+Gesamtbetrag: 1.5 EUR</pre></div>
+<hr>
+<h2>Aufgabe</h2>
+<p>Erweitere die Schleife: Nach maximal <strong>5 Münzen</strong> soll die Eingabe automatisch beendet werden, auch wenn der Nutzer noch mehr einwerfen möchte. Gib dann aus:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Maximale Muenzanzahl erreicht.</pre></div>
+<h2>Lösung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int anzahlMuenzen = 0;
+
+while (true) {
+    if (anzahlMuenzen &gt;= 5) {
+        System.out.println(&quot;Maximale Muenzanzahl erreicht.&quot;);
+        break;
+    }
+    System.out.print(&quot;Muenze: &quot;);
+    double muenze = scanner.nextDouble();
+    scanner.nextLine();
+    if (muenze == 0) break;
+    if (muenze &gt; 0) {
+        gesamtBetrag += muenze;
+        anzahlMuenzen++;
+    }
+}</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li><code>while</code> prüft die Bedingung <strong>vor</strong> dem Block – 0 bis ∞ Durchläufe.</li><li><code>do-while</code> prüft <strong>nach</strong> dem Block – mindestens 1 Durchlauf.</li><li><code>while (true)</code> mit <code>break</code> verwenden, wenn das Abbruchkriterium in der Mitte des Blocks liegt.</li><li><code>break</code> verlässt sofort die innerste Schleife.</li><li>Akkumulator-Muster: <code>summe += wert</code> – Werte in einer Variablen aufsammeln.</li></ol>
+
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">while-Schleife – Durchläufe verfolgen</div>
+  <p class="viz-note">Münzen werden simuliert eingeworfen. Verfolge wie der Betrag wächst.</p>
+  <div id="viz-p7-log" style="font-family:var(--font-mono);font-size:12px;line-height:1.9;max-height:200px;overflow-y:auto;background:var(--bg-code);border-radius:8px;padding:12px;margin-bottom:12px;"></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button class="viz-btn" onclick="addCoinP7(0.50)">+ 0,50 €</button>
+    <button class="viz-btn" onclick="addCoinP7(1.00)">+ 1,00 €</button>
+    <button class="viz-btn" onclick="addCoinP7(2.00)">+ 2,00 €</button>
+    <button class="viz-btn" onclick="stopP7()">Fertig (0)</button>
+    <button class="viz-btn" onclick="resetP7()">Reset</button>
+  </div>
+  <div id="viz-p7-total" style="margin-top:12px;font-size:15px;font-weight:700;color:var(--active);"></div>
+</div>
+
+<div class="page-nav"><a href="Praktikum6_Arrays.html" class="nav-btn nav-prev">← Arrays</a><a href="Praktikum8_Methoden_Grundlagen.html" class="nav-btn nav-next">Methoden Grundlagen →</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

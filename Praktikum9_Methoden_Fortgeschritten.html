@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 09 – Methoden Fortgeschritten | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c9); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 09</span>
+    <span class="topbar-title">Methoden Fortgeschritten</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Methoden Fortgeschritten</h1>
+    <div class="meta">
+      <span>Schritt 9 von 11</span>
+      <span class="meta-dot"></span>
+      <span>Overloading</span> <span class="meta-dot"></span> <span>final</span> <span class="meta-dot"></span> <span>Scope</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Einfache Methoden schreiben und aufrufen<br><strong>Heute lernen wir:</strong> Methoden überladen, Konstanten, Wechselgeld-Algorithmus<br><strong>Danach können wir:</strong> Den vollständigen prozeduralen Getränkeautomaten fertigstellen</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>Methoden überladen (Overloading)</h3>
+<p>Zwei Methoden dürfen <strong>denselben Namen</strong> haben, wenn sie <strong>verschiedene Parameter</strong> haben:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static void kaufe(int nummer, double betrag) { ... }
+public static void kaufe(String name, double betrag) { ... }</pre></div>
+<p>Java erkennt automatisch, welche Methode gemeint ist:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>kaufe(2, 1.50);        // → kaufe(int, double)
+kaufe(&quot;Cola&quot;, 1.50);   // → kaufe(String, double)</pre></div>
+<h3>Konstanten mit <code>final</code></h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>static final double MAX_MUENZE = 2.00;
+static final int    ANZAHL     = 5;</pre></div>
+<p><code>final</code> = der Wert kann <strong>nach der Zuweisung nicht mehr geändert werden</strong>. Konvention: Konstanten werden <strong>GROSSGESCHRIEBEN</strong>.</p>
+<h3>Geltungsbereich (Scope)</h3>
+<p>Eine Variable existiert nur innerhalb der geschweiften Klammern, in denen sie deklariert wurde:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static void beispiel() {
+    int x = 10;      // x lebt in dieser Methode
+}
+// x ist hier nicht mehr zugänglich!</pre></div>
+<p>Klassenvariablen (<code>static</code>) sind in allen Methoden der Klasse sichtbar:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Automat {
+    static String[] namen = {&quot;Cola&quot;, &quot;Wasser&quot;};   // überall sichtbar
+
+    public static void zeigeMenu() {
+        System.out.println(namen[0]);   // funktioniert!
+    }
+}</pre></div>
+<h3>Wechselgeld-Algorithmus (Münz-Stückelung)</h3>
+<p>Grundidee: Immer die <strong>größtmögliche Münze</strong> wählen, bis der Rest 0 ist.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>double[] muenzen = {2.00, 1.00, 0.50, 0.20, 0.10};
+int cents = (int) Math.round(rueckgeld * 100);   // in Cent umrechnen
+
+for (double muenze : muenzen) {
+    int muenzCents = (int) Math.round(muenze * 100);
+    int anzahl     = cents / muenzCents;
+    if (anzahl &gt; 0) {
+        System.out.print(anzahl + &quot; × &quot; + muenze + &quot; EUR  &quot;);
+        cents -= anzahl * muenzCents;
+    }
+}</pre></div>
+<p>Beispiel: 0,80 EUR Wechselgeld → <code>1 × 0.50 EUR  1 × 0.20 EUR  1 × 0.10 EUR</code></p>
+<hr>
+<h2>Im Getränkeautomaten anwenden</h2>
+<p>Das vollständige prozedurale Programm – alle Funktionen sauber in Methoden aufgeteilt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>import java.util.Scanner;
+
+public class Getraenkeautomat {
+
+    static final double[] MUENZEN = {2.00, 1.00, 0.50, 0.20, 0.10};  // NEU ←
+    static String[] namen   = {&quot;Cola&quot;, &quot;Apfelschorle&quot;, &quot;Wasser&quot;, &quot;Eistee&quot;, &quot;Limo&quot;};
+    static double[] preise  = {1.50, 1.00, 1.00, 1.20, 1.30};
+    static int[]    bestand = {5, 3, 5, 2, 4};
+
+    public static void zeigeMenu() { ... }
+
+    public static double geldEinwerfen(Scanner scanner) { ... }
+
+    public static void gibWechselgeld(double betrag) {    // NEU ←
+        int cents = (int) Math.round(betrag * 100);
+        System.out.print(&quot;Wechselgeld: &quot;);
+        for (double m : MUENZEN) {
+            int mc = (int) Math.round(m * 100);
+            int n  = cents / mc;
+            if (n &gt; 0) {
+                System.out.print(n + &quot; × &quot; + m + &quot; EUR  &quot;);
+                cents -= n * mc;
+            }
+        }
+        System.out.println();
+    }
+
+    // Überladen: kaufe per Nummer                       NEU ←
+    public static void kaufeGetraenk(int wahl, double betrag) {
+        int index = wahl - 1;
+        if (betrag &gt;= preise[index]) {
+            bestand[index]--;
+            System.out.println(&quot;&gt;&gt;&gt; &quot; + namen[index] + &quot; ausgegeben! &lt;&lt;&lt;&quot;);
+            gibWechselgeld(betrag - preise[index]);
+        } else {
+            System.out.println(&quot;Nicht genug Geld.&quot;);
+            gibWechselgeld(betrag);
+        }
+    }
+
+    // Überladen: kaufe per Name                         NEU ←
+    public static void kaufeGetraenk(String name, double betrag) {
+        for (int i = 0; i &lt; namen.length; i++) {
+            if (namen[i].equalsIgnoreCase(name)) {
+                kaufeGetraenk(i + 1, betrag);
+                return;
+            }
+        }
+        System.out.println(&quot;Getraenk nicht gefunden.&quot;);
+    }
+
+    public static void main(String[] args) { ... }
+}</pre></div>
+<p>Der vollständige Code befindet sich in: <code>java/P09_Methoden_Fortgeschritten/Getraenkeautomat.java</code></p>
+<hr>
+<h2>Aufgabe</h2>
+<p>Die Methode <code>gibWechselgeld(double betrag)</code> gibt den Betrag in Münzen aus. Schreibe zusätzlich eine Methode <code>gibWechselgeldAlsText(double betrag)</code>, die statt zu drucken einen <strong>String zurückgibt</strong>:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>&quot;2 × 0.20 EUR  1 × 0.10 EUR&quot;</pre></div>
+<h2>Lösung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static String gibWechselgeldAlsText(double betrag) {
+    StringBuilder sb = new StringBuilder();
+    int cents = (int) Math.round(betrag * 100);
+    for (double m : MUENZEN) {
+        int mc = (int) Math.round(m * 100);
+        int n  = cents / mc;
+        if (n &gt; 0) {
+            sb.append(n).append(&quot; × &quot;).append(m).append(&quot; EUR  &quot;);
+            cents -= n * mc;
+        }
+    }
+    return sb.toString().trim();
+}</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Methoden überladen: gleicher Name, unterschiedliche Parameter – Java wählt automatisch die passende.</li><li><code>final</code> macht eine Variable zur Konstante – der Wert kann nicht mehr geändert werden.</li><li>Konstanten in GROSSBUCHSTABEN schreiben (Konvention).</li><li>Scope: Variablen existieren nur in den <code>{}</code> in denen sie deklariert wurden.</li><li>Wechselgeld: in Cent umrechnen (Ganzzahl), dann von größter Münze abwärts aufteilen.</li></ol>
+
+<div class="page-nav"><a href="Praktikum8_Methoden_Grundlagen.html" class="nav-btn nav-prev">← Methoden Grundlagen</a><a href="Praktikum10_Klassen_Grundlagen.html" class="nav-btn nav-next">Klassen Grundlagen →</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

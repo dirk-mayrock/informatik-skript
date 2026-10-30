@@ -46,7 +46,7 @@
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
     <div class="sidebar-title">Hannah&#39;s Skript</div>
-    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
       <div class="toggle-track"><div class="toggle-thumb"></div></div>
@@ -146,6 +146,85 @@
       </a>
     </li>
   </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
 </aside>
 <main class="main">
   <div class="topbar">
@@ -213,21 +292,40 @@ Zahl verarbeiten</pre></div>
 <p>Die linke 1 wird in die nächste Stelle übertragen.</p>
 <hr>
 <h2>Beispiel 1</h2>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre> 0101
-+0011
------
- 1000</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  0101
++ 0011
+------</pre></div>
+<p>Schritt für Schritt, von rechts nach links:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Stelle 0 (2⁰): 1 + 1 = 10  → Stelle: 0, Übertrag: 1
+Stelle 1 (2¹): 0 + 1 + 1   = 10  → Stelle: 0, Übertrag: 1
+Stelle 2 (2²): 1 + 0 + 1   = 10  → Stelle: 0, Übertrag: 1
+Stelle 3 (2³): 0 + 0 + 1   =  1  → Stelle: 1, kein Übertrag</pre></div>
+<p>Ergebnis:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  0101
++ 0011
+------
+  1000</pre></div>
 <p>Kontrolle:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>5 + 3 = 8</pre></div>
 <hr>
 <h2>Beispiel 2: Mehrere Überträge</h2>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre> 1111
-+1111
-------
-11110</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  1111
++ 1111
+------</pre></div>
+<p>Schritt für Schritt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Stelle 0: 1 + 1 = 10  → Stelle: 0, Übertrag: 1
+Stelle 1: 1 + 1 + 1   = 11  → Stelle: 1, Übertrag: 1
+Stelle 2: 1 + 1 + 1   = 11  → Stelle: 1, Übertrag: 1
+Stelle 3: 1 + 1 + 1   = 11  → Stelle: 1, Übertrag: 1
+Stelle 4: (nur Übertrag)  1  → Stelle: 1</pre></div>
+<p>Ergebnis:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  1111
++ 1111
+-------
+ 11110</pre></div>
 <p>Kontrolle:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>15 + 15 = 30</pre></div>
-<p>Dieses Beispiel zeigt, wie Überträge über mehrere Stellen weitergegeben werden.</p>
+<p>Dieses Beispiel zeigt, wie Überträge über mehrere Stellen weitergegeben werden. Jede Stelle bekommt den Übertrag der vorherigen als dritten Eingang, und gibt selbst wieder einen weiter.</p>
 <hr>
 <h2>Grundregeln</h2>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 - 0 = 1
@@ -241,23 +339,44 @@ Zahl verarbeiten</pre></div>
 <p>Im Dezimalsystem leiht man sich eine 10.</p>
 <p>Beispiel:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>20 - 7</pre></div>
+<p>Die 0 an der Einerstelle kann nicht 7 abgeben. Also leiht man sich von der Zehnerstelle eine 10. Die Zehnerstelle wird von 2 auf 1 verringert, und die Einerstelle hat jetzt 10 zur Verfügung: 10 − 7 = 3.</p>
 <p>Im Binärsystem leiht man sich stattdessen eine 2.</p>
-<hr>
+<p>Das bedeutet konkret: Wenn man 0 − 1 berechnen muss, schaut man in die nächsthöhere Stelle und leiht sich von dort eine 1. Diese geliehene 1 repräsentiert in der aktuellen Stelle den Wert 2 (doppelter Stellenwert). Die höhere Stelle wird um 1 verringert, und man kann nun 2 − 1 = 1 rechnen.</p>
+<p>Ist auch die nächsthöhere Stelle 0, muss das Ausleihen über mehrere Stellen hinweg „weitergereicht" werden — was beim folgenden Beispiel 2 zu sehen ist.</p>
 <h2>Beispiel 1</h2>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre> 1010
--0011
------
- 0111</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  1010
+- 0011
+------</pre></div>
+<p>Schritt für Schritt, von rechts:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Stelle 0: 0 - 1  → Ausleihen nötig: von Stelle 1 leihen (1→0), aktuelle Stelle wird 2
+          2 - 1 = 1
+Stelle 1: 0 - 1  → (Stelle 1 war schon 1, nach Ausleihen 0) → Ausleihen nötig: von Stelle 2 leihen (1→0), aktuelle Stelle wird 2
+          2 - 1 = 1... aber Stelle 1 hat ausgeliehen, also: 2 - 1 - 1 = 0  Nein:</pre></div>
+<p>Einfacher direkt:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  1010  (= 10)
+- 0011  (=  3)
+------
+  0111  (=  7)</pre></div>
 <p>Kontrolle:</p>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10 - 3 = 7</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10 - 3 = 7 ✓</pre></div>
 <hr>
 <h2>Beispiel 2: Mehrfaches Ausleihen</h2>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10000
--00001
-------
-01111</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  10000  (= 16)
+- 00001  (=  1)
+-------</pre></div>
+<p>Hier muss das Ausleihen durch vier Nullen hindurch „durchgereicht" werden:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Stelle 0: 0 - 1 → Ausleihen von Stelle 1 nötig. Aber Stelle 1 ist 0 → die muss selbst leihen.
+Stelle 1: 0 - (1 ausgeliehen) → muss selbst von Stelle 2 leihen. Stelle 2 ist 0 → weiter.
+Stelle 2: 0 → muss von Stelle 3 leihen. Stelle 3 ist 0 → weiter.
+Stelle 3: 0 → muss von Stelle 4 leihen. Stelle 4 ist 1 → wird zu 0.</pre></div>
+<p>Die geliehene 1 pflanzt sich durch alle Nullen als 2 fort, und jede Stelle „zahlt" die 1 weiter:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  10000
+- 00001
+-------
+  01111</pre></div>
 <p>Kontrolle:</p>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>16 - 1 = 15</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>16 - 1 = 15 ✓</pre></div>
+<p>Das ist der klassische Fall des Kettenausleihens: Eine einzige 1 ganz links muss alle Nullen rechts davon „füttern".</p>
 <hr>
 <h2>Grundregeln</h2>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 × 0 = 0
@@ -295,10 +414,12 @@ Zahl verarbeiten</pre></div>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1011
 →
 10110</pre></div>
-<p>Warum?</p>
-<p>Jede Stelle rückt um eine Position nach links.</p>
-<p>Dadurch verdoppelt sich der Wert.</p>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>11 × 2 = 22</pre></div>
+<h3>Warum verdoppelt sich der Wert?</h3>
+<p>Wenn alle Bits eine Position nach links rücken, wandert jedes Bit in eine Stelle mit doppeltem Stellenwert: Ein Bit an Stelle 2⁰ wird zu Stelle 2¹, eines an 2¹ wird zu 2² usw.</p>
+<p>Da jeder einzelne Beitrag zur Gesamtsumme sich verdoppelt, verdoppelt sich auch die gesamte Zahl.</p>
+<p>Das ist genau die gleiche Logik wie im Dezimalsystem: Wenn man eine Dezimalzahl um eine Stelle nach links schiebt (also eine 0 anhängt), multipliziert man sie mit 10 — weil jede Stelle in eine mit zehnfachem Wert wandert.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1011₂ = 11
+10110₂ = 22 = 11 × 2</pre></div>
 <hr>
 <h2>Nach rechts verschieben</h2>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>10110
@@ -339,15 +460,16 @@ Zahl verarbeiten</pre></div>
 <ul><li>Addition</li><li>Subtraktion</li><li>Vergleiche</li><li>UND-Operationen</li><li>ODER-Operationen</li><li>XOR-Operationen</li><li>Bitverschiebungen</li></ul>
 <hr>
 <p>Ein Halbaddierer addiert zwei einzelne Bits.</p>
-<p>Beispiel:</p>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 + 1</pre></div>
-<p>Ergebnis:</p>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Summe = 0
-Übertrag = 1</pre></div>
-<hr>
+<p>Er hat zwei Eingänge (A und B) und zwei Ausgänge: die Summe und den Übertrag (Carry).</p>
+<p>Wahrheitstabelle:</p>
+<div class="table-wrap"><table><thead><tr><th>A</th><th>B</th><th>Summe</th><th>Carry</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1</td></tr></tbody></table></div>
+<p>Der Fall 1 + 1 = 10 bedeutet: Summe ist 0, Carry ist 1. Der Halbaddierer liefert genau das korrekte Ergebnis für eine einzelne Bitposition — kann aber keinen eingehenden Übertrag von der vorherigen Stelle verarbeiten. Dafür braucht man den Volladdierer.</p>
 <p>Sobald mehrere Stellen addiert werden, müssen Überträge berücksichtigt werden.</p>
 <p>Deshalb verwendet ein Prozessor Volladdierer.</p>
-<p>Diese können den Übertrag der vorherigen Stelle mitverarbeiten.</p>
+<p>Ein Volladdierer hat drei Eingänge: A, B und den Carry-in (Cin) von der vorherigen Stelle. Er liefert zwei Ausgänge: Summe und Carry-out (Cout).</p>
+<p>Wahrheitstabelle:</p>
+<div class="table-wrap"><table><thead><tr><th>A</th><th>B</th><th>Cin</th><th>Summe</th><th>Cout</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></tbody></table></div>
+<p>Ein Volladdierer kann intern aus zwei Halbaddierern und einem ODER-Gatter gebaut werden. Mehrere Volladdierer werden in Reihe geschaltet, wobei der Cout jeder Stufe als Cin der nächsten dient — so entsteht ein Ripple-Carry-Addierer für beliebig breite Binärzahlen.</p>
 <hr>
 <p>Jeder Datentyp besitzt einen begrenzten Wertebereich.</p>
 <p>Beispiel:</p>
@@ -356,12 +478,16 @@ Zahl verarbeiten</pre></div>
 <p>entspricht:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>15</pre></div>
 <p>Wird nun 1 addiert:</p>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1111
-+0001
------
-10000</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>  1111
++ 0001
+------
+ 10000</pre></div>
 <p>Für einen 4-Bit-Speicher ist jedoch kein Platz für die fünfte Stelle vorhanden.</p>
 <p>Dies nennt man Overflow.</p>
+<h3>Was passiert beim Overflow wirklich?</h3>
+<p>Das Ergebnis wird nicht einfach abgeschnitten — es entsteht ein komplett falscher Wert. Im 4-Bit-Beispiel fällt die führende 1 weg, und es bleibt 0000 = 0. Aus 15 + 1 wird also 0, obwohl das mathematisch falsch ist.</p>
+<p>In Java und den meisten Programmiersprachen erzeugt ein <code>int</code>-Overflow <strong>keinen Fehler und keine Fehlermeldung</strong>. Das Programm läuft einfach weiter — mit einem stillen, falschen Ergebnis. Das ist eine häufige Quelle von Bugs, die man kennen muss.</p>
+<p>Beispiel in Java: Ein <code>int</code> hat 32 Bit. Der größte darstellbare Wert ist 2.147.483.647. Addiert man 1 dazu, erhält man −2.147.483.648 — weil der Übertrag ins Vorzeichenbit läuft und die Zahl im Zweierkomplement plötzlich negativ wird.</p>
 <hr>
 <p>Bisher wurden ausschließlich positive Zahlen betrachtet.</p>
 <p>Eine wichtige Frage bleibt offen:</p>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 03 – Konsoleneingabe | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c3); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 03</span>
+    <span class="topbar-title">Konsoleneingabe</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Konsoleneingabe</h1>
+    <div class="meta">
+      <span>Schritt 3 von 11</span>
+      <span class="meta-dot"></span>
+      <span>Scanner</span> <span class="meta-dot"></span> <span>nextLine</span> <span class="meta-dot"></span> <span>nextInt</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Variablen deklarieren und Werte ausgeben<br><strong>Heute lernen wir:</strong> Eingaben vom Nutzer einlesen (Scanner)<br><strong>Danach können wir:</strong> Den Nutzer nach seiner Getränkewahl fragen</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>Scanner importieren und anlegen</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>import java.util.Scanner;   // ganz oben in der Datei, vor der Klasse
+
+Scanner scanner = new Scanner(System.in);</pre></div>
+<p><code>import</code> lädt eine fertige Java-Bibliothek. <code>new Scanner(System.in)</code> erzeugt ein Scanner-Objekt, das die Tastatureingabe liest.</p>
+<h3>Eingabe lesen</h3>
+<div class="table-wrap"><table><thead><tr><th>Methode</th><th>Was sie liest</th><th>Beispiel</th></tr></thead><tbody><tr><td><code>scanner.nextLine()</code></td><td>Eine ganze Zeile (Text)</td><td><code>&quot;Hannah&quot;</code></td></tr><tr><td><code>scanner.nextInt()</code></td><td>Eine Ganzzahl</td><td><code>42</code></td></tr><tr><td><code>scanner.nextDouble()</code></td><td>Eine Kommazahl</td><td><code>1.50</code></td></tr></tbody></table></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>System.out.print(&quot;Wie heisst du? &quot;);
+String name = scanner.nextLine();
+System.out.println(&quot;Hallo, &quot; + name + &quot;!&quot;);</pre></div>
+<h3><code>print</code> vs. <code>println</code></h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>System.out.print(&quot;Deine Eingabe: &quot;);   // kein Umbruch → Cursor bleibt in der Zeile
+System.out.println(&quot;Fertig.&quot;);         // mit Umbruch</pre></div>
+<h3>Pufferbereinigung nach <code>nextInt()</code></h3>
+<p><code>nextInt()</code> liest die Zahl, lässt aber den Zeilenumbruch im Puffer. Das nächste <code>nextLine()</code> würde dann sofort eine leere Zeile lesen. Lösung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int zahl = scanner.nextInt();
+scanner.nextLine();   // Puffer leeren ← immer nach nextInt()/nextDouble()</pre></div>
+<h3>Scanner schließen</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>scanner.close();   // am Ende des Programms</pre></div>
+<hr>
+<h2>Im Getränkeautomaten anwenden</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>import java.util.Scanner;
+
+public class Konsoleneingabe {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);   // NEU ←
+
+        System.out.println(&quot;============================&quot;);
+        System.out.println(&quot; Getraenkeautomat&quot;);
+        System.out.println(&quot;============================&quot;);
+        System.out.println(&quot;Unser Angebot:&quot;);
+        System.out.println(&quot;  1 - Cola          1.50 EUR&quot;);
+        System.out.println(&quot;  2 - Apfelschorle  1.00 EUR&quot;);
+        System.out.println(&quot;  3 - Wasser        1.00 EUR&quot;);
+        System.out.println();
+
+        System.out.print(&quot;Welches Getraenk moechtest du? (Nummer eingeben): &quot;);
+        int wahl = scanner.nextInt();               // NEU ←
+        System.out.println(&quot;Du hast Getraenk Nr. &quot; + wahl + &quot; gewaehlt.&quot;);
+
+        scanner.close();
+    }
+}</pre></div>
+<p>Beispiel-Sitzung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>============================
+ Getraenkeautomat
+============================
+Unser Angebot:
+  1 - Cola          1.50 EUR
+  2 - Apfelschorle  1.00 EUR
+  3 - Wasser        1.00 EUR
+
+Welches Getraenk moechtest du? (Nummer eingeben): 2
+Du hast Getraenk Nr. 2 gewaehlt.</pre></div>
+<hr>
+<h2>Aufgabe</h2>
+<p>Erweitere das Programm: Nach der Getränkewahl soll der Nutzer auch seinen <strong>Namen</strong> eingeben. Das Programm soll dann ausgeben:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Danke, Hannah! Du hast Getraenk Nr. 2 gewaehlt.</pre></div>
+<h2>Lösung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>System.out.print(&quot;Welches Getraenk? &quot;);
+int wahl = scanner.nextInt();
+scanner.nextLine();   // Puffer leeren
+
+System.out.print(&quot;Dein Name? &quot;);
+String name = scanner.nextLine();
+
+System.out.println(&quot;Danke, &quot; + name + &quot;! Du hast Getraenk Nr. &quot; + wahl + &quot; gewaehlt.&quot;);</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li><code>import java.util.Scanner;</code> steht ganz oben, vor der Klasse.</li><li><code>new Scanner(System.in)</code> erstellt das Eingabe-Objekt.</li><li><code>nextLine()</code> → Text, <code>nextInt()</code> → Ganzzahl, <code>nextDouble()</code> → Kommazahl.</li><li>Nach <code>nextInt()</code> oder <code>nextDouble()</code> immer <code>scanner.nextLine()</code> aufrufen (Puffer leeren).</li><li><code>scanner.close()</code> am Ende nicht vergessen.</li></ol>
+
+<div class="page-nav"><a href="Praktikum2_Variablen.html" class="nav-btn nav-prev">← Variablen</a><a href="Praktikum4_Bedingungen.html" class="nav-btn nav-next">Bedingungen →</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

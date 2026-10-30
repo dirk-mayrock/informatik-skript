@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 04 – Bedingungen | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c4); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 04</span>
+    <span class="topbar-title">Bedingungen</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Bedingungen</h1>
+    <div class="meta">
+      <span>Schritt 4 von 11</span>
+      <span class="meta-dot"></span>
+      <span>if</span> <span class="meta-dot"></span> <span>else if</span> <span class="meta-dot"></span> <span>else</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Nutzereingaben lesen<br><strong>Heute lernen wir:</strong> if / else if / else – Entscheidungen treffen<br><strong>Danach können wir:</strong> Prüfen ob der Nutzer genug Geld eingeworfen hat</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>if / else if / else</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>if (Bedingung) {
+    // wird ausgeführt wenn Bedingung wahr ist
+} else if (andereBedingung) {
+    // wird ausgeführt wenn andereBedingung wahr ist
+} else {
+    // wird ausgeführt wenn keine Bedingung zutrifft
+}</pre></div>
+<p>Nur <strong>ein</strong> Block wird ausgeführt – der erste, dessen Bedingung <code>true</code> ist.</p>
+<h3>Vergleichsoperatoren</h3>
+<div class="table-wrap"><table><thead><tr><th>Operator</th><th>Bedeutung</th><th>Beispiel</th></tr></thead><tbody><tr><td><code>==</code></td><td>gleich</td><td><code>a == 5</code></td></tr><tr><td><code>!=</code></td><td>ungleich</td><td><code>a != 0</code></td></tr><tr><td><code>&gt;</code></td><td>größer</td><td><code>betrag &gt; preis</code></td></tr><tr><td><code>&lt;</code></td><td>kleiner</td><td><code>alter &lt; 18</code></td></tr><tr><td><code>&gt;=</code></td><td>größer oder gleich</td><td><code>punkte &gt;= 60</code></td></tr><tr><td><code>&lt;=</code></td><td>kleiner oder gleich</td><td><code>i &lt;= 10</code></td></tr></tbody></table></div>
+<p>Achtung: <code>=</code> ist <strong>Zuweisung</strong>, <code>==</code> ist <strong>Vergleich</strong>!</p>
+<h3>Logische Operatoren</h3>
+<div class="table-wrap"><table><thead><tr><th>Operator</th><th>Bedeutung</th><th>Beispiel</th></tr></thead><tbody><tr><td><code>&amp;&amp;</code></td><td>UND</td><td><code>alter &gt;= 18 &amp;&amp; hatAusweis</code></td></tr><tr><td>`\</td><td>\</td><td>`</td><td>ODER</td><td>`istAdmin \</td><td>\</td><td>istLehrer`</td></tr><tr><td><code>!</code></td><td>NICHT</td><td><code>!istGesperrt</code></td></tr></tbody></table></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>if (betrag &gt;= preis &amp;&amp; bestand &gt; 0) {
+    System.out.println(&quot;Kauf moeglich!&quot;);
+}</pre></div>
+<hr>
+<h2>Im Getränkeautomaten anwenden</h2>
+<p>Wir prüfen, ob der eingeworfene Betrag für das gewählte Getränk reicht:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>import java.util.Scanner;
+
+public class Bedingungen {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        double preis = 1.50;   // Preis für Cola
+
+        System.out.print(&quot;Wieviel Geld hast du eingeworfen (z.B. 1.50)? &quot;);
+        double eingeworfenerBetrag = scanner.nextDouble();
+
+        if (eingeworfenerBetrag &gt;= preis) {                   // NEU ←
+            double rueckgeld = eingeworfenerBetrag - preis;
+            System.out.println(&quot;Getraenk wird ausgegeben!&quot;);
+            System.out.println(&quot;Rueckgeld: &quot; + rueckgeld + &quot; EUR&quot;);
+        } else if (eingeworfenerBetrag &gt; 0) {                 // NEU ←
+            double fehlenderBetrag = preis - eingeworfenerBetrag;
+            System.out.println(&quot;Nicht genug Geld!&quot;);
+            System.out.println(&quot;Bitte noch &quot; + fehlenderBetrag + &quot; EUR einwerfen.&quot;);
+        } else {                                              // NEU ←
+            System.out.println(&quot;Kein Geld eingeworfen.&quot;);
+        }
+
+        scanner.close();
+    }
+}</pre></div>
+<p>Beispiel mit 2.00 EUR eingegeben:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Wieviel Geld hast du eingeworfen (z.B. 1.50)? 2.00
+Getraenk wird ausgegeben!
+Rueckgeld: 0.5 EUR</pre></div>
+<p>Beispiel mit 1.00 EUR eingegeben:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Wieviel Geld hast du eingeworfen (z.B. 1.50)? 1.00
+Nicht genug Geld!
+Bitte noch 0.5 EUR einwerfen.</pre></div>
+<hr>
+<h2>Aufgabe</h2>
+<p>Ergänze die Bedingung: Wenn <code>eingeworfenerBetrag</code> <strong>genau</strong> gleich <code>preis</code> ist, soll eine besondere Nachricht erscheinen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Passend bezahlt – kein Rueckgeld!</pre></div>
+<h2>Lösung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>if (eingeworfenerBetrag == preis) {
+    System.out.println(&quot;Getraenk wird ausgegeben!&quot;);
+    System.out.println(&quot;Passend bezahlt – kein Rueckgeld!&quot;);
+} else if (eingeworfenerBetrag &gt; preis) {
+    double rueckgeld = eingeworfenerBetrag - preis;
+    System.out.println(&quot;Getraenk wird ausgegeben!&quot;);
+    System.out.println(&quot;Rueckgeld: &quot; + rueckgeld + &quot; EUR&quot;);
+} else {
+    System.out.println(&quot;Nicht genug Geld!&quot;);
+}</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li><code>if</code> prüft eine Bedingung – nur wenn sie <code>true</code> ist, wird der Block ausgeführt.</li><li><code>else if</code> wird geprüft wenn alle vorherigen Bedingungen <code>false</code> waren.</li><li><code>else</code> fängt alle verbleibenden Fälle ab.</li><li><code>=</code> ist Zuweisung, <code>==</code> ist Vergleich – Verwechslung ist ein häufiger Fehler!</li><li>Mehrere Bedingungen kombinieren: <code>&amp;&amp;</code> (beide wahr), <code>||</code> (mind. eine wahr).</li></ol>
+
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">if / else – Ablaufverfolgung</div>
+  <p class="viz-note">Stelle den eingeworfenen Betrag ein und verfolge welcher Zweig ausgeführt wird.</p>
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
+    <label style="font-size:13px;color:var(--text-secondary);">Betrag (EUR):</label>
+    <input id="viz-p4-betrag" type="range" min="0" max="3" step="0.10" value="1.00"
+           style="width:180px;" oninput="updateP4Viz()">
+    <span id="viz-p4-betrag-val" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--active);min-width:50px;">1.00</span>
+    <span style="font-size:12px;color:var(--text-secondary);">Preis: 1.50 EUR</span>
+  </div>
+  <div id="viz-p4-branches" style="display:flex;gap:12px;flex-wrap:wrap;"></div>
+</div>
+
+<div class="page-nav"><a href="Praktikum3_Konsoleneingabe.html" class="nav-btn nav-prev">← Konsoleneingabe</a><a href="Praktikum5_Switch.html" class="nav-btn nav-next">switch →</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

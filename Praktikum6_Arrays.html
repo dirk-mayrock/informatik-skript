@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 06 – Arrays | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c6); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 06</span>
+    <span class="topbar-title">Arrays</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Arrays</h1>
+    <div class="meta">
+      <span>Schritt 6 von 11</span>
+      <span class="meta-dot"></span>
+      <span>Arrays</span> <span class="meta-dot"></span> <span>for</span> <span class="meta-dot"></span> <span>for-each</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Einzelne Getränke mit Variablen speichern und per switch wählen<br><strong>Heute lernen wir:</strong> Arrays – viele Werte in einer Variablen; for und for-each Schleifen<br><strong>Danach können wir:</strong> Alle 5 Getränke in Arrays speichern und das Menü automatisch ausgeben</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>Array deklarieren und befüllen</h3>
+<p>Ein Array speichert <strong>mehrere Werte desselben Typs</strong> hintereinander im Speicher.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>// Variante 1: direkte Initialisierung
+String[] namen  = {&quot;Cola&quot;, &quot;Wasser&quot;, &quot;Limo&quot;};
+double[] preise = {1.50, 1.00, 1.30};
+
+// Variante 2: erst Größe, dann Werte eintragen
+int[] bestand = new int[3];
+bestand[0] = 5;
+bestand[1] = 3;
+bestand[2] = 4;</pre></div>
+<div class="table-wrap"><table><thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead><tbody><tr><td><code>String[]</code></td><td>Array-Typ: Array aus Strings</td></tr><tr><td><code>namen[0]</code></td><td>Erstes Element (Index beginnt bei <strong>0</strong>!)</td></tr><tr><td><code>namen.length</code></td><td>Anzahl der Elemente</td></tr></tbody></table></div>
+<h3>for-Schleife mit Index</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>for (int i = 0; i &lt; namen.length; i++) {
+    System.out.println(namen[i]);
+}</pre></div>
+<p>Struktur: <code>for (Start; Bedingung; Schritt)</code></p>
+<h3>for-each-Schleife</h3>
+<p>Kürzer, wenn kein Index gebraucht wird:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>for (String name : namen) {
+    System.out.println(name);
+}</pre></div>
+<p>Lies: *"Für jeden String <code>name</code> in <code>namen</code> tue ..."*</p>
+<h3>Häufiger Fehler: ArrayIndexOutOfBoundsException</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String[] namen = {&quot;Cola&quot;, &quot;Wasser&quot;};   // Länge 2: Index 0 und 1
+System.out.println(namen[2]);          // Fehler! Index 2 existiert nicht</pre></div>
+<p>Merke: Bei einem Array der Länge <code>n</code> sind gültige Indizes <code>0</code> bis <code>n-1</code>.</p>
+<hr>
+<h2>Im Getränkeautomaten anwenden</h2>
+<p>Statt 5 einzelner Variablenpaare speichern wir alles in Arrays. Das Menü wird per Schleife ausgegeben – kein Copy-Paste mehr!</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>import java.util.Scanner;
+
+public class GetraenkeListe {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Arrays statt einzelner Variablen              NEU ←
+        String[] namen   = {&quot;Cola&quot;, &quot;Apfelschorle&quot;, &quot;Wasser&quot;, &quot;Eistee&quot;, &quot;Limo&quot;};
+        double[] preise  = {1.50, 1.00, 1.00, 1.20, 1.30};
+        int[]    bestand = {5, 3, 5, 2, 4};
+
+        System.out.println(&quot;============================&quot;);
+        System.out.println(&quot; Getraenkeautomat&quot;);
+        System.out.println(&quot;============================&quot;);
+        System.out.println(&quot;Unser Angebot:&quot;);
+
+        // Menü per Schleife – läuft automatisch für alle Einträge  NEU ←
+        for (int i = 0; i &lt; namen.length; i++) {
+            if (bestand[i] &gt; 0) {
+                System.out.println(&quot;  &quot; + (i + 1) + &quot; - &quot;
+                    + namen[i] + &quot;  &quot; + preise[i] + &quot; EUR&quot;
+                    + &quot;  (noch &quot; + bestand[i] + &quot; Dosen)&quot;);
+            }
+        }
+
+        System.out.println();
+        System.out.print(&quot;Deine Wahl (1-5): &quot;);
+        int wahl  = scanner.nextInt();
+        int index = wahl - 1;   // Array ist 0-basiert!
+
+        if (index &gt;= 0 &amp;&amp; index &lt; namen.length &amp;&amp; bestand[index] &gt; 0) {
+            System.out.println(&quot;Du hast gewaehlt: &quot; + namen[index]);
+            System.out.println(&quot;Preis: &quot; + preise[index] + &quot; EUR&quot;);
+        } else {
+            System.out.println(&quot;Ungueltige Wahl oder ausverkauft.&quot;);
+        }
+
+        scanner.close();
+    }
+}</pre></div>
+<p>Beispiel-Ausgabe:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Unser Angebot:
+  1 - Cola          1.5 EUR  (noch 5 Dosen)
+  2 - Apfelschorle  1.0 EUR  (noch 3 Dosen)
+  3 - Wasser        1.0 EUR  (noch 5 Dosen)
+  4 - Eistee        1.2 EUR  (noch 2 Dosen)
+  5 - Limo          1.3 EUR  (noch 4 Dosen)</pre></div>
+<hr>
+<h2>Aufgabe</h2>
+<p>Füge ein sechstes Getränk <strong>"Sprudel"</strong> für <strong>0,90 EUR</strong> mit Bestand <strong>3</strong> zu den Arrays hinzu. Das Menü soll es automatisch anzeigen.</p>
+<h2>Lösung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String[] namen   = {&quot;Cola&quot;, &quot;Apfelschorle&quot;, &quot;Wasser&quot;, &quot;Eistee&quot;, &quot;Limo&quot;, &quot;Sprudel&quot;};
+double[] preise  = {1.50, 1.00, 1.00, 1.20, 1.30, 0.90};
+int[]    bestand = {5, 3, 5, 2, 4, 3};</pre></div>
+<p>Die Schleife läuft automatisch bis <code>namen.length</code> – keine weitere Anpassung nötig!</p>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Ein Array speichert viele Werte des gleichen Typs in einer Variablen.</li><li>Die Indizes beginnen bei <strong>0</strong> – letzter Index ist <code>länge - 1</code>.</li><li><code>array.length</code> gibt die Anzahl der Elemente zurück.</li><li><code>for (int i = 0; i &lt; array.length; i++)</code> läuft durch alle Elemente mit Index.</li><li><code>for (Typ x : array)</code> ist kürzer, wenn kein Index gebraucht wird.</li></ol>
+
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">Array – Zellen und Index</div>
+  <p class="viz-note">Klicke "Schritt" um die for-Schleife durchzugehen. Der aktuelle Index wird hervorgehoben.</p>
+  <div id="viz-p6-cells" style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;"></div>
+  <div id="viz-p6-info" style="font-family:var(--font-mono);font-size:13px;color:var(--text-secondary);margin-bottom:12px;min-height:20px;"></div>
+  <div style="display:flex;gap:10px;">
+    <button class="viz-btn" onclick="stepP6()">Schritt →</button>
+    <button class="viz-btn" onclick="resetP6()">Reset</button>
+  </div>
+</div>
+
+<div class="page-nav"><a href="Praktikum5_Switch.html" class="nav-btn nav-prev">← switch</a><a href="Praktikum7_While.html" class="nav-btn nav-next">while →</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

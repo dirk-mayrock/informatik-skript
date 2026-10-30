@@ -553,3 +553,47 @@ body.light .struk-active {
   border-color: var(--active) !important;
   color: var(--text-primary) !important;
 }
+
+/* ───────────────────────────────────────────────────────────────
+   PRAKTIKUM – Progress Box
+   ─────────────────────────────────────────────────────────────── */
+.progress-box {
+  background: color-mix(in srgb, var(--active) 8%, var(--bg-card));
+  border: 1px solid color-mix(in srgb, var(--active) 30%, var(--border));
+  border-left: 4px solid var(--active);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 20px 0 28px 0;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--text-primary);
+}
+
+.progress-box strong {
+  color: var(--active);
+}
+
+/* Light-mode override */
+body.light .progress-box {
+  background: color-mix(in srgb, var(--active) 6%, #ffffff);
+  border-color: color-mix(in srgb, var(--active) 35%, var(--border-hi));
+  border-left-color: var(--active);
+}
+
+/* Praktikum viz panels in light mode – bg-code panels stay readable */
+body.light #viz-p4-branches > div,
+body.light #viz-p5-cases,
+body.light #viz-p6-cells > div,
+body.light #viz-p7-log,
+body.light #viz-p8-stack > div,
+body.light #viz-p10-blueprint,
+body.light #viz-p10-objects > div,
+body.light #viz-p11-detail {
+  background: #f5f7ff !important;
+  color: var(--text-primary) !important;
+}
+
+body.light #viz-p2-detail {
+  background: #f0f2fa !important;
+  color: var(--text-primary) !important;
+}

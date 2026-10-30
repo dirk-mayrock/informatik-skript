@@ -1,0 +1,18 @@
+#BlueJ package file
+editor.fx.0.height=600
+editor.fx.0.width=800
+editor.fx.0.x=50
+editor.fx.0.y=50
+objectbench.height=100
+objectbench.width=400
+package.numDependencies=0
+package.numTargets=1
+package.showExtends=true
+package.showUses=true
+target1.height=70
+target1.name=MethodenGrundlagen
+target1.showInterface=false
+target1.type=ClassTarget
+target1.width=180
+target1.x=30
+target1.y=30

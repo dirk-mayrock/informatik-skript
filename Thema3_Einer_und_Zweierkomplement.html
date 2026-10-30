@@ -46,7 +46,7 @@
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
     <div class="sidebar-title">Hannah&#39;s Skript</div>
-    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
       <div class="toggle-track"><div class="toggle-thumb"></div></div>
@@ -146,6 +146,85 @@
       </a>
     </li>
   </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
 </aside>
 <main class="main">
   <div class="topbar">
@@ -191,6 +270,17 @@
 <p>Das Zweierkomplement ist die heute in allen Computern verwendete Methode.</p>
 <p>Es löst beide Probleme:</p>
 <ul><li>Es gibt nur eine Null.</li><li>Subtraktion kann als Addition durchgeführt werden.</li></ul>
+<h3>Warum gibt es beim Zweierkomplement nur eine einzige Null?</h3>
+<p>Das lässt sich direkt nachrechnen. Man bildet das Zweierkomplement von 0000:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0000
+Einerkomplement: 1111
++ 1:
+  1111
++ 0001
+------
+ 10000</pre></div>
+<p>Das Ergebnis hat 5 Bit. Das führende Bit fällt aus dem 4-Bit-Register heraus. Es bleibt: 0000.</p>
+<p>Das Zweierkomplement von 0 ist also wieder 0 — es gibt keine zweite Darstellung für Null. Genau das war das Problem beim Einerkomplement, wo 1111 als „−0" existierte.</p>
 <hr>
 <h2>Schritt 1: Das Einerkomplement</h2>
 <p>Das Einerkomplement entsteht durch Invertierung aller Bits.</p>
@@ -230,6 +320,8 @@ Einerkomplement:
 <p>Das führende Bit (Übertrag) fällt weg (kein Platz im 4-Bit-Register).</p>
 <p>Ergebnis: <code>0000</code> = 0</p>
 <p>Das ist korrekt: +5 + (−5) = 0</p>
+<h3>Ist dieser Übertrag ein Fehler?</h3>
+<p>Nein. Das ist ein wichtiger Punkt: Beim Addieren einer Zahl und ihrer Negation entsteht im Zweierkomplement immer ein Übertrag ins Bit n+1. Das ist kein Overflow, sondern genau das erwartete Verhalten. Der Prozessor verwirft dieses Bit, weil das Register nur n Bits breit ist — und das Ergebnis ist korrekt 0. Ein echter Overflow tritt nur dann auf, wenn zwei Zahlen gleichen Vorzeichens addiert werden und das Ergebnis das Vorzeichen ändert.</p>
 <hr>
 <h2>Wertebereich im Zweierkomplement</h2>
 <p>Bei n Bit gilt:</p>
@@ -238,12 +330,27 @@ Größter Wert:   2^(n-1) - 1</pre></div>
 <p>Beispiel mit 4 Bit:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Kleinster Wert: -2^3 = -8
 Größter Wert:    2^3 - 1 = 7</pre></div>
+<h3>Warum ist der negative Bereich einen Wert größer als der positive?</h3>
+<p>Mit 4 Bit gibt es genau 2⁴ = 16 verschiedene Bitmuster. Diese 16 Muster müssen auf Zahlen verteilt werden.</p>
+<p>Ein Muster wird für die Null benötigt (0000). Es bleiben 15 Muster für positive und negative Zahlen.</p>
+<p>Da 15 ungerade ist, kann man diese Muster nicht gleich aufteilen. Das Zweierkomplement gibt dem negativen Bereich das eine „Muster mehr" — deshalb geht er von −8 bis −1 (8 Werte) und der positive nur von +1 bis +7 (7 Werte) plus die Null.</p>
+<p>Das hat eine praktische Konsequenz: Die Zahl −8 hat im 4-Bit-Zweierkomplement kein positives Gegenstück. Das Zweierkomplement von 1000 (= −8) wäre 1000 — also wieder −8. Das ist der einzige Wert ohne Negation im Wertebereich.</p>
 <div class="table-wrap"><table><thead><tr><th>Binär</th><th>Dezimal</th></tr></thead><tbody><tr><td>0111</td><td>+7</td></tr><tr><td>0110</td><td>+6</td></tr><tr><td>0101</td><td>+5</td></tr><tr><td>0100</td><td>+4</td></tr><tr><td>0011</td><td>+3</td></tr><tr><td>0010</td><td>+2</td></tr><tr><td>0001</td><td>+1</td></tr><tr><td>0000</td><td>0</td></tr><tr><td>1111</td><td>-1</td></tr><tr><td>1110</td><td>-2</td></tr><tr><td>1101</td><td>-3</td></tr><tr><td>1100</td><td>-4</td></tr><tr><td>1011</td><td>-5</td></tr><tr><td>1010</td><td>-6</td></tr><tr><td>1001</td><td>-7</td></tr><tr><td>1000</td><td>-8</td></tr></tbody></table></div>
 <hr>
 <h2>Wie erkennt man: positiv oder negativ?</h2>
 <p>Das höchste Bit (Most Significant Bit, MSB) gibt das Vorzeichen an:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>MSB = 0 → positive Zahl
 MSB = 1 → negative Zahl</pre></div>
+<h3>Den genauen Dezimalwert direkt ablesen</h3>
+<p>Es gibt eine elegante Methode, den Wert einer Zweierkomplement-Zahl direkt zu berechnen, ohne den Umkehrweg über das Komplement gehen zu müssen.</p>
+<p>Das MSB bekommt einfach einen <strong>negativen</strong> Stellenwert:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Bei n Bit: MSB hat den Wert −2^(n−1)</pre></div>
+<p>Alle anderen Bits behalten ihre normalen positiven Stellenwerte.</p>
+<p>Beispiel mit 4 Bit: <code>1011</code></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 · (−2³) + 0 · 2² + 1 · 2¹ + 1 · 2⁰
+= −8 + 0 + 2 + 1
+= −5</pre></div>
+<p>Das liefert direkt das Ergebnis −5 — ohne Invertieren, ohne +1. Diese Methode erklärt auch die gesamte Wertetabelle: Das MSB zieht immer einen großen negativen Wert ab, der von den restlichen Bits nur teilweise ausgeglichen werden kann.</p>
 <hr>
 <h2>Subtraktion über Addition</h2>
 <p>Der wichtigste Vorteil des Zweierkomplements:</p>
@@ -283,11 +390,17 @@ Einerkomplement: 1000
 <p>Welchen Dezimalwert hat <code>1110</code> im 4-Bit-Zweierkomplement?</p>
 <h4>Lösung</h4>
 <p>MSB = 1 → negative Zahl.</p>
-<p>Zweierkomplement umkehren (nochmals Einerkomplement + 1):</p>
+<p><strong>Methode 1: Umkehrweg (Zweierkomplement nochmals anwenden)</strong></p>
+<p>Das Zweierkomplement nochmals anwenden liefert den positiven Betrag zurück — weil das Komplement des Komplements immer die Originalzahl ergibt.</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1110
 Einerkomplement: 0001
 + 1:             0010 = 2</pre></div>
-<p>Also: <code>1110</code> = -2</p>
+<p>Also: <code>1110</code> = −2</p>
+<p><strong>Methode 2: Direkt über negativen Stellenwert des MSB</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1 · (−8) + 1 · 4 + 1 · 2 + 0 · 1
+= −8 + 4 + 2 + 0
+= −2</pre></div>
+<p>Beide Methoden liefern dasselbe Ergebnis.</p>
 <hr>
 <h3>Aufgabe 3</h3>
 <p>Berechne 6 - 4 mit Hilfe des Zweierkomplements (4 Bit).</p>

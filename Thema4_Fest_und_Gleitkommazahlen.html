@@ -46,7 +46,7 @@
   <div class="sidebar-header">
     <div class="sidebar-logo">LK Informatik</div>
     <div class="sidebar-title">Hannah&#39;s Skript</div>
-    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
     <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
       <span class="toggle-icons">🌙</span>
       <div class="toggle-track"><div class="toggle-thumb"></div></div>
@@ -146,6 +146,85 @@
       </a>
     </li>
   </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
 </aside>
 <main class="main">
   <div class="topbar">
@@ -188,6 +267,10 @@
 <ul><li>Einfach zu berechnen</li><li>Schnell</li></ul>
 <h3>Nachteile</h3>
 <ul><li>Wertebereich begrenzt</li><li>Entweder kleine Zahlen oder Kommagenauigkeit, aber nicht beides</li></ul>
+<h3>Warum ist der Nachteil so gravierend?</h3>
+<p>Mit 4 Bit vor dem Komma und 4 Bit nach dem Komma lassen sich maximal 15,9375 darstellen. Die Zahl 100,5 passt nicht mehr rein — der Vorkommanteil 100 braucht mehr als 4 Bit (er braucht 7 Bit).</p>
+<p>Umgekehrt: Wenn man mehr Bits für den Vorkommateil verwendet, verliert man Präzision nach dem Komma.</p>
+<p>Ein Gleitkommasystem mit denselben 8 Bit kann dagegen sowohl winzige Zahlen wie 0,0001 als auch große wie 100000 darstellen — weil der Exponent festlegt, wo das Komma sitzt. Das ist der eigentliche Vorteil der Gleitkommadarstellung.</p>
 <hr>
 <h2>Gleitkommazahlen</h2>
 <h3>Die Idee: Wissenschaftliche Notation</h3>
@@ -219,15 +302,35 @@
 <p>Beispiel:</p>
 <p>Tatsächlicher Exponent = 4</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Gespeichert: 4 + 127 = 131 = 10000011</pre></div>
-<p>Der Bias-Trick erlaubt es, auch negative Exponenten ohne Vorzeichenbit zu speichern.</p>
+<h3>Warum dieser Bias-Trick, und warum genau 127?</h3>
+<p>Ohne Bias müsste man für negative Exponenten (z.B. für sehr kleine Zahlen wie 2⁻⁵) ein Vorzeichen speichern. Man könnte das Zweierkomplement verwenden — aber das hätte einen Nachteil: Zwei gespeicherte Exponentenwerte wären nicht mehr direkt vergleichbar, weil beim Zweierkomplement negative Zahlen höhere Bitmuster haben als positive.</p>
+<p>Mit dem Bias-Trick sind alle gespeicherten Exponenten nichtnegative ganze Zahlen. Man kann zwei Gleitkommazahlen allein anhand ihrer rohen Bitmuster vergleichen — was Vergleichsoperationen im Prozessor deutlich vereinfacht.</p>
+<p>Warum genau 127? Bei 8 Exponent-Bits gibt es 256 Muster (0–255). Die Muster 0 und 255 sind für Sonderwerte reserviert (Null, Unendlich, NaN). Die restlichen 254 Muster (1–254) werden für normale Zahlen verwendet. 127 liegt in der Mitte dieses Bereichs, sodass Exponenten von −126 bis +127 dargestellt werden können (gespeichert als 1 bis 254).</p>
 <hr>
 <h2>Die Mantisse (M)</h2>
 <p>In der wissenschaftlichen Darstellung beginnt die Zahl immer mit 1:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1,xxxxx · 2^e</pre></div>
 <p>Die führende 1 wird <strong>nicht gespeichert</strong> (Hidden Bit), weil sie immer vorhanden ist.</p>
+<p>Das folgt direkt aus der Normalisierung: Da jede normalisierte Binärzahl die Form 1,xxx hat, ist die erste Stelle immer 1. Es wäre Platzverschwendung, diese bekannte Information zu speichern. Indem man sie weglässt, gewinnt man eine zusätzliche Bit-Stelle für die eigentlichen Nachkommabits — und erhöht damit die Präzision.</p>
 <p>Das spart ein Bit.</p>
 <hr>
 <h2>Vollständiges Beispiel: Dezimal → IEEE 754</h2>
+<h3>Wie wandelt man Nachkommastellen in Binär um?</h3>
+<p>Ganzzahlen werden durch wiederholte Division durch 2 umgewandelt (wie in Thema 1). Für Nachkommastellen funktioniert das Umgekehrte: wiederholte <strong>Multiplikation mit 2</strong>.</p>
+<p>Der Grund: Multipliziert man eine Binärzahl mit 2, verschiebt sich das Komma eine Stelle nach rechts — genau wie eine Multiplikation mit 10 im Dezimalsystem das Komma nach rechts schiebt. Das erste Bit nach dem Komma hat den Wert 2⁻¹ = 0,5. Wenn man also mit 2 multipliziert und der Vorkommateil wird 1, dann war das Bit gesetzt.</p>
+<p><strong>Verfahren:</strong></p>
+<ol><li>Nachkommateil mit 2 multiplizieren.</li><li>Den Vorkommateil des Ergebnisses (0 oder 1) als nächstes Bit notieren.</li><li>Mit dem neuen Nachkommateil weitermachen, bis der Nachkommateil 0 wird — oder bis genug Bits vorhanden sind.</li></ol>
+<p>Beispiel: 0,75</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0,75 × 2 = 1,5  → Bit: 1, weiter mit 0,5
+0,5  × 2 = 1,0  → Bit: 1, weiter mit 0,0 → fertig</pre></div>
+<p>0,75₁₀ = 0,11₂</p>
+<p>Kontrolle: 1 · 2⁻¹ + 1 · 2⁻² = 0,5 + 0,25 = 0,75 ✓</p>
+<p>Beispiel: 0,625</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0,625 × 2 = 1,25 → Bit: 1, weiter mit 0,25
+0,25  × 2 = 0,5  → Bit: 0, weiter mit 0,5
+0,5   × 2 = 1,0  → Bit: 1, fertig</pre></div>
+<p>0,625₁₀ = 0,101₂</p>
+<hr>
 <h3>Zahl: 13,5</h3>
 <p><strong>Schritt 1: In Binär umwandeln</strong></p>
 <p>Ganzzahlteil: 13</p>
@@ -243,7 +346,12 @@
 <hr>
 <p><strong>Schritt 2: Normalisieren</strong></p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>1101,1 = 1,1011 · 2³</pre></div>
-<p>Die Eins wird vor das Komma gebracht. Der Exponent gibt an, um wie viele Stellen verschoben wurde.</p>
+<h3>Warum normalisiert man, und warum immer „1,xxxx"?</h3>
+<p>Normalisierung bedeutet: Die Zahl so umschreiben, dass genau eine 1 vor dem Komma steht.</p>
+<p>Das klingt nach einer beliebigen Konvention, hat aber zwei wichtige Gründe:</p>
+<p>Erstens: <strong>Eindeutigkeit.</strong> Eine Zahl hat in normalisierter Form genau eine Darstellung. 1101,1 könnte man auch als 11,011 · 2² oder 0,11011 · 2⁴ schreiben — all das ist dasselbe. Ohne Normalisierung hätte jede Zahl unendlich viele Darstellungen, und man könnte Zahlen nicht einfach vergleichen.</p>
+<p>Zweitens: <strong>Das Hidden Bit.</strong> Da nach der Normalisierung die Stelle vor dem Komma immer genau 1 ist (jede Binärzahl ≠ 0 beginnt mit 1), muss diese 1 nicht gespeichert werden — sie ist immer da. Man spart so ein Bit und gewinnt eine zusätzliche Stelle Präzision in der Mantisse.</p>
+<p>Die Eins wird vor das Komma gebracht. Der Exponent gibt an, um wie viele Stellen das Komma nach links verschoben wurde.</p>
 <hr>
 <p><strong>Schritt 3: Vorzeichen</strong></p>
 <p>13,5 ist positiv → S = 0</p>
@@ -279,6 +387,9 @@
 <hr>
 <h2>Besondere Werte in IEEE 754</h2>
 <div class="table-wrap"><table><thead><tr><th>Exponent</th><th>Mantisse</th><th>Bedeutung</th></tr></thead><tbody><tr><td>00000000</td><td>0</td><td>Null (±0)</td></tr><tr><td>00000000</td><td>≠ 0</td><td>Denormalisiert</td></tr><tr><td>11111111</td><td>0</td><td>Unendlich (±∞)</td></tr><tr><td>11111111</td><td>≠ 0</td><td>NaN (Not a Number)</td></tr></tbody></table></div>
+<h3>Denormalisierte Zahlen (Subnormals)</h3>
+<p>Ganz normale normalisierte Zahlen haben immer eine führende 1 vor dem Komma — deshalb kann der kleinste darstellbare Exponent (−126) nicht unterschritten werden, ohne dass die Zahl zu 0 wird. Das erzeugt eine „Lücke" um den Nullpunkt.</p>
+<p>Denormalisierte Zahlen schließen diese Lücke. Wenn der gespeicherte Exponent 00000000 ist und die Mantisse nicht null ist, wird das Hidden Bit nicht angenommen. Die Zahl hat die Form 0,xxxxx · 2⁻¹²⁶. So lassen sich sehr kleine Werte nahe Null noch annähernd korrekt darstellen — mit abnehmender Präzision, aber ohne abrupten Sprung zur Null.</p>
 <p>NaN entsteht zum Beispiel bei:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0 ÷ 0
 √(-1)</pre></div>
@@ -290,8 +401,21 @@
 <p>In Python:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>&gt;&gt;&gt; 0.1 + 0.2
 0.30000000000000004</pre></div>
-<p>Das ist kein Bug — sondern ein Eigenschaft der Binärdarstellung.</p>
-<p>Grund: 0,1 im Binärsystem ist ein unendlicher Bruch (ähnlich wie 1/3 im Dezimalsystem).</p>
+<p>Das ist kein Bug — sondern eine Eigenschaft der Binärdarstellung.</p>
+<h3>Warum ist 0,1 ein unendlicher Bruch im Binärsystem?</h3>
+<p>Man kann das direkt mit dem Multiplikationsverfahren zeigen. Man wendet es auf 0,1 an:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>0,1  × 2 = 0,2  → Bit: 0
+0,2  × 2 = 0,4  → Bit: 0
+0,4  × 2 = 0,8  → Bit: 0
+0,8  × 2 = 1,6  → Bit: 1, weiter mit 0,6
+0,6  × 2 = 1,2  → Bit: 1, weiter mit 0,2
+0,2  × 2 = 0,4  → Bit: 0  ← jetzt beginnt die Wiederholung
+0,4  × 2 = 0,8  → Bit: 0
+0,8  × 2 = 1,6  → Bit: 1
+...</pre></div>
+<p>Die Sequenz 0011 wiederholt sich endlos. 0,1 im Binärsystem ist genau wie 1/3 im Dezimalsystem — ein unendlicher periodischer Bruch.</p>
+<p>Da in einem 32-Bit-Float nur 23 Bit für die Mantisse zur Verfügung stehen, wird 0,1 an einer bestimmten Stelle abgebrochen. Das erzeugt einen winzigen Rundungsfehler. Addiert man 0,1 und 0,2 (beide mit Rundungsfehlern behaftet), summieren sich diese kleinen Fehler auf — deshalb ist das Ergebnis nicht exakt 0,3.</p>
+<p>Das ist kein Bug, sondern ein systemimmanentes Verhalten jeder Binär-Gleitkommadarstellung.</p>
 <hr>
 <h2>Vergleich: 32-Bit vs. 64-Bit</h2>
 <div class="table-wrap"><table><thead><tr><th>Eigenschaft</th><th>Single (32 Bit)</th><th>Double (64 Bit)</th></tr></thead><tbody><tr><td>Vorzeichen</td><td>1 Bit</td><td>1 Bit</td></tr><tr><td>Exponent</td><td>8 Bit</td><td>11 Bit</td></tr><tr><td>Mantisse</td><td>23 Bit</td><td>52 Bit</td></tr><tr><td>Genauigkeit</td><td>~7 Dezimalstellen</td><td>~15 Dezimalstellen</td></tr></tbody></table></div>

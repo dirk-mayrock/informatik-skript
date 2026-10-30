@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 05 – switch | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c5); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 05</span>
+    <span class="topbar-title">switch</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>switch</h1>
+    <div class="meta">
+      <span>Schritt 5 von 11</span>
+      <span class="meta-dot"></span>
+      <span>switch</span> <span class="meta-dot"></span> <span>case</span> <span class="meta-dot"></span> <span>break</span> <span class="meta-dot"></span> <span>default</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Mit if/else Entscheidungen treffen<br><strong>Heute lernen wir:</strong> switch – elegante Auswahl bei festen Werten<br><strong>Danach können wir:</strong> Getränke per Nummer (1–5) sauber auswählen</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>switch</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>switch (ausdruck) {
+    case wert1:
+        // Code für wert1
+        break;
+    case wert2:
+        // Code für wert2
+        break;
+    default:
+        // Code wenn kein case passt
+}</pre></div>
+<div class="table-wrap"><table><thead><tr><th>Teil</th><th>Bedeutung</th></tr></thead><tbody><tr><td><code>switch (x)</code></td><td>Welche Variable wird verglichen?</td></tr><tr><td><code>case 3:</code></td><td>Wenn x == 3, führe diesen Block aus</td></tr><tr><td><code>break;</code></td><td>Verlässt den switch – ohne <code>break</code> "fällt" der Code zum nächsten <code>case</code> durch!</td></tr><tr><td><code>default:</code></td><td>Wird ausgeführt wenn kein <code>case</code> passt (wie <code>else</code>)</td></tr></tbody></table></div>
+<h3>Wann switch statt if-else?</h3>
+<ul><li><code>switch</code> ist besser lesbar wenn <strong>viele feste Einzelwerte</strong> geprüft werden.</li><li><code>if-else</code> ist besser wenn Bereichsprüfungen nötig sind (z.B. <code>&gt; 100</code>).</li></ul>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>// switch: gut für feste Werte
+switch (wahl) {
+    case 1: ...   case 2: ...   case 3: ...
+}
+
+// if-else: besser für Bereiche
+if (punkte &gt;= 90) { ... }
+else if (punkte &gt;= 75) { ... }</pre></div>
+<h3>Vergessen von <code>break</code> – Durchfall-Effekt</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int x = 2;
+switch (x) {
+    case 1: System.out.println(&quot;eins&quot;);
+    case 2: System.out.println(&quot;zwei&quot;);   // kein break!
+    case 3: System.out.println(&quot;drei&quot;);
+}
+// Ausgabe: &quot;zwei&quot;  UND  &quot;drei&quot;  ← Durchfall!</pre></div>
+<hr>
+<h2>Im Getränkeautomaten anwenden</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>import java.util.Scanner;
+
+public class SwitchBeispiel {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println(&quot;Unser Angebot:&quot;);
+        System.out.println(&quot;  1 - Cola          1.50 EUR&quot;);
+        System.out.println(&quot;  2 - Apfelschorle  1.00 EUR&quot;);
+        System.out.println(&quot;  3 - Wasser        1.00 EUR&quot;);
+        System.out.println(&quot;  4 - Eistee        1.20 EUR&quot;);
+        System.out.println(&quot;  5 - Limo          1.30 EUR&quot;);
+
+        System.out.print(&quot;Deine Wahl (1-5): &quot;);
+        int wahl = scanner.nextInt();
+
+        String gewaehltesGetraenk;
+        double gewaehlterPreis;
+
+        switch (wahl) {                           // NEU ←
+            case 1:
+                gewaehltesGetraenk = &quot;Cola&quot;;
+                gewaehlterPreis    = 1.50;
+                break;
+            case 2:
+                gewaehltesGetraenk = &quot;Apfelschorle&quot;;
+                gewaehlterPreis    = 1.00;
+                break;
+            case 3:
+                gewaehltesGetraenk = &quot;Wasser&quot;;
+                gewaehlterPreis    = 1.00;
+                break;
+            case 4:
+                gewaehltesGetraenk = &quot;Eistee&quot;;
+                gewaehlterPreis    = 1.20;
+                break;
+            case 5:
+                gewaehltesGetraenk = &quot;Limo&quot;;
+                gewaehlterPreis    = 1.30;
+                break;
+            default:                              // NEU ←
+                gewaehltesGetraenk = &quot;Unbekannt&quot;;
+                gewaehlterPreis    = 0.00;
+                System.out.println(&quot;Ungueltige Auswahl!&quot;);
+        }
+
+        if (!gewaehltesGetraenk.equals(&quot;Unbekannt&quot;)) {
+            System.out.println(&quot;Du hast gewaehlt: &quot; + gewaehltesGetraenk);
+            System.out.println(&quot;Preis: &quot; + gewaehlterPreis + &quot; EUR&quot;);
+        }
+
+        scanner.close();
+    }
+}</pre></div>
+<p>Beispiel-Sitzung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Deine Wahl (1-5): 4
+Du hast gewaehlt: Eistee
+Preis: 1.2 EUR</pre></div>
+<hr>
+<h2>Aufgabe</h2>
+<p>Füge ein sechstes Getränk <strong>"Sprudel"</strong> für <strong>0,90 EUR</strong> (Taste <code>6</code>) in den switch ein.</p>
+<h2>Lösung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>case 6:
+    gewaehltesGetraenk = &quot;Sprudel&quot;;
+    gewaehlterPreis    = 0.90;
+    break;</pre></div>
+<p>Und ergänze das Menü mit <code>System.out.println(&quot;  6 - Sprudel        0.90 EUR&quot;);</code>.</p>
+<hr>
+<h2>Merksätze</h2>
+<ol><li><code>switch</code> vergleicht einen Wert gegen mehrere feste <code>case</code>-Werte.</li><li>Jeder <code>case</code>-Block <strong>muss</strong> mit <code>break;</code> enden – sonst läuft der Code in den nächsten <code>case</code> weiter.</li><li><code>default</code> fängt alle Werte auf, die kein <code>case</code> abdeckt.</li><li><code>switch</code> funktioniert mit <code>int</code>, <code>char</code>, <code>String</code> und einigen anderen Typen.</li><li>Bei Bereichen (<code>&gt; 100</code>) ist <code>if-else</code> besser geeignet als <code>switch</code>.</li></ol>
+
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">switch – Welcher case wird aktiv?</div>
+  <p class="viz-note">Wähle eine Nummer und sieh, welcher case im switch aufleuchtet.</p>
+  <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+    <button class="viz-btn" onclick="setP5(1)">1 – Cola</button>
+    <button class="viz-btn" onclick="setP5(2)">2 – Apfelschorle</button>
+    <button class="viz-btn" onclick="setP5(3)">3 – Wasser</button>
+    <button class="viz-btn" onclick="setP5(4)">4 – Eistee</button>
+    <button class="viz-btn" onclick="setP5(5)">5 – Limo</button>
+    <button class="viz-btn" onclick="setP5(9)">9 – (default)</button>
+  </div>
+  <div id="viz-p5-cases" style="font-family:var(--font-mono);font-size:13px;line-height:2;"></div>
+</div>
+
+<div class="page-nav"><a href="Praktikum4_Bedingungen.html" class="nav-btn nav-prev">← Bedingungen</a><a href="Praktikum6_Arrays.html" class="nav-btn nav-next">Arrays →</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 11 – OOP Getränkeautomat | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c11); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 11</span>
+    <span class="topbar-title">OOP Getränkeautomat</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>OOP Getränkeautomat</h1>
+    <div class="meta">
+      <span>Schritt 11 von 11</span>
+      <span class="meta-dot"></span>
+      <span>private</span> <span class="meta-dot"></span> <span>Getter</span> <span class="meta-dot"></span> <span>Setter</span> <span class="meta-dot"></span> <span>toString</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Klassen mit Attributen und Konstruktor definieren<br><strong>Heute lernen wir:</strong> Kapselung (private/public), Getter/Setter, mehrere Klassen zusammen<br><strong>Danach können wir:</strong> Den vollständigen OOP-Getränkeautomaten mit 3 Klassen</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>Kapselung: private und public</h3>
+<p>Attribute sollten <strong>nicht direkt von außen</strong> zugänglich sein – sie werden <code>private</code> gemacht:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Getraenk {
+    private String name;   // von außen nicht änderbar
+    private double preis;
+    private int    bestand;
+}</pre></div>
+<p>Zugriff nur über <strong>Getter</strong> und <strong>Setter</strong>:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>// Getter: Wert lesen
+public String getName()  { return name; }
+public double getPreis() { return preis; }
+public int getBestand()  { return bestand; }
+
+// Setter: Wert (kontrolliert) setzen
+public void setBestand(int bestand) {
+    if (bestand &gt;= 0) {          // Prüfung vor Zuweisung!
+        this.bestand = bestand;
+    }
+}</pre></div>
+<h3>Zugriffsmodifizierer</h3>
+<div class="table-wrap"><table><thead><tr><th>Modifizierer</th><th>Sichtbar von</th></tr></thead><tbody><tr><td><code>private</code></td><td>Nur innerhalb der eigenen Klasse</td></tr><tr><td><code>public</code></td><td>Überall</td></tr><tr><td><code>protected</code></td><td>Eigene Klasse + Unterklassen</td></tr></tbody></table></div>
+<h3><code>toString()</code> überschreiben</h3>
+<p><code>toString()</code> wird automatisch aufgerufen wenn ein Objekt als Text ausgegeben wird:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>@Override
+public String toString() {
+    return String.format(&quot;%-15s %.2f EUR  (%d Dosen)&quot;, name, preis, bestand);
+}</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Getraenk cola = new Getraenk(&quot;Cola&quot;, 1.50, 5);
+System.out.println(cola);   // ruft toString() auf
+// Ausgabe: Cola            1.50 EUR  (5 Dosen)</pre></div>
+<h3>Mehrere Klassen zusammen</h3>
+<p>Ein Programm kann aus mehreren Klassen bestehen. In BlueJ legt man für jede Klasse eine eigene <code>.java</code>-Datei im selben Projektordner an.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>P11_OOP_Getraenkeautomat/
+├── Getraenk.java   ← Klasse für ein Getränk
+├── Geldfach.java   ← Klasse für das Geld
+└── Automat.java    ← Hauptklasse (enthält main)</pre></div>
+<hr>
+<h2>Die drei Klassen im Überblick</h2>
+<h3>UML-Klassendiagramm</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>┌─────────────────────────┐       ┌──────────────────────────┐
+│        Getraenk         │       │         Geldfach         │
+├─────────────────────────┤       ├──────────────────────────┤
+│ - name : String         │       │ - betrag : double        │
+│ - preis : double        │       ├──────────────────────────┤
+│ - bestand : int         │       │ + einwerfen(double)      │
+├─────────────────────────┤       │ + abziehen(double)       │
+│ + getName() : String    │       │ + zurueckgeben() : double│
+│ + getPreis() : double   │       │ + wechselgeldAlsText()   │
+│ + getBestand() : int    │       │ + toString()             │
+│ + istVerfuegbar() : bool│       └──────────────────────────┘
+│ + ausgeben() : bool     │                   ▲
+│ + toString() : String   │                   │ verwendet
+└─────────────────────────┘       ┌────────────┴─────────────┐
+              ▲                   │          Automat         │
+              │ verwendet         ├──────────────────────────┤
+              └───────────────────│ - getraenke : Getraenk[] │
+                                  │ - geldfach  : Geldfach   │
+                                  ├──────────────────────────┤
+                                  │ + zeigeMenu()            │
+                                  │ + geldPhase() : bool     │
+                                  │ + kaufPhase()            │
+                                  │ + start()                │
+                                  │ + main()                 │
+                                  └──────────────────────────┘</pre></div>
+<hr>
+<h2>Klasse <code>Getraenk</code></h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Getraenk {
+
+    private String name;
+    private double preis;
+    private int    bestand;
+
+    public Getraenk(String name, double preis, int bestand) {
+        this.name    = name;
+        this.preis   = preis;
+        this.bestand = bestand;
+    }
+
+    public String getName()    { return name; }
+    public double getPreis()   { return preis; }
+    public int    getBestand() { return bestand; }
+
+    public boolean istVerfuegbar() { return bestand &gt; 0; }
+
+    public boolean ausgeben() {
+        if (bestand &gt; 0) { bestand--; return true; }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(&quot;%-15s %.2f EUR  (%d Dosen)&quot;, name, preis, bestand);
+    }
+}</pre></div>
+<hr>
+<h2>Klasse <code>Geldfach</code></h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Geldfach {
+
+    private double betrag;
+    private static final double[] MUENZEN = {2.00, 1.00, 0.50, 0.20, 0.10};
+
+    public Geldfach() { this.betrag = 0.0; }
+
+    public double getBetrag() { return betrag; }
+
+    public boolean einwerfen(double muenze) {
+        for (double m : MUENZEN) {
+            if (Math.abs(muenze - m) &lt; 0.001) {
+                betrag += muenze;
+                betrag = Math.round(betrag * 100) / 100.0;
+                return true;
+            }
+        }
+        return false;   // ungültige Münze
+    }
+
+    public void abziehen(double preis) {
+        betrag -= preis;
+        betrag = Math.round(betrag * 100) / 100.0;
+    }
+
+    public double zurueckgeben() {
+        double r = betrag; betrag = 0.0; return r;
+    }
+
+    public String wechselgeldAlsText() {
+        StringBuilder sb = new StringBuilder();
+        int cents = (int) Math.round(betrag * 100);
+        for (double m : MUENZEN) {
+            int mc = (int) Math.round(m * 100);
+            int n  = cents / mc;
+            if (n &gt; 0) {
+                sb.append(n).append(&quot; × &quot;).append(String.format(&quot;%.2f&quot;, m))
+                  .append(&quot; EUR  &quot;);
+                cents -= n * mc;
+            }
+        }
+        return sb.toString().trim();
+    }
+
+    @Override
+    public String toString() { return String.format(&quot;%.2f EUR&quot;, betrag); }
+}</pre></div>
+<hr>
+<h2>Klasse <code>Automat</code> (Hauptklasse)</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>import java.util.Scanner;
+
+public class Automat {
+
+    private Getraenk[] getraenke;
+    private Geldfach   geldfach;
+    private Scanner    scanner;
+
+    public Automat() {
+        geldfach  = new Geldfach();
+        scanner   = new Scanner(System.in);
+        getraenke = new Getraenk[]{
+            new Getraenk(&quot;Cola&quot;,         1.50, 5),
+            new Getraenk(&quot;Apfelschorle&quot;, 1.00, 3),
+            new Getraenk(&quot;Wasser&quot;,       1.00, 5),
+            new Getraenk(&quot;Eistee&quot;,       1.20, 2),
+            new Getraenk(&quot;Limo&quot;,         1.30, 4)
+        };
+    }
+
+    public void start() {
+        System.out.println(&quot;Willkommen beim Getraenkeautomaten!&quot;);
+        boolean weiter = true;
+        while (weiter) {
+            zeigeMenu();
+            if (geldPhase()) kaufPhase();
+            System.out.print(&quot;Nochmal? (j/n): &quot;);
+            weiter = scanner.nextLine().equalsIgnoreCase(&quot;j&quot;);
+        }
+        System.out.println(&quot;Auf Wiedersehen!&quot;);
+        scanner.close();
+    }
+
+    public static void main(String[] args) {
+        new Automat().start();
+    }
+
+    // ... zeigeMenu(), geldPhase(), kaufPhase() wie in der .java-Datei
+}</pre></div>
+<p>Der vollständige Code befindet sich in: <code>java/P11_OOP_Getraenkeautomat/</code></p>
+<hr>
+<h2>Beispiel-Sitzung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Willkommen beim Getraenkeautomaten!
+============================
+ Getraenkeautomat  v2.0
+============================
+Unser Angebot:
+  1 - Cola            1.50 EUR  (5 Dosen)
+  2 - Apfelschorle    1.00 EUR  (3 Dosen)
+  3 - Wasser          1.00 EUR  (5 Dosen)
+  4 - Eistee          1.20 EUR  (2 Dosen)
+  5 - Limo            1.30 EUR  (4 Dosen)
+
+Muenzen einwerfen:
+  Aktuell: 0.00 EUR  |  Muenze: 1.00
+  Aktuell: 1.00 EUR  |  Muenze: 0.50
+  Aktuell: 1.50 EUR  |  Muenze: 0
+
+Gesamtbetrag: 1.50 EUR
+Deine Wahl (1-5, 0 = Abbruch): 1
+&gt;&gt;&gt; Cola wird ausgegeben! &lt;&lt;&lt;
+
+Nochmal? (j/n): n
+Auf Wiedersehen!</pre></div>
+<hr>
+<h2>Aufgabe</h2>
+<p>Erweitere den <code>Automat</code> um eine Methode <code>befuelleAlleGetraenke()</code>, die alle Getränke auf vollen Bestand auffüllt (nutze die <code>auffuellen()</code>-Methode aus <code>Getraenk</code>).</p>
+<h2>Lösung</h2>
+<p>In <code>Getraenk.java</code>:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public void auffuellen() {
+    bestand = 5;   // MAX_BESTAND
+}</pre></div>
+<p>In <code>Automat.java</code>:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public void befuelleAlleGetraenke() {
+    for (Getraenk g : getraenke) {
+        g.auffuellen();
+    }
+    System.out.println(&quot;Alle Getraenke aufgefuellt.&quot;);
+}</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li><code>private</code> schützt Attribute vor unkontrolliertem Zugriff von außen.</li><li>Getter lesen, Setter setzen Attributwerte – sie können dabei prüfen ob der Wert gültig ist.</li><li><code>@Override toString()</code> ermöglicht direkte Ausgabe eines Objekts mit <code>println</code>.</li><li>Mehrere Klassen im gleichen Projektordner können sich gegenseitig verwenden.</li><li>OOP macht Programme wartbarer: Änderung an <code>Getraenk</code> wirkt sich automatisch überall aus.</li></ol>
+
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">UML-Klassendiagramm – Getränkeautomat</div>
+  <p class="viz-note">Klicke auf eine Klasse um ihre Attribute und Methoden zu sehen.</p>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
+    <button class="viz-btn" onclick="showP11Class('Getraenk')">Getraenk</button>
+    <button class="viz-btn" onclick="showP11Class('Geldfach')">Geldfach</button>
+    <button class="viz-btn" onclick="showP11Class('Automat')">Automat</button>
+  </div>
+  <div id="viz-p11-detail" style="background:var(--bg-code);border-radius:10px;padding:16px;font-family:var(--font-mono);font-size:13px;min-height:120px;"></div>
+</div>
+
+<div class="page-nav"><a href="Praktikum10_Klassen_Grundlagen.html" class="nav-btn nav-prev">← Klassen Grundlagen</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

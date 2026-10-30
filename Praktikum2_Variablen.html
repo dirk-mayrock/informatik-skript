@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 02 – Variablen | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c2); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 02</span>
+    <span class="topbar-title">Variablen</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Variablen</h1>
+    <div class="meta">
+      <span>Schritt 2 von 11</span>
+      <span class="meta-dot"></span>
+      <span>int</span> <span class="meta-dot"></span> <span>double</span> <span class="meta-dot"></span> <span>String</span> <span class="meta-dot"></span> <span>boolean</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Text auf der Konsole ausgeben<br><strong>Heute lernen wir:</strong> Daten in Variablen speichern<br><strong>Danach können wir:</strong> Namen, Preise und Bestände eines Getränks speichern</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>Variable deklarieren und initialisieren</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Typ name = Wert;</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int    alter       = 17;
+double preis       = 1.50;
+String getraenk    = &quot;Cola&quot;;
+boolean istKalt    = true;</pre></div>
+<h3>Die wichtigsten Datentypen</h3>
+<div class="table-wrap"><table><thead><tr><th>Typ</th><th>Beispiel</th><th>Speicher</th><th>Verwendung</th></tr></thead><tbody><tr><td><code>int</code></td><td><code>42</code>, <code>-7</code></td><td>32 Bit</td><td>Ganzzahlen</td></tr><tr><td><code>double</code></td><td><code>3.14</code>, <code>1.50</code></td><td>64 Bit</td><td>Kommazahlen</td></tr><tr><td><code>String</code></td><td><code>&quot;Cola&quot;</code></td><td>variabel</td><td>Text</td></tr><tr><td><code>boolean</code></td><td><code>true</code>, <code>false</code></td><td>1 Bit</td><td>Wahrheitswert</td></tr><tr><td><code>char</code></td><td><code>&#x27;A&#x27;</code></td><td>16 Bit</td><td>einzelnes Zeichen</td></tr></tbody></table></div>
+<h3>Variable in Ausgabe einbauen</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String name = &quot;Hannah&quot;;
+int alter = 17;
+System.out.println(&quot;Name: &quot; + name);
+System.out.println(&quot;Alter: &quot; + alter + &quot; Jahre&quot;);</pre></div>
+<p>Der <code>+</code>-Operator verbindet Text → <strong>String-Verkettung</strong>.</p>
+<h3>Wert ändern</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int alter = 17;
+alter = 18;    // neuer Wert – kein &quot;int&quot; mehr davor!</pre></div>
+<h3>Rechnen mit Variablen</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int a = 10;
+int b = 3;
+System.out.println(a + b);   // 13
+System.out.println(a - b);   // 7
+System.out.println(a * b);   // 30
+System.out.println(a / b);   // 3  ← Ganzzahldivision!
+System.out.println(a % b);   // 1  ← Rest (Modulo)</pre></div>
+<p>Achtung: <code>10 / 3 = 3</code> – der Nachkommaanteil wird <strong>abgeschnitten</strong>, nicht gerundet. Für genaue Division: mindestens ein <code>double</code> verwenden:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>double ergebnis = 10.0 / 3;   // 3.333...</pre></div>
+<hr>
+<h2>Im Getränkeautomaten anwenden</h2>
+<p>Wir speichern ein Getränk mit Name und Preis in Variablen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Variablen {
+    public static void main(String[] args) {
+
+        System.out.println(&quot;============================&quot;);
+        System.out.println(&quot; Willkommen beim&quot;);
+        System.out.println(&quot; Getraenkeautomaten!&quot;);
+        System.out.println(&quot;============================&quot;);
+
+        String getraenk1Name  = &quot;Cola&quot;;
+        double getraenk1Preis = 1.50;
+
+        String getraenk2Name  = &quot;Apfelschorle&quot;;
+        double getraenk2Preis = 1.00;
+
+        String getraenk3Name  = &quot;Wasser&quot;;      // NEU ←
+        double getraenk3Preis = 1.00;           // NEU ←
+
+        System.out.println(&quot;Unser Angebot:&quot;);
+        System.out.println(&quot;  &quot; + getraenk1Name + &quot;  &quot; + getraenk1Preis + &quot; EUR&quot;);
+        System.out.println(&quot;  &quot; + getraenk2Name + &quot;  &quot; + getraenk2Preis + &quot; EUR&quot;);
+        System.out.println(&quot;  &quot; + getraenk3Name + &quot;  &quot; + getraenk3Preis + &quot; EUR&quot;);
+    }
+}</pre></div>
+<p>Ausgabe:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>============================
+ Willkommen beim
+ Getraenkeautomaten!
+============================
+Unser Angebot:
+  Cola  1.5 EUR
+  Apfelschorle  1.0 EUR
+  Wasser  1.0 EUR</pre></div>
+<hr>
+<h2>Aufgabe</h2>
+<p>Füge ein viertes Getränk <strong>"Orangensaft"</strong> für <strong>1,20 EUR</strong> hinzu und gib es im Menü aus.</p>
+<h2>Lösung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String getraenk4Name  = &quot;Orangensaft&quot;;
+double getraenk4Preis = 1.20;
+System.out.println(&quot;  &quot; + getraenk4Name + &quot;  &quot; + getraenk4Preis + &quot; EUR&quot;);</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Eine Variable muss erst <strong>deklariert</strong> (Typ + Name) und <strong>initialisiert</strong> (Wert zugewiesen) werden.</li><li><code>int</code> für Ganzzahlen, <code>double</code> für Kommazahlen, <code>String</code> für Text, <code>boolean</code> für ja/nein.</li><li><code>int / int</code> ergibt immer eine Ganzzahl – der Rest wird abgeschnitten.</li><li><code>%</code> liefert den Rest der Ganzzahldivision.</li><li>Text und Variablen werden mit <code>+</code> verbunden.</li></ol>
+
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">Datentypen – Wertebereich &amp; Speicher</div>
+  <p class="viz-note">Klicke auf einen Datentyp, um Speichergröße, Wertebereich und ein Beispiel zu sehen.</p>
+  <div id="viz-p2-types" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;"></div>
+  <div id="viz-p2-detail" style="background:var(--bg-code);border-radius:10px;padding:16px;min-height:80px;font-family:var(--font-mono);font-size:13px;color:var(--text-primary);"></div>
+</div>
+
+<div class="page-nav"><a href="Praktikum1_Hallo_Welt.html" class="nav-btn nav-prev">← Hallo Welt</a><a href="Praktikum3_Konsoleneingabe.html" class="nav-btn nav-next">Konsoleneingabe →</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

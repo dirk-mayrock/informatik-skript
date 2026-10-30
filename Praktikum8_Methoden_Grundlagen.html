@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 08 – Methoden Grundlagen | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c8); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 08</span>
+    <span class="topbar-title">Methoden Grundlagen</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Methoden Grundlagen</h1>
+    <div class="meta">
+      <span>Schritt 8 von 11</span>
+      <span class="meta-dot"></span>
+      <span>void</span> <span class="meta-dot"></span> <span>return</span> <span class="meta-dot"></span> <span>Parameter</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Münzen einwerfen (while), Menü ausgeben (for), Getränk wählen (switch)<br><strong>Heute lernen wir:</strong> Methoden – Code in wiederverwendbare Bausteine aufteilen<br><strong>Danach können wir:</strong> zeigeMenu() und berechneBetrag() als eigene Methoden auslagern</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>Methode deklarieren</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static void methodenName() {
+    // Code der Methode
+}</pre></div>
+<div class="table-wrap"><table><thead><tr><th>Teil</th><th>Bedeutung</th></tr></thead><tbody><tr><td><code>public</code></td><td>Von überall aufrufbar</td></tr><tr><td><code>static</code></td><td>Gehört zur Klasse, nicht zu einem Objekt (nötig solange kein OOP)</td></tr><tr><td><code>void</code></td><td>Die Methode gibt keinen Wert zurück</td></tr><tr><td><code>methodenName</code></td><td>Name der Methode (beginnt mit Kleinbuchstabe)</td></tr><tr><td><code>()</code></td><td>Parameter-Liste (hier leer)</td></tr></tbody></table></div>
+<h3>Methode mit Parameter</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static void begruesse(String name) {
+    System.out.println(&quot;Hallo, &quot; + name + &quot;!&quot;);
+}</pre></div>
+<p>Aufruf: <code>begruesse(&quot;Hannah&quot;);</code></p>
+<h3>Methode mit Rückgabewert</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static int addiere(int a, int b) {
+    return a + b;   // return gibt den Wert zurück
+}</pre></div>
+<p>Aufruf: <code>int ergebnis = addiere(3, 4);</code></p>
+<p>Der Rückgabetyp steht statt <code>void</code> → hier <code>int</code>.</p>
+<h3>Methode aufrufen</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static void main(String[] args) {
+    sagHallo();                  // void-Methode aufrufen
+    begruesse(&quot;Hannah&quot;);         // mit Parameter
+    int s = addiere(3, 4);       // mit Rückgabewert
+}</pre></div>
+<h3>Warum Methoden?</h3>
+<p>Ohne Methode:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>// An drei verschiedenen Stellen im Code:
+System.out.println(&quot;======&quot;);
+System.out.println(&quot; Menü&quot;);
+System.out.println(&quot;======&quot;);
+// ... (10 Zeilen Menü-Code)
+// ... (10 Zeilen Menü-Code)
+// ... (10 Zeilen Menü-Code)</pre></div>
+<p>Mit Methode:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>zeigeMenu();   // einmal definiert, dreimal aufgerufen – keine Wiederholung</pre></div>
+<hr>
+<h2>Im Getränkeautomaten anwenden</h2>
+<p>Wir lagern die Menü-Ausgabe und die Münz-Addition in Methoden aus:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class MethodenGrundlagen {
+
+    // --- Menü ausgeben (Methode) ---                  NEU ←
+    public static void zeigeMenu(String[] namen, double[] preise, int[] bestand) {
+        System.out.println(&quot;============================&quot;);
+        System.out.println(&quot; Getraenkeautomat&quot;);
+        System.out.println(&quot;============================&quot;);
+        for (int i = 0; i &lt; namen.length; i++) {
+            if (bestand[i] &gt; 0) {
+                System.out.println(&quot;  &quot; + (i+1) + &quot; - &quot;
+                    + namen[i] + &quot;  &quot; + preise[i] + &quot; EUR&quot;);
+            }
+        }
+        System.out.println();
+    }
+
+    // --- Münze zum Betrag addieren (Methode) ---      NEU ←
+    public static double addiereMuenze(double betrag, double muenze) {
+        return betrag + muenze;
+    }
+
+    // --- Hauptprogramm ---
+    public static void main(String[] args) {
+        String[] namen   = {&quot;Cola&quot;, &quot;Apfelschorle&quot;, &quot;Wasser&quot;, &quot;Eistee&quot;, &quot;Limo&quot;};
+        double[] preise  = {1.50, 1.00, 1.00, 1.20, 1.30};
+        int[]    bestand = {5, 3, 5, 2, 4};
+
+        zeigeMenu(namen, preise, bestand);   // Einzeiler!  NEU ←
+
+        double betrag = 0.0;
+        betrag = addiereMuenze(betrag, 1.00);
+        betrag = addiereMuenze(betrag, 0.50);
+        System.out.println(&quot;Eingeworfen: &quot; + betrag + &quot; EUR&quot;);
+    }
+}</pre></div>
+<hr>
+<h2>Aufgabe</h2>
+<p>Schreibe eine Methode <code>gibNachricht(double betrag, double preis)</code>, die folgendes ausgibt:</p>
+<ul><li>Wenn genug Geld: <code>&quot;Getraenk wird ausgegeben!&quot;</code></li><li>Sonst: <code>&quot;Bitte mehr Geld einwerfen.&quot;</code></li></ul>
+<h2>Lösung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public static void gibNachricht(double betrag, double preis) {
+    if (betrag &gt;= preis) {
+        System.out.println(&quot;Getraenk wird ausgegeben!&quot;);
+    } else {
+        System.out.println(&quot;Bitte mehr Geld einwerfen.&quot;);
+    }
+}</pre></div>
+<p>Aufruf: <code>gibNachricht(1.50, 1.50);</code></p>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Eine Methode fasst zusammengehörigen Code unter einem Namen zusammen.</li><li><code>void</code> = kein Rückgabewert; statt <code>void</code> steht der Typ des Rückgabewerts.</li><li>Parameter sind Variablen, die beim Aufruf einen Wert erhalten.</li><li><code>return</code> gibt einen Wert zurück und beendet die Methode sofort.</li><li>Methoden vermeiden Code-Wiederholung und machen Programme lesbarer.</li></ol>
+
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">Methoden – Call Stack</div>
+  <p class="viz-note">Sieh wie Methoden aufgerufen werden und der Stack wächst und schrumpft.</p>
+  <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+    <button class="viz-btn" onclick="callP8('zeigeMenu')">zeigeMenu()</button>
+    <button class="viz-btn" onclick="callP8('addiereMuenze')">addiereMuenze(1.00, 0.50)</button>
+    <button class="viz-btn" onclick="callP8('gibNachricht')">gibNachricht(1.50, 1.50)</button>
+    <button class="viz-btn" onclick="resetP8()">Reset</button>
+  </div>
+  <div id="viz-p8-stack" style="font-family:var(--font-mono);font-size:13px;"></div>
+</div>
+
+<div class="page-nav"><a href="Praktikum7_While.html" class="nav-btn nav-prev">← while</a><a href="Praktikum9_Methoden_Fortgeschritten.html" class="nav-btn nav-next">Methoden Fortgeschritten →</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

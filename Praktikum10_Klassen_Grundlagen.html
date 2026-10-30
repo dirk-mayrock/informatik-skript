@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum 10 – Klassen Grundlagen | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c10); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">LK Informatik</div>
+    <div class="sidebar-title">Hannah&#39;s Skript</div>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item active" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Praktikum 10</span>
+    <span class="topbar-title">Klassen Grundlagen</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Klassen Grundlagen</h1>
+    <div class="meta">
+      <span>Schritt 10 von 11</span>
+      <span class="meta-dot"></span>
+      <span>class</span> <span class="meta-dot"></span> <span>Konstruktor</span> <span class="meta-dot"></span> <span>new</span> <span class="meta-dot"></span> <span>this</span>
+    </div>
+<h2>Informatik Leistungskurs – Praktikum</h2>
+<hr>
+<div class="progress-box"><strong>Bisher können wir:</strong> Den vollständigen prozeduralen Automaten mit Methoden<br><strong>Heute lernen wir:</strong> Eigene Klassen mit Attributen und Konstruktor definieren<br><strong>Danach können wir:</strong> Ein <code>Getraenk</code>-Objekt anlegen – kein Array-Chaos mehr</div>
+<hr>
+<h2>Neue Syntax</h2>
+<h3>Klasse definieren</h3>
+<p>Eine <strong>Klasse</strong> ist ein Bauplan. Sie beschreibt, welche <strong>Attribute</strong> (Eigenschaften) und <strong>Methoden</strong> (Fähigkeiten) ein Objekt haben soll.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Getraenk {
+    // Attribute
+    String name;
+    double preis;
+    int    bestand;
+}</pre></div>
+<h3>Konstruktor</h3>
+<p>Ein <strong>Konstruktor</strong> initialisiert ein Objekt beim Erstellen. Er heißt genauso wie die Klasse:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Getraenk {
+    String name;
+    double preis;
+    int    bestand;
+
+    // Konstruktor
+    public Getraenk(String name, double preis, int bestand) {
+        this.name    = name;     // this = dieses Objekt
+        this.preis   = preis;
+        this.bestand = bestand;
+    }
+}</pre></div>
+<p><code>this</code> unterscheidet den <strong>Attribut-Namen</strong> vom <strong>Parameter-Namen</strong>, wenn beide gleich heißen.</p>
+<h3>Objekt erzeugen mit <code>new</code></h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Getraenk cola = new Getraenk(&quot;Cola&quot;, 1.50, 5);</pre></div>
+<div class="table-wrap"><table><thead><tr><th>Teil</th><th>Bedeutung</th></tr></thead><tbody><tr><td><code>Getraenk</code></td><td>Typ (Klasse)</td></tr><tr><td><code>cola</code></td><td>Variablenname des Objekts</td></tr><tr><td><code>new Getraenk(...)</code></td><td>Konstruktor aufrufen → Objekt erstellen</td></tr></tbody></table></div>
+<h3>Auf Attribute zugreifen</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>System.out.println(cola.name);     // &quot;Cola&quot;
+System.out.println(cola.preis);    // 1.5
+cola.bestand = 4;                  // Wert ändern</pre></div>
+<h3>Methoden in einer Klasse</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Getraenk {
+    String name;
+    double preis;
+    int bestand;
+
+    public Getraenk(String name, double preis, int bestand) {
+        this.name = name; this.preis = preis; this.bestand = bestand;
+    }
+
+    public void zeigeInfo() {
+        System.out.println(name + &quot;  &quot; + preis + &quot; EUR  (&quot; + bestand + &quot; Dosen)&quot;);
+    }
+
+    public boolean istVerfuegbar() {
+        return bestand &gt; 0;
+    }
+}</pre></div>
+<p>Aufruf: <code>cola.zeigeInfo();</code></p>
+<hr>
+<h2>Im Getränkeautomaten anwenden</h2>
+<p>Statt drei paralleler Arrays ein Array von <code>Getraenk</code>-Objekten:</p>
+<p><strong>Früher (P6–P9):</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>String[] namen   = {&quot;Cola&quot;, ...};
+double[] preise  = {1.50, ...};
+int[]    bestand = {5, ...};
+// Zugriff: namen[i], preise[i], bestand[i]</pre></div>
+<p><strong>Jetzt (P10):</strong></p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Getraenk[] automat = new Getraenk[5];
+automat[0] = new Getraenk(&quot;Cola&quot;,         1.50, 5);   // NEU ←
+automat[1] = new Getraenk(&quot;Apfelschorle&quot;, 1.00, 3);
+automat[2] = new Getraenk(&quot;Wasser&quot;,       1.00, 5);
+automat[3] = new Getraenk(&quot;Eistee&quot;,       1.20, 2);
+automat[4] = new Getraenk(&quot;Limo&quot;,         1.30, 4);
+
+// Zugriff: automat[i].name, automat[i].preis, automat[i].bestand
+for (int i = 0; i &lt; automat.length; i++) {
+    if (automat[i].istVerfuegbar()) {
+        System.out.print((i+1) + &quot; - &quot;);
+        automat[i].zeigeInfo();
+    }
+}</pre></div>
+<p>Vorteile:</p>
+<ul><li>Ein Objekt enthält <strong>alle Informationen eines Getränks</strong> zusammen.</li><li>Methoden wie <code>istVerfuegbar()</code> gehören direkt zum Objekt.</li><li>Kein versehentliches Vertauschen von Indizes mehr.</li></ul>
+<hr>
+<h2>Klasse vs. Objekt – Vergleich</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Klasse Getraenk        → Bauplan: &quot;Ein Getränk hat Name, Preis, Bestand&quot;
+Objekt automat[0]      → konkretes Exemplar: Cola, 1.50 EUR, 5 Dosen
+Objekt automat[1]      → konkretes Exemplar: Apfelschorle, 1.00 EUR, 3 Dosen</pre></div>
+<hr>
+<h2>Aufgabe</h2>
+<p>Füge der Klasse <code>Getraenk</code> eine Methode <code>ausgeben()</code> hinzu, die den Bestand um 1 reduziert und <code>true</code> zurückgibt wenn das möglich war, sonst <code>false</code>.</p>
+<h2>Lösung</h2>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public boolean ausgeben() {
+    if (bestand &gt; 0) {
+        bestand--;
+        return true;
+    }
+    return false;
+}</pre></div>
+<p>Aufruf:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>if (automat[0].ausgeben()) {
+    System.out.println(&quot;Cola ausgegeben!&quot;);
+}</pre></div>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Eine <strong>Klasse</strong> ist ein Bauplan – ein <strong>Objekt</strong> ist ein konkretes Exemplar.</li><li>Attribute beschreiben die Eigenschaften, Methoden die Fähigkeiten eines Objekts.</li><li>Der <strong>Konstruktor</strong> heißt wie die Klasse und initialisiert das Objekt.</li><li><code>this</code> verweist auf das aktuelle Objekt – nötig wenn Parameter und Attribut gleich heißen.</li><li><code>new Klasse(...)</code> erzeugt ein neues Objekt und ruft den Konstruktor auf.</li></ol>
+
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">Klasse → Objekte instanziieren</div>
+  <p class="viz-note">Klicke auf "new Getraenk(...)" um ein neues Objekt zu erzeugen und im Speicher zu sehen.</p>
+  <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+    <button class="viz-btn" onclick="newGetraenk('Cola', 1.50, 5)">new Getraenk("Cola", 1.50, 5)</button>
+    <button class="viz-btn" onclick="newGetraenk('Wasser', 1.00, 3)">new Getraenk("Wasser", 1.00, 3)</button>
+    <button class="viz-btn" onclick="newGetraenk('Limo', 1.30, 2)">new Getraenk("Limo", 1.30, 2)</button>
+    <button class="viz-btn" onclick="resetP10()">Reset</button>
+  </div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
+    <div>
+      <div style="font-size:11px;color:var(--text-secondary);margin-bottom:6px;">BAUPLAN (Klasse)</div>
+      <div id="viz-p10-blueprint" style="background:var(--bg-code);border-radius:8px;padding:12px;font-family:var(--font-mono);font-size:12px;min-width:200px;border:2px solid var(--active);"></div>
+    </div>
+    <div style="font-size:20px;color:var(--text-secondary);padding-top:30px;">→</div>
+    <div>
+      <div style="font-size:11px;color:var(--text-secondary);margin-bottom:6px;">OBJEKTE (Instanzen)</div>
+      <div id="viz-p10-objects" style="display:flex;flex-direction:column;gap:10px;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-nav"><a href="Praktikum9_Methoden_Fortgeschritten.html" class="nav-btn nav-prev">← Methoden Fortgeschritten</a><a href="Praktikum11_OOP_Getraenkeautomat.html" class="nav-btn nav-next">OOP Getränkeautomat →</a></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

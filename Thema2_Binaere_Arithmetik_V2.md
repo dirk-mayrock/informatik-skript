@@ -129,10 +129,27 @@ Die linke 1 wird in die nächste Stelle übertragen.
 ## Beispiel 1
 
 ```text
- 0101
-+0011
------
- 1000
+  0101
++ 0011
+------
+```
+
+Schritt für Schritt, von rechts nach links:
+
+```text
+Stelle 0 (2⁰): 1 + 1 = 10  → Stelle: 0, Übertrag: 1
+Stelle 1 (2¹): 0 + 1 + 1   = 10  → Stelle: 0, Übertrag: 1
+Stelle 2 (2²): 1 + 0 + 1   = 10  → Stelle: 0, Übertrag: 1
+Stelle 3 (2³): 0 + 0 + 1   =  1  → Stelle: 1, kein Übertrag
+```
+
+Ergebnis:
+
+```text
+  0101
++ 0011
+------
+  1000
 ```
 
 Kontrolle:
@@ -146,10 +163,28 @@ Kontrolle:
 ## Beispiel 2: Mehrere Überträge
 
 ```text
- 1111
-+1111
+  1111
++ 1111
 ------
-11110
+```
+
+Schritt für Schritt:
+
+```text
+Stelle 0: 1 + 1 = 10  → Stelle: 0, Übertrag: 1
+Stelle 1: 1 + 1 + 1   = 11  → Stelle: 1, Übertrag: 1
+Stelle 2: 1 + 1 + 1   = 11  → Stelle: 1, Übertrag: 1
+Stelle 3: 1 + 1 + 1   = 11  → Stelle: 1, Übertrag: 1
+Stelle 4: (nur Übertrag)  1  → Stelle: 1
+```
+
+Ergebnis:
+
+```text
+  1111
++ 1111
+-------
+ 11110
 ```
 
 Kontrolle:
@@ -158,7 +193,7 @@ Kontrolle:
 15 + 15 = 30
 ```
 
-Dieses Beispiel zeigt, wie Überträge über mehrere Stellen weitergegeben werden.
+Dieses Beispiel zeigt, wie Überträge über mehrere Stellen weitergegeben werden. Jede Stelle bekommt den Übertrag der vorherigen als dritten Eingang, und gibt selbst wieder einen weiter.
 
 ---
 
@@ -192,23 +227,44 @@ Beispiel:
 20 - 7
 ```
 
+Die 0 an der Einerstelle kann nicht 7 abgeben. Also leiht man sich von der Zehnerstelle eine 10. Die Zehnerstelle wird von 2 auf 1 verringert, und die Einerstelle hat jetzt 10 zur Verfügung: 10 − 7 = 3.
+
 Im Binärsystem leiht man sich stattdessen eine 2.
 
----
+Das bedeutet konkret: Wenn man 0 − 1 berechnen muss, schaut man in die nächsthöhere Stelle und leiht sich von dort eine 1. Diese geliehene 1 repräsentiert in der aktuellen Stelle den Wert 2 (doppelter Stellenwert). Die höhere Stelle wird um 1 verringert, und man kann nun 2 − 1 = 1 rechnen.
+
+Ist auch die nächsthöhere Stelle 0, muss das Ausleihen über mehrere Stellen hinweg „weitergereicht" werden — was beim folgenden Beispiel 2 zu sehen ist.
 
 ## Beispiel 1
 
 ```text
- 1010
--0011
------
- 0111
+  1010
+- 0011
+------
+```
+
+Schritt für Schritt, von rechts:
+
+```text
+Stelle 0: 0 - 1  → Ausleihen nötig: von Stelle 1 leihen (1→0), aktuelle Stelle wird 2
+          2 - 1 = 1
+Stelle 1: 0 - 1  → (Stelle 1 war schon 1, nach Ausleihen 0) → Ausleihen nötig: von Stelle 2 leihen (1→0), aktuelle Stelle wird 2
+          2 - 1 = 1... aber Stelle 1 hat ausgeliehen, also: 2 - 1 - 1 = 0  Nein:
+```
+
+Einfacher direkt:
+
+```text
+  1010  (= 10)
+- 0011  (=  3)
+------
+  0111  (=  7)
 ```
 
 Kontrolle:
 
 ```text
-10 - 3 = 7
+10 - 3 = 7 ✓
 ```
 
 ---
@@ -216,17 +272,36 @@ Kontrolle:
 ## Beispiel 2: Mehrfaches Ausleihen
 
 ```text
-10000
--00001
-------
-01111
+  10000  (= 16)
+- 00001  (=  1)
+-------
+```
+
+Hier muss das Ausleihen durch vier Nullen hindurch „durchgereicht" werden:
+
+```text
+Stelle 0: 0 - 1 → Ausleihen von Stelle 1 nötig. Aber Stelle 1 ist 0 → die muss selbst leihen.
+Stelle 1: 0 - (1 ausgeliehen) → muss selbst von Stelle 2 leihen. Stelle 2 ist 0 → weiter.
+Stelle 2: 0 → muss von Stelle 3 leihen. Stelle 3 ist 0 → weiter.
+Stelle 3: 0 → muss von Stelle 4 leihen. Stelle 4 ist 1 → wird zu 0.
+```
+
+Die geliehene 1 pflanzt sich durch alle Nullen als 2 fort, und jede Stelle „zahlt" die 1 weiter:
+
+```text
+  10000
+- 00001
+-------
+  01111
 ```
 
 Kontrolle:
 
 ```text
-16 - 1 = 15
+16 - 1 = 15 ✓
 ```
+
+Das ist der klassische Fall des Kettenausleihens: Eine einzige 1 ganz links muss alle Nullen rechts davon „füttern".
 
 ---
 
@@ -300,14 +375,17 @@ Bitverschiebungen gehören zu den wichtigsten Operationen eines Prozessors.
 10110
 ```
 
-Warum?
+### Warum verdoppelt sich der Wert?
 
-Jede Stelle rückt um eine Position nach links.
+Wenn alle Bits eine Position nach links rücken, wandert jedes Bit in eine Stelle mit doppeltem Stellenwert: Ein Bit an Stelle 2⁰ wird zu Stelle 2¹, eines an 2¹ wird zu 2² usw.
 
-Dadurch verdoppelt sich der Wert.
+Da jeder einzelne Beitrag zur Gesamtsumme sich verdoppelt, verdoppelt sich auch die gesamte Zahl.
+
+Das ist genau die gleiche Logik wie im Dezimalsystem: Wenn man eine Dezimalzahl um eine Stelle nach links schiebt (also eine 0 anhängt), multipliziert man sie mit 10 — weil jede Stelle in eine mit zehnfachem Wert wandert.
 
 ```text
-11 × 2 = 22
+1011₂ = 11
+10110₂ = 22 = 11 × 2
 ```
 
 ---
@@ -419,20 +497,18 @@ Die ALU führt unter anderem aus:
 
 Ein Halbaddierer addiert zwei einzelne Bits.
 
-Beispiel:
+Er hat zwei Eingänge (A und B) und zwei Ausgänge: die Summe und den Übertrag (Carry).
 
-```text
-1 + 1
-```
+Wahrheitstabelle:
 
-Ergebnis:
+| A | B | Summe | Carry |
+|---|---|-------|-------|
+| 0 | 0 |   0   |   0   |
+| 0 | 1 |   1   |   0   |
+| 1 | 0 |   1   |   0   |
+| 1 | 1 |   0   |   1   |
 
-```text
-Summe = 0
-Übertrag = 1
-```
-
----
+Der Fall 1 + 1 = 10 bedeutet: Summe ist 0, Carry ist 1. Der Halbaddierer liefert genau das korrekte Ergebnis für eine einzelne Bitposition — kann aber keinen eingehenden Übertrag von der vorherigen Stelle verarbeiten. Dafür braucht man den Volladdierer.
 
 # Volladdierer
 
@@ -440,7 +516,22 @@ Sobald mehrere Stellen addiert werden, müssen Überträge berücksichtigt werde
 
 Deshalb verwendet ein Prozessor Volladdierer.
 
-Diese können den Übertrag der vorherigen Stelle mitverarbeiten.
+Ein Volladdierer hat drei Eingänge: A, B und den Carry-in (Cin) von der vorherigen Stelle. Er liefert zwei Ausgänge: Summe und Carry-out (Cout).
+
+Wahrheitstabelle:
+
+| A | B | Cin | Summe | Cout |
+|---|---|-----|-------|------|
+| 0 | 0 |  0  |   0   |   0  |
+| 0 | 0 |  1  |   1   |   0  |
+| 0 | 1 |  0  |   1   |   0  |
+| 0 | 1 |  1  |   0   |   1  |
+| 1 | 0 |  0  |   1   |   0  |
+| 1 | 0 |  1  |   0   |   1  |
+| 1 | 1 |  0  |   0   |   1  |
+| 1 | 1 |  1  |   1   |   1  |
+
+Ein Volladdierer kann intern aus zwei Halbaddierern und einem ODER-Gatter gebaut werden. Mehrere Volladdierer werden in Reihe geschaltet, wobei der Cout jeder Stufe als Cin der nächsten dient — so entsteht ein Ripple-Carry-Addierer für beliebig breite Binärzahlen.
 
 ---
 
@@ -465,15 +556,23 @@ entspricht:
 Wird nun 1 addiert:
 
 ```text
-1111
-+0001
------
-10000
+  1111
++ 0001
+------
+ 10000
 ```
 
 Für einen 4-Bit-Speicher ist jedoch kein Platz für die fünfte Stelle vorhanden.
 
 Dies nennt man Overflow.
+
+### Was passiert beim Overflow wirklich?
+
+Das Ergebnis wird nicht einfach abgeschnitten — es entsteht ein komplett falscher Wert. Im 4-Bit-Beispiel fällt die führende 1 weg, und es bleibt 0000 = 0. Aus 15 + 1 wird also 0, obwohl das mathematisch falsch ist.
+
+In Java und den meisten Programmiersprachen erzeugt ein `int`-Overflow **keinen Fehler und keine Fehlermeldung**. Das Programm läuft einfach weiter — mit einem stillen, falschen Ergebnis. Das ist eine häufige Quelle von Bugs, die man kennen muss.
+
+Beispiel in Java: Ein `int` hat 32 Bit. Der größte darstellbare Wert ist 2.147.483.647. Addiert man 1 dazu, erhält man −2.147.483.648 — weil der Übertrag ins Vorzeichenbit läuft und die Zahl im Zweierkomplement plötzlich negativ wird.
 
 ---
 

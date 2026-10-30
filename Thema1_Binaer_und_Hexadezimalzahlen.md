@@ -170,6 +170,16 @@ Nach der 1 kommt nicht die 2.
 
 Stattdessen muss ein Übertrag durchgeführt werden.
 
+### Warum funktioniert der Übertrag?
+
+Das Prinzip ist identisch mit dem Dezimalsystem. Wenn alle Ziffern einer Stelle ausgeschöpft sind, wird die Stelle auf 0 zurückgesetzt und die nächsthöhere Stelle um 1 erhöht.
+
+Im Dezimalsystem hat man die Ziffern 0–9. Nach der 9 gibt es keine weitere Ziffer, also wird die aktuelle Stelle 0 und die nächste Stelle erhöht: aus 9 wird 10.
+
+Im Binärsystem hat man nur 0 und 1. Nach der 1 gibt es keine weitere Ziffer, also wird die aktuelle Stelle 0 und die nächste Stelle erhöht: aus 01 wird 10. Aus 011 wird 100.
+
+Das führt dazu, dass beim Zählen von 7 (0111) auf 8 (1000) alle drei unteren Stellen umklappen — weil sich der Übertrag wie eine Welle durch alle vollen Stellen durchschlägt, bis er eine freie (0) Stelle findet.
+
 ---
 
 ## Umrechnung Dezimal → Binär
@@ -184,9 +194,9 @@ Durch wiederholte Division durch 2:
 
 ```
 13 : 2 = 6 Rest 1
-6 : 2 = 3 Rest 0
-3 : 2 = 1 Rest 1
-1 : 2 = 0 Rest 1
+ 6 : 2 = 3 Rest 0
+ 3 : 2 = 1 Rest 1
+ 1 : 2 = 0 Rest 1
 ```
 
 Von unten nach oben lesen:
@@ -194,6 +204,16 @@ Von unten nach oben lesen:
 ```
 1101₂
 ```
+
+### Warum liest man die Reste von unten nach oben?
+
+Das klingt zunächst willkürlich, hat aber eine klare Begründung.
+
+Der erste Rest (ganz oben) entsteht beim ersten Dividieren von 13. Dabei fragt man: „Wie oft passt 2 in 13, und was bleibt übrig?" Der Rest ist genau das niedrigste Bit der Binärzahl — also die 2⁰-Stelle (Einerstelle). Er gibt an, ob die Zahl gerade oder ungerade ist.
+
+Jede weitere Division arbeitet mit dem Quotienten der vorherigen Stufe und ermittelt so das nächsthöhere Bit. Der letzte Rest gehört damit zur höchsten Stelle — genauso wie beim Schreiben einer Dezimalzahl die größte Stelle ganz links steht.
+
+Deshalb liest man die Reste von unten nach oben: Der letzte Rest ist das höchste Bit, der erste Rest das niedrigste.
 
 Kontrolle:
 
@@ -276,6 +296,16 @@ Der große Vorteil:
 4 Bit = genau 1 Hex-Zeichen
 ```
 
+### Warum passt das so perfekt zusammen?
+
+Mit 4 Bit kann man genau 2⁴ = 16 verschiedene Werte darstellen (0000 bis 1111, also 0 bis 15).
+
+Das Hexadezimalsystem hat genau 16 Symbole: 0–9 und A–F.
+
+Das ist kein Zufall — das Hexadezimalsystem wurde genau so gewählt, weil es sich lückenlos mit Binärzahlen deckt. Jeder der 16 möglichen 4-Bit-Werte hat genau ein Hex-Symbol, und jedes Hex-Symbol steht für genau einen 4-Bit-Wert.
+
+Das bedeutet: Man kann eine beliebig lange Binärzahl in 4er-Gruppen aufteilen und jede Gruppe direkt durch ein Hex-Zeichen ersetzen — ohne jede Berechnung.
+
 Beispiel:
 
 ```
@@ -311,6 +341,51 @@ Ergebnis:
 
 ```
 FF₁₆
+```
+
+---
+
+## Umrechnung Hexadezimal → Dezimal
+
+Hexadezimalzahlen funktionieren nach demselben Stellenwert-Prinzip wie Dezimal- und Binärzahlen — nur mit der Basis 16.
+
+Das bedeutet: Die erste Stelle von rechts hat den Stellenwert 16⁰ = 1, die zweite Stelle 16¹ = 16, die dritte 16² = 256 usw.
+
+Beispiel: AF₁₆
+
+```
+A = 10
+F = 15
+
+A · 16¹ + F · 16⁰
+= 10 · 16 + 15 · 1
+= 160 + 15
+= 175
+```
+
+Beispiel: 3C₁₆
+
+```
+3 · 16¹ + C · 16⁰
+= 3 · 16 + 12 · 1
+= 48 + 12
+= 60
+```
+
+### Schnellweg: Hex → Binär → Dezimal
+
+Oft ist es einfacher, zuerst jedes Hex-Zeichen in 4 Bit umzuwandeln und dann die Binärzahl auszuwerten.
+
+```
+AF₁₆
+
+A = 1010
+F = 1111
+
+→ 10101111₂
+
+= 128 + 32 + 8 + 4 + 2 + 1
+= 175
 ```
 
 ---
@@ -390,7 +465,25 @@ Wandle 25 in eine Binärzahl um.
 ### Lösung
 
 ```
+25 : 2 = 12 Rest 1
+12 : 2 =  6 Rest 0
+ 6 : 2 =  3 Rest 0
+ 3 : 2 =  1 Rest 1
+ 1 : 2 =  0 Rest 1
+```
+
+Von unten nach oben lesen:
+
+```
 25 = 11001₂
+```
+
+Kontrolle:
+
+```
+1 · 2⁴ + 1 · 2³ + 0 · 2² + 0 · 2¹ + 1 · 2⁰
+= 16 + 8 + 0 + 0 + 1
+= 25 ✓
 ```
 
 ---

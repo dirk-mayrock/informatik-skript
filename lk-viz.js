@@ -1216,4 +1216,331 @@ document.addEventListener('DOMContentLoaded', () => {
   // T13
   initT13SortRace();
   initT13ONotation();
+  // Praktikum
+  initP2DataTypes();
+  initP4IfTrace();
+  initP5SwitchTrace();
+  initP6ArrayViz();
+  initP7WhileTrace();
+  initP8MethodStack();
+  initP10ClassObject();
+  initP11UMLDiagram();
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PRAKTIKUM VISUALIZATIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+// P2 – Datentypen Explorer
+function initP2DataTypes() {
+  const el = document.getElementById('viz-p2-types');
+  const detail = document.getElementById('viz-p2-detail');
+  if (!el || !detail) return;
+
+  const types = [
+    { name: 'int',     bits: 32, range: '-2.147.483.648 bis 2.147.483.647', example: 'int alter = 17;',        color: 'var(--c1)' },
+    { name: 'double',  bits: 64, range: '±1,7 × 10³⁰⁸ (IEEE 754)',         example: 'double preis = 1.50;',   color: 'var(--c2)' },
+    { name: 'boolean', bits: 1,  range: 'true  /  false',                   example: 'boolean ok = true;',     color: 'var(--c3)' },
+    { name: 'char',    bits: 16, range: '0 bis 65535 (Unicode)',             example: "char c = 'A';",          color: 'var(--c4)' },
+    { name: 'long',    bits: 64, range: '±9,2 × 10¹⁸',                     example: 'long n = 100L;',         color: 'var(--c5)' },
+    { name: 'float',   bits: 32, range: '±3,4 × 10³⁸ (IEEE 754)',           example: 'float f = 3.14f;',       color: 'var(--c6)' },
+    { name: 'byte',    bits: 8,  range: '-128 bis 127',                     example: 'byte b = 42;',           color: 'var(--c7)' },
+    { name: 'short',   bits: 16, range: '-32.768 bis 32.767',               example: 'short s = 1000;',        color: 'var(--c8)' },
+    { name: 'String',  bits: -1, range: 'beliebig langer Text',             example: 'String s = "Cola";',     color: 'var(--c9)' },
+  ];
+
+  types.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'viz-btn';
+    btn.textContent = t.name;
+    btn.style.borderColor = t.color;
+    btn.onclick = () => {
+      const bitsStr = t.bits === -1 ? 'variabel' : t.bits + ' Bit';
+      const blocks = t.bits > 0 ? Math.ceil(t.bits / 8) : '?';
+      detail.innerHTML =
+        `<span style="color:${t.color};font-weight:700;font-size:15px;">${t.name}</span><br><br>` +
+        `Speicher:      <strong>${bitsStr}</strong>  (${blocks} Byte)<br>` +
+        `Wertebereich:  <strong>${t.range}</strong><br><br>` +
+        `Beispiel: <code style="background:var(--bg-panel);padding:2px 6px;border-radius:4px;">${t.example}</code>`;
+    };
+    el.appendChild(btn);
+  });
+
+  // Show int by default
+  types[0] && el.firstChild && el.firstChild.click();
+}
+
+// P4 – if/else trace
+function initP4IfTrace() {
+  const slider = document.getElementById('viz-p4-betrag');
+  const valEl  = document.getElementById('viz-p4-betrag-val');
+  const box    = document.getElementById('viz-p4-branches');
+  if (!slider || !box) return;
+
+  const PREIS = 1.50;
+  const branches = [
+    { id: 'b1', label: 'if (betrag >= preis)',          result: 'Getraenk ausgeben + Rueckgeld' },
+    { id: 'b2', label: 'else if (betrag > 0)',          result: 'Nicht genug Geld! Bitte mehr einwerfen.' },
+    { id: 'b3', label: 'else',                          result: 'Kein Geld eingeworfen.' },
+  ];
+
+  branches.forEach(b => {
+    const div = document.createElement('div');
+    div.id = 'viz-p4-' + b.id;
+    div.style.cssText = 'padding:12px 16px;border-radius:8px;border:2px solid var(--border);background:var(--bg-panel);font-family:var(--font-mono);font-size:13px;flex:1;min-width:180px;transition:all .2s;';
+    div.innerHTML = `<div style="color:var(--text-secondary);margin-bottom:6px;">${b.label}</div><div style="color:var(--active);">${b.result}</div>`;
+    box.appendChild(div);
+  });
+
+  window.updateP4Viz = function() {
+    const v = parseFloat(slider.value);
+    valEl.textContent = v.toFixed(2);
+    const active = v >= PREIS ? 'b1' : v > 0 ? 'b2' : 'b3';
+    branches.forEach(b => {
+      const el = document.getElementById('viz-p4-' + b.id);
+      const on = b.id === active;
+      el.style.borderColor  = on ? 'var(--active)' : 'var(--border)';
+      el.style.background   = on ? 'color-mix(in srgb, var(--active) 12%, var(--bg-panel))' : 'var(--bg-panel)';
+    });
+  };
+  slider.addEventListener('input', window.updateP4Viz);
+  window.updateP4Viz();
+}
+
+// P5 – switch trace
+function initP5SwitchTrace() {
+  const box = document.getElementById('viz-p5-cases');
+  if (!box) return;
+
+  const cases = [
+    { val: 1, label: 'case 1:', name: 'Cola',         preis: '1.50' },
+    { val: 2, label: 'case 2:', name: 'Apfelschorle', preis: '1.00' },
+    { val: 3, label: 'case 3:', name: 'Wasser',       preis: '1.00' },
+    { val: 4, label: 'case 4:', name: 'Eistee',       preis: '1.20' },
+    { val: 5, label: 'case 5:', name: 'Limo',         preis: '1.30' },
+    { val: -1, label: 'default:', name: '(kein Match)', preis: '–' },
+  ];
+
+  cases.forEach(c => {
+    const row = document.createElement('div');
+    row.id = 'viz-p5-case-' + c.val;
+    row.style.cssText = 'padding:6px 12px;border-radius:6px;margin-bottom:4px;transition:background .2s,color .2s;';
+    row.innerHTML = `<span style="color:var(--text-secondary);min-width:90px;display:inline-block;">${c.label}</span>  ` +
+                    `<span class="case-content">name = "${c.name}"; preis = ${c.preis} EUR; break;</span>`;
+    box.appendChild(row);
+  });
+
+  window.setP5 = function(val) {
+    const active = cases.find(c => val >= 1 && val <= 5 ? c.val === val : c.val === -1);
+    cases.forEach(c => {
+      const row = document.getElementById('viz-p5-case-' + c.val);
+      const on  = c === active;
+      row.style.background = on ? 'color-mix(in srgb, var(--active) 15%, var(--bg-panel))' : '';
+      row.style.color      = on ? 'var(--active)' : '';
+    });
+  };
+}
+
+// P6 – Array visualizer
+function initP6ArrayViz() {
+  const cellsEl = document.getElementById('viz-p6-cells');
+  const infoEl  = document.getElementById('viz-p6-info');
+  if (!cellsEl) return;
+
+  const namen = ['Cola','Apfelschorle','Wasser','Eistee','Limo'];
+  let stepIdx = -1;
+
+  function render() {
+    cellsEl.innerHTML = '';
+    namen.forEach((name, i) => {
+      const div = document.createElement('div');
+      const active = i === stepIdx;
+      div.style.cssText = `padding:10px 14px;border-radius:8px;border:2px solid ${active ? 'var(--active)' : 'var(--border)'};background:${active ? 'color-mix(in srgb, var(--active) 15%, var(--bg-panel))' : 'var(--bg-panel)'};font-family:var(--font-mono);font-size:12px;text-align:center;transition:all .2s;`;
+      div.innerHTML = `<div style="color:var(--text-secondary);font-size:10px;">namen[${i}]</div><div style="margin-top:4px;font-weight:700;color:${active ? 'var(--active)' : 'var(--text-primary)'};">${name}</div>`;
+      cellsEl.appendChild(div);
+    });
+    if (infoEl) {
+      infoEl.textContent = stepIdx >= 0
+        ? `i = ${stepIdx}  →  namen[${stepIdx}] = "${namen[stepIdx]}"`
+        : 'Klicke "Schritt" um die Schleife zu starten.';
+    }
+  }
+
+  window.stepP6 = function() {
+    stepIdx = stepIdx < namen.length - 1 ? stepIdx + 1 : -1;
+    render();
+  };
+  window.resetP6 = function() { stepIdx = -1; render(); };
+  render();
+}
+
+// P7 – While loop trace
+function initP7WhileTrace() {
+  const logEl   = document.getElementById('viz-p7-log');
+  const totalEl = document.getElementById('viz-p7-total');
+  if (!logEl) return;
+
+  let betrag = 0.0;
+  let done   = false;
+
+  function log(msg) {
+    logEl.innerHTML += `<div>${msg}</div>`;
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  function updateTotal() {
+    if (totalEl) totalEl.textContent = done
+      ? `Schleife beendet. Gesamtbetrag: ${betrag.toFixed(2)} EUR`
+      : `Aktuell: ${betrag.toFixed(2)} EUR`;
+  }
+
+  log('<span style="color:var(--text-secondary);">while (true) {   // Schleife startet</span>');
+  updateTotal();
+
+  window.addCoinP7 = function(muenze) {
+    if (done) return;
+    betrag = Math.round((betrag + muenze) * 100) / 100;
+    log(`  muenze = ${muenze.toFixed(2)}  →  betrag = <strong style="color:var(--active);">${betrag.toFixed(2)}</strong>`);
+    updateTotal();
+  };
+
+  window.stopP7 = function() {
+    if (done) return;
+    done = true;
+    log('<span style="color:var(--c3);">  muenze == 0  →  break; // Schleife verlassen</span>');
+    log('<span style="color:var(--text-secondary);">}   // while endet</span>');
+    updateTotal();
+  };
+
+  window.resetP7 = function() {
+    betrag = 0; done = false;
+    logEl.innerHTML = '';
+    log('<span style="color:var(--text-secondary);">while (true) {   // Schleife startet</span>');
+    updateTotal();
+  };
+}
+
+// P8 – Method call stack
+function initP8MethodStack() {
+  const stackEl = document.getElementById('viz-p8-stack');
+  if (!stackEl) return;
+
+  const methodDefs = {
+    zeigeMenu:     { sig: 'void zeigeMenu(String[] n, double[] p, int[] b)',  returns: 'void',    result: '→ Menü auf Konsole ausgegeben' },
+    addiereMuenze: { sig: 'double addiereMuenze(double betrag, double m)',     returns: '2.50',    result: '→ return 1.00 + 0.50 → 1.50… + 1.00 = 2.50' },
+    gibNachricht:  { sig: 'void gibNachricht(double betrag, double preis)',    returns: 'void',    result: '→ "Getraenk wird ausgegeben!" (1.50 >= 1.50)' },
+  };
+
+  let callStack = [];
+
+  function render() {
+    stackEl.innerHTML = '';
+    const header = document.createElement('div');
+    header.style.cssText = 'font-size:11px;color:var(--text-secondary);margin-bottom:8px;';
+    header.textContent = 'Call Stack (unten = main, oben = aktuelle Methode)';
+    stackEl.appendChild(header);
+
+    const frames = [{ sig: 'main(String[] args)', returns: '', result: '' }, ...callStack];
+    frames.forEach((f, idx) => {
+      const div = document.createElement('div');
+      const isTop = idx === frames.length - 1;
+      div.style.cssText = `padding:10px 14px;border-radius:8px;margin-bottom:6px;border:2px solid ${isTop ? 'var(--active)' : 'var(--border)'};background:${isTop ? 'color-mix(in srgb, var(--active) 12%, var(--bg-panel))' : 'var(--bg-panel)'};font-family:var(--font-mono);font-size:12px;`;
+      div.innerHTML = `<span style="color:${isTop ? 'var(--active)' : 'var(--text-secondary)'};">${f.sig}</span>` +
+        (f.result ? `<div style="margin-top:4px;color:var(--c3);font-size:11px;">${f.result}</div>` : '');
+      stackEl.appendChild(div);
+    });
+  }
+
+  window.callP8 = function(name) {
+    const m = methodDefs[name];
+    if (!m) return;
+    callStack.push(m);
+    render();
+    setTimeout(() => {
+      callStack.pop();
+      render();
+    }, 1800);
+  };
+
+  window.resetP8 = function() { callStack = []; render(); };
+  render();
+}
+
+// P10 – Class → Object instantiation
+function initP10ClassObject() {
+  const bpEl  = document.getElementById('viz-p10-blueprint');
+  const objEl = document.getElementById('viz-p10-objects');
+  if (!bpEl || !objEl) return;
+
+  bpEl.innerHTML =
+    `<div style="color:var(--active);font-weight:700;margin-bottom:8px;">class Getraenk</div>` +
+    `<div style="color:var(--text-secondary);font-size:11px;">Attribute:</div>` +
+    `<div>  String <span style="color:var(--c2);">name</span></div>` +
+    `<div>  double <span style="color:var(--c2);">preis</span></div>` +
+    `<div>  int    <span style="color:var(--c2);">bestand</span></div>` +
+    `<div style="margin-top:8px;color:var(--text-secondary);font-size:11px;">Methoden:</div>` +
+    `<div>  zeigeInfo()</div>` +
+    `<div>  istVerfuegbar()</div>`;
+
+  let objCount = 0;
+
+  window.newGetraenk = function(name, preis, bestand) {
+    objCount++;
+    const div = document.createElement('div');
+    div.style.cssText = 'background:var(--bg-code);border-radius:8px;padding:12px;font-family:var(--font-mono);font-size:12px;border:2px solid var(--c' + (objCount % 11 + 1) + ');min-width:180px;animation:fadeIn .3s;';
+    div.innerHTML =
+      `<div style="color:var(--active);font-weight:700;margin-bottom:6px;">Getraenk #${objCount}</div>` +
+      `<div>name    = <span style="color:var(--c2);">"${name}"</span></div>` +
+      `<div>preis   = <span style="color:var(--c3);">${preis.toFixed(2)}</span></div>` +
+      `<div>bestand = <span style="color:var(--c4);">${bestand}</span></div>`;
+    objEl.appendChild(div);
+  };
+
+  window.resetP10 = function() { objEl.innerHTML = ''; objCount = 0; };
+}
+
+// P11 – UML class diagram detail view
+function initP11UMLDiagram() {
+  const detail = document.getElementById('viz-p11-detail');
+  if (!detail) return;
+
+  const classes = {
+    Getraenk: {
+      color: 'var(--c1)',
+      attrs: ['- name : String', '- preis : double', '- bestand : int'],
+      methods: ['+ getName() : String', '+ getPreis() : double', '+ getBestand() : int',
+                '+ istVerfuegbar() : boolean', '+ ausgeben() : boolean', '+ toString() : String'],
+      uses: [],
+    },
+    Geldfach: {
+      color: 'var(--c2)',
+      attrs: ['- betrag : double'],
+      methods: ['+ einwerfen(double) : boolean', '+ abziehen(double)',
+                '+ zurueckgeben() : double', '+ wechselgeldAlsText() : String', '+ toString() : String'],
+      uses: [],
+    },
+    Automat: {
+      color: 'var(--c3)',
+      attrs: ['- getraenke : Getraenk[]', '- geldfach : Geldfach', '- scanner : Scanner'],
+      methods: ['+ zeigeMenu()', '+ geldPhase() : boolean', '+ kaufPhase()', '+ start()', '+ main(String[])'],
+      uses: ['Getraenk', 'Geldfach'],
+    },
+  };
+
+  window.showP11Class = function(name) {
+    const c = classes[name];
+    if (!c) return;
+    const attrRows  = c.attrs.map(a  => `<div style="padding:2px 0;">${a}</div>`).join('');
+    const methRows  = c.methods.map(m => `<div style="padding:2px 0;">${m}</div>`).join('');
+    const usesStr   = c.uses.length ? `<div style="margin-top:10px;color:var(--text-secondary);font-size:11px;">verwendet: ${c.uses.join(', ')}</div>` : '';
+    detail.innerHTML =
+      `<div style="color:${c.color};font-weight:700;font-size:16px;margin-bottom:12px;">${name}</div>` +
+      `<div style="color:var(--text-secondary);font-size:11px;margin-bottom:4px;">ATTRIBUTE (private)</div>` +
+      `<div style="margin-bottom:12px;">${attrRows}</div>` +
+      `<div style="color:var(--text-secondary);font-size:11px;margin-bottom:4px;">METHODEN (public)</div>` +
+      `<div>${methRows}</div>` +
+      usesStr;
+  };
+
+  window.showP11Class('Automat');
+}

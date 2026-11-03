@@ -1603,10 +1603,10 @@ function initKlausurArrays() {
       const td = document.createElement('td');
       td.textContent = val;
       td.dataset.tag = tagIdx;
+      td.className = 'k1-cell';
       td.style.cssText =
         'padding:7px 8px;text-align:center;border-radius:6px;' +
-        'transition:background .2s,color .2s,transform .2s;' +
-        'background:var(--bg-code);color:var(--text-primary);font-weight:600;';
+        'transition:background .2s,color .2s,transform .2s;font-weight:600;';
       tr.appendChild(td);
     });
 

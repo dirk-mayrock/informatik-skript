@@ -598,10 +598,15 @@ body.light #viz-p2-detail {
   color: var(--text-primary) !important;
 }
 
-/* Klausurvorbereitung – K1 grid in light mode */
-body.light #viz-k1-grid td[data-tag] {
-  background: #f0f2fa !important;
-  color: var(--text-primary) !important;
+/* Klausurvorbereitung – K1 grid cells */
+.k1-cell {
+  background: var(--bg-code);
+  color: var(--text-primary);
+}
+
+body.light .k1-cell {
+  background: #e8eaf6 !important;
+  color: #1a1a2e !important;
 }
 
 body.light #viz-k1-grid td:first-child {

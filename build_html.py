@@ -987,11 +987,15 @@ def md_to_html(md_text):
             while i < len(lines) and '|' in lines[i]:
                 table_lines.append(lines[i])
                 i += 1
-            header_row = [c.strip() for c in table_lines[0].split('|') if c.strip()]
+            # Split on '|', strip each cell, but drop only the empty strings
+            # produced by the leading and trailing '|' delimiters — not inner empty cells.
+            raw_header = table_lines[0].split('|')
+            header_row = [c.strip() for c in raw_header[1:-1]]  # keep empty inner cells
             body_rows  = []
             for tl in table_lines[2:]:
-                cols = [c.strip() for c in tl.split('|') if c.strip()]
-                if cols:
+                raw = tl.split('|')
+                cols = [c.strip() for c in raw[1:-1]]
+                if any(c for c in cols):  # skip blank separator lines
                     body_rows.append(cols)
             ths = ''.join(f'<th>{inline(h)}</th>' for h in header_row)
             trs = ''

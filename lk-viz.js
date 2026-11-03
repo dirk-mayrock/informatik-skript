@@ -1216,6 +1216,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // T13
   initT13SortRace();
   initT13ONotation();
+  // Klausurvorbereitung
+  initKlausurArrays();
   // Praktikum
   initP2DataTypes();
   initP4IfTrace();
@@ -1543,4 +1545,146 @@ function initP11UMLDiagram() {
   };
 
   window.showP11Class('Automat');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// KLAUSURVORBEREITUNG VISUALIZATIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+// K1 – Kino-Wochenprogramm 2D-Array Heatmap
+function initKlausurArrays() {
+  const gridEl = document.getElementById('viz-k1-grid');
+  const infoEl = document.getElementById('viz-k1-info');
+  if (!gridEl || !infoEl) return;
+
+  const filme = ['Film 0', 'Film 1', 'Film 2', 'Film 3', 'Film 4'];
+  const tage  = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+  const daten = [
+    [120,  85, 200, 175, 300, 410, 380],
+    [ 95, 110, 130, 160, 220, 370, 340],
+    [200, 190, 210, 205, 280, 450, 420],
+    [ 50,  60,  55,  70,  90, 150, 140],
+    [170, 155, 180, 160, 240, 390, 360]
+  ];
+
+  // find global max for colour scaling
+  const globalMax = Math.max(...daten.flat());
+
+  // build table
+  const tbl = document.createElement('table');
+  tbl.style.cssText = 'border-collapse:collapse;font-family:var(--font-code);font-size:13px;';
+
+  // header row
+  const thead = document.createElement('thead');
+  const headTr = document.createElement('tr');
+  const thEmpty = document.createElement('th');
+  thEmpty.style.cssText = 'padding:6px 12px 6px 6px;color:var(--text-muted);font-size:11px;text-align:left;';
+  headTr.appendChild(thEmpty);
+  tage.forEach(tag => {
+    const th = document.createElement('th');
+    th.textContent = tag;
+    th.style.cssText = 'padding:6px 8px;color:var(--text-muted);font-size:11px;font-weight:600;text-align:center;min-width:48px;';
+    headTr.appendChild(th);
+  });
+  thead.appendChild(headTr);
+  tbl.appendChild(thead);
+
+  // body rows
+  const tbody = document.createElement('tbody');
+  daten.forEach((zeile, filmIdx) => {
+    const tr = document.createElement('tr');
+    tr.style.cssText = 'cursor:pointer;transition:background .15s;border-radius:6px;';
+    tr.dataset.film = filmIdx;
+
+    // film label cell
+    const tdLabel = document.createElement('td');
+    tdLabel.textContent = filme[filmIdx];
+    tdLabel.style.cssText = 'padding:6px 14px 6px 6px;font-weight:700;color:var(--active);white-space:nowrap;';
+    tr.appendChild(tdLabel);
+
+    zeile.forEach((val, tagIdx) => {
+      const td = document.createElement('td');
+      td.textContent = val;
+      td.dataset.tag = tagIdx;
+      const intensity = Math.round((val / globalMax) * 80 + 10); // 10–90%
+      td.style.cssText =
+        'padding:7px 8px;text-align:center;border-radius:6px;margin:2px;' +
+        'transition:background .2s,color .2s,transform .2s;' +
+        `background:color-mix(in srgb, var(--active) ${intensity}%, var(--bg-code));` +
+        `color:${intensity > 50 ? 'var(--bg-deep)' : 'var(--text-primary)'};font-weight:600;`;
+      tr.appendChild(td);
+    });
+
+    tr.addEventListener('mouseenter', () => {
+      if (!tr.classList.contains('k1-selected')) {
+        tr.style.outline = '2px solid color-mix(in srgb, var(--active) 50%, transparent)';
+        tr.style.outlineOffset = '2px';
+      }
+    });
+    tr.addEventListener('mouseleave', () => {
+      if (!tr.classList.contains('k1-selected')) {
+        tr.style.outline = 'none';
+      }
+    });
+
+    tr.addEventListener('click', () => {
+      // clear previous selection
+      tbody.querySelectorAll('tr').forEach(r => {
+        r.classList.remove('k1-selected');
+        r.style.outline = 'none';
+        r.querySelectorAll('td[data-tag]').forEach(td => {
+          td.style.transform = 'scale(1)';
+          td.style.zIndex = '';
+        });
+      });
+
+      tr.classList.add('k1-selected');
+      tr.style.outline = '2px solid var(--active)';
+      tr.style.outlineOffset = '2px';
+
+      const zeileData = daten[filmIdx];
+      const summe = zeileData.reduce((a, b) => a + b, 0);
+      const maxVal = Math.max(...zeileData);
+      const maxTagIdx = zeileData.indexOf(maxVal);
+
+      // highlight best day cell
+      tr.querySelectorAll('td[data-tag]').forEach(td => {
+        if (parseInt(td.dataset.tag) === maxTagIdx) {
+          td.style.transform = 'scale(1.18)';
+          td.style.zIndex = '2';
+          td.style.outline = '2px solid #fff';
+          td.style.outlineOffset = '1px';
+        } else {
+          td.style.outline = 'none';
+        }
+      });
+
+      infoEl.innerHTML =
+        `<span style="color:var(--active);font-weight:700;">${filme[filmIdx]}</span>` +
+        `<span style="color:var(--text-muted);margin:0 8px;">|</span>` +
+        `Gesamtverkäufe: <span style="color:var(--active);font-weight:700;">${summe}</span> Tickets` +
+        `<span style="color:var(--text-muted);margin:0 8px;">|</span>` +
+        `Bester Tag: <span style="color:#4de8b2;font-weight:700;">${tage[maxTagIdx]}</span>` +
+        ` mit <span style="color:#4de8b2;font-weight:700;">${maxVal}</span> Tickets` +
+        `<div style="margin-top:8px;font-size:11px;color:var(--text-muted);">` +
+        `Java: programm[${filmIdx}][${maxTagIdx}] == ${maxVal}</div>`;
+    });
+
+    tbody.appendChild(tr);
+  });
+  tbl.appendChild(tbody);
+  gridEl.appendChild(tbl);
+
+  window.resetKlausur1 = function() {
+    tbody.querySelectorAll('tr').forEach(r => {
+      r.classList.remove('k1-selected');
+      r.style.outline = 'none';
+      r.querySelectorAll('td[data-tag]').forEach(td => {
+        td.style.transform = 'scale(1)';
+        td.style.zIndex = '';
+        td.style.outline = 'none';
+      });
+    });
+    infoEl.innerHTML = '← Klicke auf einen Film';
+  };
 }

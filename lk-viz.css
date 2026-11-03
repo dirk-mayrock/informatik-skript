@@ -597,3 +597,13 @@ body.light #viz-p2-detail {
   background: #f0f2fa !important;
   color: var(--text-primary) !important;
 }
+
+/* Klausurvorbereitung – K1 heatmap grid in light mode */
+body.light #viz-k1-grid td[data-tag] {
+  color: var(--text-primary) !important;
+}
+
+body.light #viz-k1-info {
+  background: #f0f2fa !important;
+  color: var(--text-primary) !important;
+}

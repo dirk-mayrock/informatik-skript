@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klausurvorbereitung – Arrays &amp; 2D-Arrays | LK Informatik</title>
+<link rel="stylesheet" href="lk-style.css">
+<link rel="stylesheet" href="lk-viz.css">
+<style>
+:root { --active: var(--c9); }
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-btn:hover {
+  color: var(--active);
+  border-color: var(--active);
+  background: color-mix(in srgb, var(--active) 6%, var(--bg-panel));
+}
+.wf-phase { font-size:14px; color:var(--text-secondary); font-family:var(--font-ui); }
+.wf-phase.active { background: color-mix(in srgb, var(--active) 10%, var(--bg-card)) !important; color: var(--active) !important; }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <a href="index.html" class="sidebar-home-link">
+      <div class="sidebar-logo">LK Informatik</div>
+      <div class="sidebar-title">Hannah&#39;s Skript</div>
+    </a>
+    <div class="sidebar-subtitle">Gymnasium J2 &middot; 13 Themen + Praktikum</div>
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Theme wechseln">
+      <span class="toggle-icons">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+  </div>
+  <div class="nav-section-label">Themenübersicht</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Thema1_Binaer_und_Hexadezimalzahlen.html">
+        <span class="nav-num">01</span>
+        Binär- &amp; Hexadezimalzahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Thema2_Binaere_Arithmetik_V2.html">
+        <span class="nav-num">02</span>
+        Binäre Arithmetik
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Thema3_Einer_und_Zweierkomplement.html">
+        <span class="nav-num">03</span>
+        Einer- &amp; Zweierkomplement
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Thema4_Fest_und_Gleitkommazahlen.html">
+        <span class="nav-num">04</span>
+        Fest- &amp; Gleitkommazahlen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Thema5_Nachricht_Information_Nachrichtentraeger.html">
+        <span class="nav-num">05</span>
+        Nachricht &amp; Information
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Thema6_Datenkompression.html">
+        <span class="nav-num">06</span>
+        Datenkompression
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Thema7_Hashing.html">
+        <span class="nav-num">07</span>
+        Hashing
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Thema8_Hamming_Codes.html">
+        <span class="nav-num">08</span>
+        Hamming-Codes
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Thema9_Java_Grundlagen.html">
+        <span class="nav-num">09</span>
+        Java-Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Thema10_Softwareentwicklung_Wasserfallmodell.html">
+        <span class="nav-num">10</span>
+        Softwareentwicklung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Thema11_Objektorientierung.html">
+        <span class="nav-num">11</span>
+        Objektorientierung
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="12">
+      <a href="Thema12_Struktogramme_und_Ablaufplaene.html">
+        <span class="nav-num">12</span>
+        Struktogramme
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="13">
+      <a href="Thema13_Sortieralgorithmen.html">
+        <span class="nav-num">13</span>
+        Sortieralgorithmen
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Praktikum</div>
+  <ul class="nav-list">
+    <li class="nav-item" data-c="1">
+      <a href="Praktikum1_Hallo_Welt.html">
+        <span class="nav-num">01</span>
+        Hallo Welt
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="2">
+      <a href="Praktikum2_Variablen.html">
+        <span class="nav-num">02</span>
+        Variablen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="3">
+      <a href="Praktikum3_Konsoleneingabe.html">
+        <span class="nav-num">03</span>
+        Konsoleneingabe
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="4">
+      <a href="Praktikum4_Bedingungen.html">
+        <span class="nav-num">04</span>
+        Bedingungen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="5">
+      <a href="Praktikum5_Switch.html">
+        <span class="nav-num">05</span>
+        switch
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="6">
+      <a href="Praktikum6_Arrays.html">
+        <span class="nav-num">06</span>
+        Arrays
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="7">
+      <a href="Praktikum7_While.html">
+        <span class="nav-num">07</span>
+        while
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="8">
+      <a href="Praktikum8_Methoden_Grundlagen.html">
+        <span class="nav-num">08</span>
+        Methoden Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="9">
+      <a href="Praktikum9_Methoden_Fortgeschritten.html">
+        <span class="nav-num">09</span>
+        Methoden Fortgeschritten
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="10">
+      <a href="Praktikum10_Klassen_Grundlagen.html">
+        <span class="nav-num">10</span>
+        Klassen Grundlagen
+      </a>
+    </li>
+
+    <li class="nav-item" data-c="11">
+      <a href="Praktikum11_OOP_Getraenkeautomat.html">
+        <span class="nav-num">11</span>
+        OOP Getränkeautomat
+      </a>
+    </li>
+  </ul>
+  <div class="nav-section-label">Klausurvorbereitung</div>
+  <ul class="nav-list">
+    <li class="nav-item active" data-c="9">
+      <a href="Klausurvorbereitung_Arrays.html">
+        <span class="nav-num">K</span>
+        Arrays &amp; 2D-Arrays
+      </a>
+    </li>
+  </ul>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-badge">Klausurvorbereitung</span>
+    <span class="topbar-title">Arrays &amp; 2D-Arrays</span>
+    <span class="topbar-spacer"></span>
+    <span class="topbar-lk">LK Informatik</span>
+  </div>
+  <div class="content">
+    <h1>Arrays &amp; 2D-Arrays</h1>
+    <div class="meta">
+      <span>Übung 1</span>
+      <span class="meta-dot"></span>
+      <span>Kino-Wochenprogramm</span> <span class="meta-dot"></span> <span>Szenario</span>
+    </div>
+<h2>Szenario: Kino-Wochenprogramm</h2>
+<hr>
+<h2>Das Szenario</h2>
+<p>Ein Kino zeigt in einer Woche <strong>5 verschiedene Filme</strong>. Für jeden Film werden die <strong>Ticketverkäufe an 7 Tagen</strong> (Montag bis Sonntag) erfasst.</p>
+<p>Deine Aufgabe: Schreibe ein Java-Programm, das diese Daten speichert, auswertet und auf der Konsole ausgibt.</p>
+<p>Dieses Szenario wird in zwei Schritten gelöst:</p>
+<ul><li><strong>Aufgabe A</strong> – Zuerst nur ein einzelner Film → <strong>1D-Array</strong></li><li><strong>Aufgabe B</strong> – Alle fünf Filme gleichzeitig → <strong>2D-Array</strong></li></ul>
+<hr>
+<h2>Aufgabe A – Ein Film, eine Woche (1D-Array)</h2>
+<h3>Die Aufgabe (Klausur-Text)</h3>
+<p>Ein Kino erfasst die Ticketverkäufe eines Films für die sieben Tage der Woche:</p>
+<div class="table-wrap"><table><thead><tr><th>Tag</th><th>Mo</th><th>Di</th><th>Mi</th><th>Do</th><th>Fr</th><th>Sa</th><th>So</th></tr></thead><tbody><tr><td>Tickets</td><td>120</td><td>85</td><td>200</td><td>175</td><td>300</td><td>410</td><td>380</td></tr></tbody></table></div>
+<p>Schreibe eine Klasse <code>KinoWoche</code> mit einer <code>main</code>-Methode, die:</p>
+<ol><li>Die Verkaufszahlen in einem <code>int</code>-Array speichert.</li><li>Die <strong>Gesamtanzahl</strong> aller verkauften Tickets berechnet und ausgibt.</li><li>Den <strong>Index des besten Tages</strong> (meiste Tickets) ermittelt und ausgibt.</li></ol>
+<h3>Schritt 1: Das Array deklarieren</h3>
+<p>Ein Array speichert mehrere Werte <strong>desselben Typs</strong> unter einem Namen.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>// 7 Werte, ein Array – Index läuft von 0 bis 6
+int[] verkaufe = {120, 85, 200, 175, 300, 410, 380};</pre></div>
+<p>Wichtig: Der erste Tag (Montag) hat den Index <strong>0</strong>, Sonntag hat Index <strong>6</strong>.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Index:   0    1    2    3    4    5    6
+Wert:  120   85  200  175  300  410  380
+Tag:   Mo   Di   Mi   Do   Fr   Sa   So</pre></div>
+<h3>Schritt 2: Alle Werte summieren (for-Schleife)</h3>
+<p>Mit einer <code>for</code>-Schleife und <code>array.length</code> lässt sich jedes Array durchlaufen, egal wie groß es ist.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int summe = 0;
+for (int i = 0; i &lt; verkaufe.length; i++) {
+    summe = summe + verkaufe[i];  // addiere Eintrag an Stelle i
+}
+System.out.println(&quot;Gesamt: &quot; + summe + &quot; Tickets&quot;);</pre></div>
+<h3>Schritt 3: Den besten Tag finden</h3>
+<p>Wir merken uns den Index des bisher besten Wertes und aktualisieren ihn bei jedem Fund.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int maxIndex = 0;                             // starte mit Index 0 als Annahme
+for (int i = 1; i &lt; verkaufe.length; i++) {  // ab Index 1 vergleichen
+    if (verkaufe[i] &gt; verkaufe[maxIndex]) {
+        maxIndex = i;                         // neuen Besttag merken
+    }
+}
+System.out.println(&quot;Bester Tag: Index &quot; + maxIndex
+                   + &quot; mit &quot; + verkaufe[maxIndex] + &quot; Tickets&quot;);</pre></div>
+<h3>Vollständige Musterlösung A</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class KinoWoche {
+
+    public static void main(String[] args) {
+
+        // Ticketverkäufe Mo bis So
+        int[] verkaufe = {120, 85, 200, 175, 300, 410, 380};
+
+        // --- Gesamtverkäufe berechnen ---
+        int summe = 0;
+        for (int i = 0; i &lt; verkaufe.length; i++) {
+            summe = summe + verkaufe[i];
+        }
+        System.out.println(&quot;Gesamt: &quot; + summe + &quot; Tickets&quot;);
+
+        // --- Besten Tag ermitteln ---
+        int maxIndex = 0;
+        for (int i = 1; i &lt; verkaufe.length; i++) {
+            if (verkaufe[i] &gt; verkaufe[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        System.out.println(&quot;Bester Tag: Index &quot; + maxIndex
+                           + &quot; mit &quot; + verkaufe[maxIndex] + &quot; Tickets&quot;);
+    }
+}</pre></div>
+<p>Erwartete Ausgabe in BlueJ:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Gesamt: 1670 Tickets
+Bester Tag: Index 5 mit 410 Tickets</pre></div>
+<hr>
+<h2>Aufgabe B – Alle Filme (2D-Array)</h2>
+<h3>Die Aufgabe (Klausur-Text)</h3>
+<p>Das Kino zeigt jetzt 5 Filme gleichzeitig. Die Tabelle sieht so aus:</p>
+<div class="table-wrap"><table><thead><tr><th>Mo</th><th>Di</th><th>Mi</th><th>Do</th><th>Fr</th><th>Sa</th><th>So</th></tr></thead><tbody><tr><td>Film 0</td><td>120</td><td>85</td><td>200</td><td>175</td><td>300</td><td>410</td><td>380</td></tr><tr><td>Film 1</td><td>95</td><td>110</td><td>130</td><td>160</td><td>220</td><td>370</td><td>340</td></tr><tr><td>Film 2</td><td>200</td><td>190</td><td>210</td><td>205</td><td>280</td><td>450</td><td>420</td></tr><tr><td>Film 3</td><td>50</td><td>60</td><td>55</td><td>70</td><td>90</td><td>150</td><td>140</td></tr><tr><td>Film 4</td><td>170</td><td>155</td><td>180</td><td>160</td><td>240</td><td>390</td><td>360</td></tr></tbody></table></div>
+<p>Schreibe eine Klasse <code>KinoProgramm</code>, die:</p>
+<ol><li>Diese Tabelle als <strong>zweidimensionales Array</strong> speichert.</li><li>Mit einer <strong>verschachtelten for-Schleife</strong> die Gesamtverkäufe pro Film berechnet und ausgibt.</li></ol>
+<h3>Schritt 1: Das 2D-Array verstehen</h3>
+<p>Ein 2D-Array ist ein Array von Arrays – also eine Tabelle mit Zeilen und Spalten.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>programm[zeile][spalte]
+          Film    Tag</pre></div>
+<p>Deklaration und Initialisierung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int[][] programm = {
+    {120,  85, 200, 175, 300, 410, 380},  // Film 0
+    { 95, 110, 130, 160, 220, 370, 340},  // Film 1
+    {200, 190, 210, 205, 280, 450, 420},  // Film 2
+    { 50,  60,  55,  70,  90, 150, 140},  // Film 3
+    {170, 155, 180, 160, 240, 390, 360}   // Film 4
+};</pre></div>
+<p>Ein einzelner Wert wird mit <strong>zwei Indizes</strong> abgerufen:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>programm[2][5]   // Film 2, Samstag → 450 Tickets
+programm[0][0]   // Film 0, Montag  → 120 Tickets</pre></div>
+<h3>Schritt 2: Verschachtelte for-Schleife</h3>
+<p>Die äußere Schleife geht durch die Filme (Zeilen), die innere durch die Tage (Spalten).</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>// Äußere Schleife: jede Zeile = ein Film
+for (int film = 0; film &lt; programm.length; film++) {
+
+    int summe = 0;
+
+    // Innere Schleife: jede Spalte = ein Tag
+    for (int tag = 0; tag &lt; programm[film].length; tag++) {
+        summe = summe + programm[film][tag];
+    }
+
+    System.out.println(&quot;Film &quot; + film + &quot;: &quot; + summe + &quot; Tickets&quot;);
+}</pre></div>
+<p><code>programm.length</code> gibt die Anzahl der Zeilen (5 Filme). <code>programm[film].length</code> gibt die Anzahl der Spalten (7 Tage) der aktuellen Zeile.</p>
+<h3>Vollständige Musterlösung B</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class KinoProgramm {
+
+    public static void main(String[] args) {
+
+        // 5 Filme x 7 Tage  (Zeile = Film, Spalte = Tag)
+        int[][] programm = {
+            {120,  85, 200, 175, 300, 410, 380},  // Film 0
+            { 95, 110, 130, 160, 220, 370, 340},  // Film 1
+            {200, 190, 210, 205, 280, 450, 420},  // Film 2
+            { 50,  60,  55,  70,  90, 150, 140},  // Film 3
+            {170, 155, 180, 160, 240, 390, 360}   // Film 4
+        };
+
+        // Gesamtverkäufe pro Film berechnen
+        for (int film = 0; film &lt; programm.length; film++) {
+            int summe = 0;
+            for (int tag = 0; tag &lt; programm[film].length; tag++) {
+                summe = summe + programm[film][tag];
+            }
+            System.out.println(&quot;Film &quot; + film + &quot;: &quot; + summe + &quot; Tickets&quot;);
+        }
+    }
+}</pre></div>
+<p>Erwartete Ausgabe in BlueJ:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Film 0: 1670 Tickets
+Film 1: 1425 Tickets
+Film 2: 1955 Tickets
+Film 3:  615 Tickets
+Film 4: 1655 Tickets</pre></div>
+<hr>
+<h2>Typische Klausuraufgaben</h2>
+<h3>Aufgabe 1</h3>
+<p>Was gibt folgender Code aus?</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int[] zahlen = {10, 20, 30, 40, 50};
+System.out.println(zahlen[2]);
+System.out.println(zahlen.length);</pre></div>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>30
+5</pre></div>
+<p><code>zahlen[2]</code> ist der Wert an Index 2 (also der dritte Wert = 30). <code>length</code> gibt die Anzahl der Elemente zurück, also 5.</p>
+<hr>
+<h3>Aufgabe 2</h3>
+<p>Was passiert bei diesem Code und warum?</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int[] zahlen = {10, 20, 30};
+System.out.println(zahlen[3]);</pre></div>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3</pre></div>
+<p>Das Array hat nur die Indizes 0, 1 und 2. Index 3 existiert nicht. Java wirft eine Laufzeit-Ausnahme.</p>
+<hr>
+<h3>Aufgabe 3</h3>
+<p>Schreibe eine for-Schleife, die alle Elemente des Arrays <code>noten</code> der Reihe nach ausgibt.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int[] noten = {2, 1, 3, 2, 4, 1};</pre></div>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>for (int i = 0; i &lt; noten.length; i++) {
+    System.out.println(noten[i]);
+}</pre></div>
+<hr>
+<h3>Aufgabe 4</h3>
+<p>Gegeben ist folgendes 2D-Array:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int[][] tabelle = {
+    {1, 2, 3},
+    {4, 5, 6}
+};</pre></div>
+<p>Was gibt <code>tabelle[1][2]</code> aus?</p>
+<h4>Lösung</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>6</pre></div>
+<p>Zeile 1 ist <code>{4, 5, 6}</code>, Spalte 2 ist der dritte Wert: 6.</p>
+<hr>
+<h2>Merksätze</h2>
+<ol><li>Arrays speichern mehrere Werte <strong>desselben Typs</strong> unter einem Namen.</li><li>Der erste Index ist immer <strong>0</strong>, der letzte ist <code>array.length - 1</code>.</li><li><code>array.length</code> gibt die Anzahl der Elemente zurück – <strong>kein Methodenaufruf</strong> (kein <code>()</code>).</li><li>Ein 2D-Array ist ein <strong>Array von Arrays</strong>: <code>int[][] tabelle = new int[zeilen][spalten];</code>.</li><li>Beim Zugriff auf <code>tabelle[zeile][spalte]</code> ist die <strong>Zeile immer zuerst</strong>.</li><li><code>ArrayIndexOutOfBoundsException</code> entsteht, wenn der Index kleiner als 0 oder größer als <code>length - 1</code> ist.</li></ol>
+
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">Kino-Wochenprogramm – 2D-Array als Heatmap</div>
+  <p class="viz-note">Klicke auf eine Zeile (= einen Film), um die Wochensumme und den besten Tag hervorzuheben.</p>
+  <div id="viz-k1-grid" style="overflow-x:auto;margin-bottom:16px;"></div>
+  <div id="viz-k1-info" style="background:var(--bg-code);border-radius:8px;padding:14px;font-family:var(--font-code);font-size:13px;min-height:52px;color:var(--text-secondary);">← Klicke auf einen Film</div>
+  <div style="margin-top:12px;">
+    <button class="viz-btn" onclick="resetKlausur1()">↺ Auswahl zurücksetzen</button>
+  </div>
+</div>
+
+<div class="page-nav"><span></span></div>
+  </div>
+</main>
+
+<script src="lk-script.js"></script>
+<script src="lk-viz.js"></script>
+</body>
+</html>

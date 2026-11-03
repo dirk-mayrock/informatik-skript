@@ -40,6 +40,11 @@ PRAKTIKUM = [
     (11, "OOP Getränkeautomat",         "--c11", "Praktikum11_OOP_Getraenkeautomat",                    "private · Getter · Setter · toString"),
 ]
 
+# Klausurvorbereitung track
+KLAUSUR = [
+    ('k1', "Arrays & 2D-Arrays",        "--c9",  "Klausurvorbereitung_Arrays",  "Kino-Wochenprogramm · Szenario"),
+]
+
 ALL_TOPICS = TOPICS + [(f'p{p[0]}', p[1], p[2], p[3], p[4]) for p in PRAKTIKUM]
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -680,6 +685,26 @@ VIZUALIZATIONS = {
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Klausurvorbereitung visualizations – keyed by string 'k1', 'k2', …
+# ─────────────────────────────────────────────────────────────────────────────
+VIZUALIZATIONS_KLAUSUR = {
+
+'k1': """
+<h2>Interaktive Visualisierung</h2>
+<div class="viz-box">
+  <div class="viz-title">Kino-Wochenprogramm – 2D-Array als Heatmap</div>
+  <p class="viz-note">Klicke auf eine Zeile (= einen Film), um die Wochensumme und den besten Tag hervorzuheben.</p>
+  <div id="viz-k1-grid" style="overflow-x:auto;margin-bottom:16px;"></div>
+  <div id="viz-k1-info" style="background:var(--bg-code);border-radius:8px;padding:14px;font-family:var(--font-code);font-size:13px;min-height:52px;color:var(--text-secondary);">← Klicke auf einen Film</div>
+  <div style="margin-top:12px;">
+    <button class="viz-btn" onclick="resetKlausur1()">↺ Auswahl zurücksetzen</button>
+  </div>
+</div>
+""",
+
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Praktikum visualizations – keyed by string 'p1' .. 'p11'
 # ─────────────────────────────────────────────────────────────────────────────
 VIZUALIZATIONS_PRAKTIKUM = {
@@ -856,8 +881,20 @@ def sidebar_html(active_num):
         {htmlmod.escape(title)}
       </a>
     </li>''')
-    theory_nav = "\n".join(theory_items)
-    praxis_nav = "\n".join(praxis_items)
+    # Klausurvorbereitung items
+    klausur_items = []
+    for key, title, color, slug, _ in KLAUSUR:
+        active_cls = " active" if key == active_num else ""
+        klausur_items.append(f'''
+    <li class="nav-item{active_cls}" data-c="9">
+      <a href="{slug}.html">
+        <span class="nav-num">K</span>
+        {htmlmod.escape(title)}
+      </a>
+    </li>''')
+    theory_nav  = "\n".join(theory_items)
+    praxis_nav  = "\n".join(praxis_items)
+    klausur_nav = "\n".join(klausur_items)
     return f'''<aside class="sidebar">
   <div class="sidebar-header">
     <a href="index.html" class="sidebar-home-link">
@@ -876,6 +913,9 @@ def sidebar_html(active_num):
   </ul>
   <div class="nav-section-label">Praktikum</div>
   <ul class="nav-list">{praxis_nav}
+  </ul>
+  <div class="nav-section-label">Klausurvorbereitung</div>
+  <ul class="nav-list">{klausur_nav}
   </ul>
 </aside>'''
 
@@ -999,6 +1039,7 @@ def md_to_html(md_text):
 def build_page(num, title, color_var, slug, subtitle, body_html, viz_html):
     active_css = f':root {{ --active: var({color_var}); }}'
     is_praktikum = isinstance(num, str) and num.startswith('p')
+    is_klausur   = isinstance(num, str) and num.startswith('k')
 
     if is_praktikum:
         p_idx = int(num[1:])
@@ -1009,6 +1050,15 @@ def build_page(num, title, color_var, slug, subtitle, body_html, viz_html):
         badge_text = f'Praktikum {p_idx:02d}'
         of_text    = f'Schritt {p_idx} von {len(PRAKTIKUM)}'
         title_tag  = f'Praktikum {p_idx:02d} – {htmlmod.escape(title)} | LK Informatik'
+    elif is_klausur:
+        k_idx = int(num[1:])
+        prev_slug  = None
+        next_slug  = None
+        prev_title = None
+        next_title = None
+        badge_text = f'Klausurvorbereitung'
+        of_text    = f'Übung {k_idx}'
+        title_tag  = f'Klausurvorbereitung – {htmlmod.escape(title)} | LK Informatik'
     else:
         prev_slug  = TOPICS[num-2][3] if num > 1  else None
         next_slug  = TOPICS[num][3]   if num < 13 else None
@@ -1106,7 +1156,7 @@ def build_page(num, title, color_var, slug, subtitle, body_html, viz_html):
 # ─────────────────────────────────────────────────────────────────────────────
 def main():
     built = 0
-    total = len(TOPICS) + len(PRAKTIKUM)
+    total = len(TOPICS) + len(PRAKTIKUM) + len(KLAUSUR)
 
     # Build theory pages
     for num, title, color_var, slug, subtitle in TOPICS:
@@ -1139,6 +1189,23 @@ def main():
         body_html = md_to_html(md_text)
         viz_html  = VIZUALIZATIONS_PRAKTIKUM.get(pkey, '')
         page = build_page(pkey, title, color_var, slug, subtitle, body_html, viz_html)
+        with open(html_path, 'w', encoding='utf-8') as f:
+            f.write(page)
+        print(f'  OK    {slug}.html')
+        built += 1
+
+    # Build Klausurvorbereitung pages
+    for key, title, color_var, slug, subtitle in KLAUSUR:
+        md_path   = os.path.join(BASE, f'{slug}.md')
+        html_path = os.path.join(BASE, f'{slug}.html')
+        if not os.path.exists(md_path):
+            print(f'  SKIP  {slug}.md  (not found)')
+            continue
+        with open(md_path, encoding='utf-8') as f:
+            md_text = f.read()
+        body_html = md_to_html(md_text)
+        viz_html  = VIZUALIZATIONS_KLAUSUR.get(key, '')
+        page = build_page(key, title, color_var, slug, subtitle, body_html, viz_html)
         with open(html_path, 'w', encoding='utf-8') as f:
             f.write(page)
         print(f'  OK    {slug}.html')

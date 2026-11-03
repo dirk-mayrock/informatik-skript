@@ -1560,15 +1560,12 @@ function initKlausurArrays() {
   const filme = ['Film 0', 'Film 1', 'Film 2', 'Film 3', 'Film 4'];
   const tage  = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
   const daten = [
-    [120,  85, 200, 175, 300, 410, 380],
-    [ 95, 110, 130, 160, 220, 370, 340],
-    [200, 190, 210, 205, 280, 450, 420],
-    [ 50,  60,  55,  70,  90, 150, 140],
-    [170, 155, 180, 160, 240, 390, 360]
+    [120,  85, 200, 175, 300, 410, 380],  // bester Tag: Sa (5)
+    [210, 340, 180, 160, 220, 270, 190],  // bester Tag: Di (1)
+    [200, 190, 210, 205, 450, 380, 420],  // bester Tag: Fr (4)
+    [ 50, 140,  55, 170,  90, 150,  80],  // bester Tag: Do (3)
+    [170, 155, 390, 160, 240, 310, 280]   // bester Tag: Mi (2)
   ];
-
-  // find global max for colour scaling
-  const globalMax = Math.max(...daten.flat());
 
   // build table
   const tbl = document.createElement('table');
@@ -1606,12 +1603,10 @@ function initKlausurArrays() {
       const td = document.createElement('td');
       td.textContent = val;
       td.dataset.tag = tagIdx;
-      const intensity = Math.round((val / globalMax) * 80 + 10); // 10–90%
       td.style.cssText =
-        'padding:7px 8px;text-align:center;border-radius:6px;margin:2px;' +
+        'padding:7px 8px;text-align:center;border-radius:6px;' +
         'transition:background .2s,color .2s,transform .2s;' +
-        `background:color-mix(in srgb, var(--active) ${intensity}%, var(--bg-code));` +
-        `color:${intensity > 50 ? 'var(--bg-deep)' : 'var(--text-primary)'};font-weight:600;`;
+        'background:var(--bg-code);color:var(--text-primary);font-weight:600;';
       tr.appendChild(td);
     });
 

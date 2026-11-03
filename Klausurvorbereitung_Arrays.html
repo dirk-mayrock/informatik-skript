@@ -324,7 +324,7 @@ Bester Tag: Index 5 mit 410 Tickets</pre></div>
 <h2>Aufgabe B – Alle Filme (2D-Array)</h2>
 <h3>Die Aufgabe (Klausur-Text)</h3>
 <p>Das Kino zeigt jetzt 5 Filme gleichzeitig. Die Tabelle sieht so aus:</p>
-<div class="table-wrap"><table><thead><tr><th></th><th>Mo</th><th>Di</th><th>Mi</th><th>Do</th><th>Fr</th><th>Sa</th><th>So</th></tr></thead><tbody><tr><td>Film 0</td><td>120</td><td>85</td><td>200</td><td>175</td><td>300</td><td>410</td><td>380</td></tr><tr><td>Film 1</td><td>95</td><td>110</td><td>130</td><td>160</td><td>220</td><td>370</td><td>340</td></tr><tr><td>Film 2</td><td>200</td><td>190</td><td>210</td><td>205</td><td>280</td><td>450</td><td>420</td></tr><tr><td>Film 3</td><td>50</td><td>60</td><td>55</td><td>70</td><td>90</td><td>150</td><td>140</td></tr><tr><td>Film 4</td><td>170</td><td>155</td><td>180</td><td>160</td><td>240</td><td>390</td><td>360</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Film</th><th>Mo</th><th>Di</th><th>Mi</th><th>Do</th><th>Fr</th><th>Sa</th><th>So</th></tr></thead><tbody><tr><td>Film 0</td><td>120</td><td>85</td><td>200</td><td>175</td><td>300</td><td>410</td><td>380</td></tr><tr><td>Film 1</td><td>210</td><td>340</td><td>180</td><td>160</td><td>220</td><td>270</td><td>190</td></tr><tr><td>Film 2</td><td>200</td><td>190</td><td>210</td><td>205</td><td>450</td><td>380</td><td>420</td></tr><tr><td>Film 3</td><td>50</td><td>140</td><td>55</td><td>170</td><td>90</td><td>150</td><td>80</td></tr><tr><td>Film 4</td><td>170</td><td>155</td><td>390</td><td>160</td><td>240</td><td>310</td><td>280</td></tr></tbody></table></div>
 <p>Schreibe eine Klasse <code>KinoProgramm</code>, die:</p>
 <ol><li>Diese Tabelle als <strong>zweidimensionales Array</strong> speichert.</li><li>Mit einer <strong>verschachtelten for-Schleife</strong> die Gesamtverkäufe pro Film berechnet und ausgibt.</li></ol>
 <h3>Schritt 1: Das 2D-Array verstehen</h3>
@@ -334,14 +334,14 @@ Bester Tag: Index 5 mit 410 Tickets</pre></div>
 <p>Deklaration und Initialisierung:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>int[][] programm = {
     {120,  85, 200, 175, 300, 410, 380},  // Film 0
-    { 95, 110, 130, 160, 220, 370, 340},  // Film 1
-    {200, 190, 210, 205, 280, 450, 420},  // Film 2
-    { 50,  60,  55,  70,  90, 150, 140},  // Film 3
-    {170, 155, 180, 160, 240, 390, 360}   // Film 4
+    {210, 340, 180, 160, 220, 270, 190},  // Film 1
+    {200, 190, 210, 205, 450, 380, 420},  // Film 2
+    { 50, 140,  55, 170,  90, 150,  80},  // Film 3
+    {170, 155, 390, 160, 240, 310, 280}   // Film 4
 };</pre></div>
 <p>Ein einzelner Wert wird mit <strong>zwei Indizes</strong> abgerufen:</p>
-<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>programm[2][5]   // Film 2, Samstag → 450 Tickets
-programm[0][0]   // Film 0, Montag  → 120 Tickets</pre></div>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>programm[2][4]   // Film 2, Freitag  → 450 Tickets
+programm[0][0]   // Film 0, Montag   → 120 Tickets</pre></div>
 <h3>Schritt 2: Verschachtelte for-Schleife</h3>
 <p>Die äußere Schleife geht durch die Filme (Zeilen), die innere durch die Tage (Spalten).</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>// Äußere Schleife: jede Zeile = ein Film
@@ -364,11 +364,11 @@ for (int film = 0; film &lt; programm.length; film++) {
 
         // 5 Filme x 7 Tage  (Zeile = Film, Spalte = Tag)
         int[][] programm = {
-            {120,  85, 200, 175, 300, 410, 380},  // Film 0
-            { 95, 110, 130, 160, 220, 370, 340},  // Film 1
-            {200, 190, 210, 205, 280, 450, 420},  // Film 2
-            { 50,  60,  55,  70,  90, 150, 140},  // Film 3
-            {170, 155, 180, 160, 240, 390, 360}   // Film 4
+            {120,  85, 200, 175, 300, 410, 380},  // Film 0 – bester Tag: Sa
+            {210, 340, 180, 160, 220, 270, 190},  // Film 1 – bester Tag: Di
+            {200, 190, 210, 205, 450, 380, 420},  // Film 2 – bester Tag: Fr
+            { 50, 140,  55, 170,  90, 150,  80},  // Film 3 – bester Tag: Do
+            {170, 155, 390, 160, 240, 310, 280}   // Film 4 – bester Tag: Mi
         };
 
         // Gesamtverkäufe pro Film berechnen
@@ -383,10 +383,10 @@ for (int film = 0; film &lt; programm.length; film++) {
 }</pre></div>
 <p>Erwartete Ausgabe in BlueJ:</p>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Film 0: 1670 Tickets
-Film 1: 1425 Tickets
-Film 2: 1955 Tickets
-Film 3:  615 Tickets
-Film 4: 1655 Tickets</pre></div>
+Film 1: 1570 Tickets
+Film 2: 2055 Tickets
+Film 3:  735 Tickets
+Film 4: 1705 Tickets</pre></div>
 <hr>
 <h2>Typische Klausuraufgaben</h2>
 <h3>Aufgabe 1</h3>

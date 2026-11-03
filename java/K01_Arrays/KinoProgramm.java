@@ -5,11 +5,11 @@ public class KinoProgramm {
         // 5 Filme x 7 Tage  (Zeile = Film, Spalte = Tag)
         // Index:  Mo   Di   Mi   Do   Fr   Sa   So
         int[][] programm = {
-            {120,  85, 200, 175, 300, 410, 380},  // Film 0
-            { 95, 110, 130, 160, 220, 370, 340},  // Film 1
-            {200, 190, 210, 205, 280, 450, 420},  // Film 2
-            { 50,  60,  55,  70,  90, 150, 140},  // Film 3
-            {170, 155, 180, 160, 240, 390, 360}   // Film 4
+            {120,  85, 200, 175, 300, 410, 380},  // Film 0 – bester Tag: Sa
+            {210, 340, 180, 160, 220, 270, 190},  // Film 1 – bester Tag: Di
+            {200, 190, 210, 205, 450, 380, 420},  // Film 2 – bester Tag: Fr
+            { 50, 140,  55, 170,  90, 150,  80},  // Film 3 – bester Tag: Do
+            {170, 155, 390, 160, 240, 310, 280}   // Film 4 – bester Tag: Mi
         };
 
         // Gesamtverkäufe pro Film berechnen

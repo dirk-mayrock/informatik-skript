@@ -125,13 +125,13 @@ Bester Tag: Index 5 mit 410 Tickets
 
 Das Kino zeigt jetzt 5 Filme gleichzeitig. Die Tabelle sieht so aus:
 
-|         | Mo  | Di  | Mi  | Do  | Fr  | Sa  | So  |
+| Film    | Mo  | Di  | Mi  | Do  | Fr  | Sa  | So  |
 |---------|-----|-----|-----|-----|-----|-----|-----|
 | Film 0  | 120 |  85 | 200 | 175 | 300 | 410 | 380 |
-| Film 1  |  95 | 110 | 130 | 160 | 220 | 370 | 340 |
-| Film 2  | 200 | 190 | 210 | 205 | 280 | 450 | 420 |
-| Film 3  |  50 |  60 |  55 |  70 |  90 | 150 | 140 |
-| Film 4  | 170 | 155 | 180 | 160 | 240 | 390 | 360 |
+| Film 1  | 210 | 340 | 180 | 160 | 220 | 270 | 190 |
+| Film 2  | 200 | 190 | 210 | 205 | 450 | 380 | 420 |
+| Film 3  |  50 | 140 |  55 | 170 |  90 | 150 |  80 |
+| Film 4  | 170 | 155 | 390 | 160 | 240 | 310 | 280 |
 
 Schreibe eine Klasse `KinoProgramm`, die:
 1. Diese Tabelle als **zweidimensionales Array** speichert.
@@ -151,18 +151,18 @@ Deklaration und Initialisierung:
 ```java
 int[][] programm = {
     {120,  85, 200, 175, 300, 410, 380},  // Film 0
-    { 95, 110, 130, 160, 220, 370, 340},  // Film 1
-    {200, 190, 210, 205, 280, 450, 420},  // Film 2
-    { 50,  60,  55,  70,  90, 150, 140},  // Film 3
-    {170, 155, 180, 160, 240, 390, 360}   // Film 4
+    {210, 340, 180, 160, 220, 270, 190},  // Film 1
+    {200, 190, 210, 205, 450, 380, 420},  // Film 2
+    { 50, 140,  55, 170,  90, 150,  80},  // Film 3
+    {170, 155, 390, 160, 240, 310, 280}   // Film 4
 };
 ```
 
 Ein einzelner Wert wird mit **zwei Indizes** abgerufen:
 
 ```java
-programm[2][5]   // Film 2, Samstag → 450 Tickets
-programm[0][0]   // Film 0, Montag  → 120 Tickets
+programm[2][4]   // Film 2, Freitag  → 450 Tickets
+programm[0][0]   // Film 0, Montag   → 120 Tickets
 ```
 
 ### Schritt 2: Verschachtelte for-Schleife
@@ -196,11 +196,11 @@ public class KinoProgramm {
 
         // 5 Filme x 7 Tage  (Zeile = Film, Spalte = Tag)
         int[][] programm = {
-            {120,  85, 200, 175, 300, 410, 380},  // Film 0
-            { 95, 110, 130, 160, 220, 370, 340},  // Film 1
-            {200, 190, 210, 205, 280, 450, 420},  // Film 2
-            { 50,  60,  55,  70,  90, 150, 140},  // Film 3
-            {170, 155, 180, 160, 240, 390, 360}   // Film 4
+            {120,  85, 200, 175, 300, 410, 380},  // Film 0 – bester Tag: Sa
+            {210, 340, 180, 160, 220, 270, 190},  // Film 1 – bester Tag: Di
+            {200, 190, 210, 205, 450, 380, 420},  // Film 2 – bester Tag: Fr
+            { 50, 140,  55, 170,  90, 150,  80},  // Film 3 – bester Tag: Do
+            {170, 155, 390, 160, 240, 310, 280}   // Film 4 – bester Tag: Mi
         };
 
         // Gesamtverkäufe pro Film berechnen
@@ -219,10 +219,10 @@ Erwartete Ausgabe in BlueJ:
 
 ```
 Film 0: 1670 Tickets
-Film 1: 1425 Tickets
-Film 2: 1955 Tickets
-Film 3:  615 Tickets
-Film 4: 1655 Tickets
+Film 1: 1570 Tickets
+Film 2: 2055 Tickets
+Film 3:  735 Tickets
+Film 4: 1705 Tickets
 ```
 
 ---

@@ -65,15 +65,20 @@ System.out.println("Gesamt: " + summe + " Tickets");
 Wir merken uns den Index des bisher besten Wertes und aktualisieren ihn bei jedem Fund.
 
 ```java
-int maxIndex = 0;                             // starte mit Index 0 als Annahme
-for (int i = 1; i < verkaufe.length; i++) {  // ab Index 1 vergleichen
-    if (verkaufe[i] > verkaufe[maxIndex]) {
-        maxIndex = i;                         // neuen Besttag merken
+int maxIndex = 0;                             // Index 0 ist der erste Kandidat
+for (int i = 1; i < verkaufe.length; i++) {  // i=1: Index 0 ist bereits gesetzt,
+    if (verkaufe[i] > verkaufe[maxIndex]) {   //      alle anderen werden verglichen
+        maxIndex = i;                         // besseren Tag merken
     }
 }
 System.out.println("Bester Tag: Index " + maxIndex
                    + " mit " + verkaufe[maxIndex] + " Tickets");
 ```
+
+**Warum beginnt die Schleife bei `i = 1`?**
+`maxIndex = 0` bedeutet: „Ich nehme erstmal an, dass Index 0 der beste ist."
+Die Schleife muss dann nur noch alle *übrigen* Einträge (Index 1 bis 6) dagegen prüfen.
+Mit `i = 0` würde man Index 0 gegen sich selbst vergleichen — das ist unnötig, aber kein Fehler.
 
 ### Vollständige Musterlösung A
 
@@ -93,8 +98,8 @@ public class KinoWoche {
         System.out.println("Gesamt: " + summe + " Tickets");
 
         // --- Besten Tag ermitteln ---
-        int maxIndex = 0;
-        for (int i = 1; i < verkaufe.length; i++) {
+        int maxIndex = 0;                        // Index 0 ist der erste Kandidat
+        for (int i = 1; i < verkaufe.length; i++) { // i=1: alle übrigen prüfen
             if (verkaufe[i] > verkaufe[maxIndex]) {
                 maxIndex = i;
             }

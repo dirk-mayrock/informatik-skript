@@ -13,10 +13,10 @@ public class KinoWoche {
         System.out.println("Gesamt: " + summe + " Tickets");
 
         // --- Besten Tag ermitteln ---
-        int maxIndex = 0;                             // starte mit Index 0
-        for (int i = 1; i < verkaufe.length; i++) {  // ab Index 1 vergleichen
+        int maxIndex = 0;                             // Index 0 ist erster Kandidat
+        for (int i = 1; i < verkaufe.length; i++) {  // i=1: alle übrigen dagegen prüfen
             if (verkaufe[i] > verkaufe[maxIndex]) {
-                maxIndex = i;                         // neuen Besttag merken
+                maxIndex = i;                         // besseren Tag merken
             }
         }
         System.out.println("Bester Tag: Index " + maxIndex

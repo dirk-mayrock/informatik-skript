@@ -43,9 +43,9 @@ int[] verkaufe = {120, 85, 200, 175, 300, 410, 380};
 Wichtig: Der erste Tag (Montag) hat den Index **0**, Sonntag hat Index **6**.
 
 ```
-Index:   0    1    2    3    4    5    6
-Wert:  120   85  200  175  300  410  380
-Tag:   Mo   Di   Mi   Do   Fr   Sa   So
+Index:    0    1    2    3    4    5    6
+Wert:   120   85  200  175  300  410  380
+Tag:     Mo   Di   Mi   Do   Fr   Sa   So
 ```
 
 ### Schritt 2: Alle Werte summieren (for-Schleife)

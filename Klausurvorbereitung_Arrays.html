@@ -426,8 +426,141 @@ System.out.println(zahlen[3]);</pre></div>
 <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>6</pre></div>
 <p>Zeile 1 ist <code>{4, 5, 6}</code>, Spalte 2 ist der dritte Wert: 6.</p>
 <hr>
+<h2>Aufgabe C – Erweiterung: Klasse Film (Zusatzaufgabe)</h2>
+<p>Diese Aufgabe ist <strong>optional</strong> und verbindet Arrays (Aufgabe A & B) mit Objektorientierung (Thema 11).</p>
+<h3>Das Problem mit dem bisherigen Ansatz</h3>
+<p>Bisher speichern wir nur Zahlen im Array. Wenn wir zusätzliche Informationen pro Film brauchen – Titel, Dauer, Genre – passen diese nicht in ein <code>int[][]</code>, weil ein <code>int</code>-Array nur ganze Zahlen speichern kann.</p>
+<p>Parallele Arrays wären eine schlechte Lösung:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>// Schlecht – alles auseinandergezogen, leicht zu verwechseln
+String[] titel   = {&quot;Matrix&quot;, &quot;Barbie&quot;, &quot;Oppenheimer&quot;, &quot;Dune&quot;, &quot;Avatar&quot;};
+int[]    dauer   = {136, 114, 180, 155, 192};
+int[][]  verkaufe = { {120, 85, ...}, ... };</pre></div>
+<p>Die saubere Lösung: eine eigene Klasse <code>Film</code>.</p>
+<h3>Schritt 1: Die Klasse Film schreiben</h3>
+<p>Alles, was zu einem Film gehört, kommt in eine Klasse. Die Verkaufsdaten sind ein <code>int[]</code>-Attribut innerhalb der Klasse.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Film {
+
+    // Attribute
+    private String titel;
+    private int    dauer;       // Laufzeit in Minuten
+    private String genre;
+    private int[]  verkaufe;    // Ticketverkäufe Mo bis So
+
+    // Konstruktor
+    public Film(String titel, int dauer, String genre, int[] verkaufe) {
+        this.titel    = titel;
+        this.dauer    = dauer;
+        this.genre    = genre;
+        this.verkaufe = verkaufe;
+    }
+
+    // Getter
+    public String getTitel()    { return titel; }
+    public int    getDauer()    { return dauer; }
+    public String getGenre()    { return genre; }
+    public int[]  getVerkaufe() { return verkaufe; }
+
+    // Hilfsmethode: Gesamtverkäufe berechnen
+    public int getGesamtverkaufe() {
+        int summe = 0;
+        for (int i = 0; i &lt; verkaufe.length; i++) {
+            summe = summe + verkaufe[i];
+        }
+        return summe;
+    }
+}</pre></div>
+<h3>Schritt 2: Ein Array von Film-Objekten anlegen</h3>
+<p>Statt <code>int[][]</code> verwenden wir jetzt <code>Film[]</code> – ein Array von Objekten.</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Film[] programm = {
+    new Film(&quot;Matrix&quot;,      136, &quot;SciFi&quot;,   new int[]{120,  85, 200, 175, 300, 410, 380}),
+    new Film(&quot;Barbie&quot;,      114, &quot;Komoedie&quot;,new int[]{210, 340, 180, 160, 220, 270, 190}),
+    new Film(&quot;Oppenheimer&quot;, 180, &quot;Drama&quot;,   new int[]{200, 190, 210, 205, 450, 380, 420}),
+    new Film(&quot;Dune&quot;,        155, &quot;SciFi&quot;,   new int[]{ 50, 140,  55, 170,  90, 150,  80}),
+    new Film(&quot;Avatar&quot;,      192, &quot;SciFi&quot;,   new int[]{170, 155, 390, 160, 240, 310, 280})
+};</pre></div>
+<h3>Schritt 3: Die for-Schleife bleibt gleich – nur der Zugriff ändert sich</h3>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>for (int i = 0; i &lt; programm.length; i++) {
+    System.out.println(programm[i].getTitel()
+                       + &quot;: &quot; + programm[i].getGesamtverkaufe()
+                       + &quot; Tickets (&quot; + programm[i].getGenre() + &quot;)&quot;);
+}</pre></div>
+<h3>Vollständige Musterlösung C</h3>
+<p>Zwei Dateien in BlueJ – <code>Film.java</code> und <code>KinoProgrammOOP.java</code>.</p>
+<h4>Film.java</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class Film {
+
+    private String titel;
+    private int    dauer;
+    private String genre;
+    private int[]  verkaufe;
+
+    public Film(String titel, int dauer, String genre, int[] verkaufe) {
+        this.titel    = titel;
+        this.dauer    = dauer;
+        this.genre    = genre;
+        this.verkaufe = verkaufe;
+    }
+
+    public String getTitel()    { return titel; }
+    public int    getDauer()    { return dauer; }
+    public String getGenre()    { return genre; }
+    public int[]  getVerkaufe() { return verkaufe; }
+
+    public int getGesamtverkaufe() {
+        int summe = 0;
+        for (int i = 0; i &lt; verkaufe.length; i++) {
+            summe = summe + verkaufe[i];
+        }
+        return summe;
+    }
+
+    public String toString() {
+        return titel + &quot; (&quot; + genre + &quot;, &quot; + dauer + &quot; min)&quot;
+               + &quot; – &quot; + getGesamtverkaufe() + &quot; Tickets&quot;;
+    }
+}</pre></div>
+<h4>KinoProgrammOOP.java</h4>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>public class KinoProgrammOOP {
+
+    public static void main(String[] args) {
+
+        // Film-Array – jedes Element ist ein Objekt mit Metadaten + Verkaufszahlen
+        Film[] programm = {
+            new Film(&quot;Matrix&quot;,      136, &quot;SciFi&quot;,    new int[]{120,  85, 200, 175, 300, 410, 380}),
+            new Film(&quot;Barbie&quot;,      114, &quot;Komoedie&quot;, new int[]{210, 340, 180, 160, 220, 270, 190}),
+            new Film(&quot;Oppenheimer&quot;, 180, &quot;Drama&quot;,    new int[]{200, 190, 210, 205, 450, 380, 420}),
+            new Film(&quot;Dune&quot;,        155, &quot;SciFi&quot;,    new int[]{ 50, 140,  55, 170,  90, 150,  80}),
+            new Film(&quot;Avatar&quot;,      192, &quot;SciFi&quot;,    new int[]{170, 155, 390, 160, 240, 310, 280})
+        };
+
+        // Alle Filme ausgeben
+        for (int i = 0; i &lt; programm.length; i++) {
+            System.out.println(programm[i].toString());
+        }
+
+        // Bester Film gesamt
+        int maxIdx = 0;
+        for (int i = 1; i &lt; programm.length; i++) {  // i=1: programm[0] ist erster Kandidat
+            if (programm[i].getGesamtverkaufe() &gt; programm[maxIdx].getGesamtverkaufe()) {
+                maxIdx = i;
+            }
+        }
+        System.out.println(&quot;Erfolgreichster Film: &quot; + programm[maxIdx].getTitel());
+    }
+}</pre></div>
+<p>Erwartete Ausgabe in BlueJ:</p>
+<div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Kopieren</button><pre>Matrix (SciFi, 136 min) – 1670 Tickets
+Barbie (Komoedie, 114 min) – 1570 Tickets
+Oppenheimer (Drama, 180 min) – 2055 Tickets
+Dune (SciFi, 155 min) – 735 Tickets
+Avatar (SciFi, 192 min) – 1705 Tickets
+Erfolgreichster Film: Oppenheimer</pre></div>
+<h3>Was hat sich geändert?</h3>
+<div class="table-wrap"><table><thead><tr><th>Aufgabe B</th><th>Aufgabe C</th></tr></thead><tbody><tr><td><code>int[][] programm</code></td><td><code>Film[] programm</code></td></tr><tr><td><code>programm[i][tag]</code></td><td><code>programm[i].getVerkaufe()[tag]</code></td></tr><tr><td><code>programm.length</code></td><td><code>programm.length</code></td></tr><tr><td>kein Titel, kein Genre</td><td><code>programm[i].getTitel()</code>, <code>programm[i].getGenre()</code></td></tr></tbody></table></div>
+<p>Die verschachtelte for-Schleife bleibt <strong>strukturell identisch</strong>. Nur der Zugriff auf die Daten geht jetzt durch die Klasse.</p>
+<hr>
 <h2>Merksätze</h2>
-<ol><li>Arrays speichern mehrere Werte <strong>desselben Typs</strong> unter einem Namen.</li><li>Der erste Index ist immer <strong>0</strong>, der letzte ist <code>array.length - 1</code>.</li><li><code>array.length</code> gibt die Anzahl der Elemente zurück – <strong>kein Methodenaufruf</strong> (kein <code>()</code>).</li><li>Ein 2D-Array ist ein <strong>Array von Arrays</strong>: <code>int[][] tabelle = new int[zeilen][spalten];</code>.</li><li>Beim Zugriff auf <code>tabelle[zeile][spalte]</code> ist die <strong>Zeile immer zuerst</strong>.</li><li><code>ArrayIndexOutOfBoundsException</code> entsteht, wenn der Index kleiner als 0 oder größer als <code>length - 1</code> ist.</li></ol>
+<ol><li>Arrays speichern mehrere Werte <strong>desselben Typs</strong> unter einem Namen.</li><li>Der erste Index ist immer <strong>0</strong>, der letzte ist <code>array.length - 1</code>.</li><li><code>array.length</code> gibt die Anzahl der Elemente zurück – <strong>kein Methodenaufruf</strong> (kein <code>()</code>).</li><li>Ein 2D-Array ist ein <strong>Array von Arrays</strong>: <code>int[][] tabelle = new int[zeilen][spalten];</code>.</li><li>Beim Zugriff auf <code>tabelle[zeile][spalte]</code> ist die <strong>Zeile immer zuerst</strong>.</li><li><code>ArrayIndexOutOfBoundsException</code> entsteht, wenn der Index kleiner als 0 oder größer als <code>length - 1</code> ist.</li><li>Wenn ein Array verschiedene Datentypen pro Element braucht, ist eine <strong>eigene Klasse</strong> die richtige Lösung.</li><li><code>Film[]</code> ist ein Array von Objekten – <code>programm.length</code> funktioniert genauso wie bei <code>int[]</code>.</li></ol>
 
 <h2>Interaktive Visualisierung</h2>
 <div class="viz-box">

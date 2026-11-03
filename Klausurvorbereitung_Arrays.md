@@ -310,6 +310,185 @@ Zeile 1 ist `{4, 5, 6}`, Spalte 2 ist der dritte Wert: 6.
 
 ---
 
+## Aufgabe C – Erweiterung: Klasse Film (Zusatzaufgabe)
+
+Diese Aufgabe ist **optional** und verbindet Arrays (Aufgabe A & B) mit Objektorientierung (Thema 11).
+
+### Das Problem mit dem bisherigen Ansatz
+
+Bisher speichern wir nur Zahlen im Array. Wenn wir zusätzliche Informationen pro Film brauchen – Titel, Dauer, Genre – passen diese nicht in ein `int[][]`, weil ein `int`-Array nur ganze Zahlen speichern kann.
+
+Parallele Arrays wären eine schlechte Lösung:
+
+```java
+// Schlecht – alles auseinandergezogen, leicht zu verwechseln
+String[] titel   = {"Matrix", "Barbie", "Oppenheimer", "Dune", "Avatar"};
+int[]    dauer   = {136, 114, 180, 155, 192};
+int[][]  verkaufe = { {120, 85, ...}, ... };
+```
+
+Die saubere Lösung: eine eigene Klasse `Film`.
+
+### Schritt 1: Die Klasse Film schreiben
+
+Alles, was zu einem Film gehört, kommt in eine Klasse. Die Verkaufsdaten sind ein `int[]`-Attribut innerhalb der Klasse.
+
+```java
+public class Film {
+
+    // Attribute
+    private String titel;
+    private int    dauer;       // Laufzeit in Minuten
+    private String genre;
+    private int[]  verkaufe;    // Ticketverkäufe Mo bis So
+
+    // Konstruktor
+    public Film(String titel, int dauer, String genre, int[] verkaufe) {
+        this.titel    = titel;
+        this.dauer    = dauer;
+        this.genre    = genre;
+        this.verkaufe = verkaufe;
+    }
+
+    // Getter
+    public String getTitel()    { return titel; }
+    public int    getDauer()    { return dauer; }
+    public String getGenre()    { return genre; }
+    public int[]  getVerkaufe() { return verkaufe; }
+
+    // Hilfsmethode: Gesamtverkäufe berechnen
+    public int getGesamtverkaufe() {
+        int summe = 0;
+        for (int i = 0; i < verkaufe.length; i++) {
+            summe = summe + verkaufe[i];
+        }
+        return summe;
+    }
+}
+```
+
+### Schritt 2: Ein Array von Film-Objekten anlegen
+
+Statt `int[][]` verwenden wir jetzt `Film[]` – ein Array von Objekten.
+
+```java
+Film[] programm = {
+    new Film("Matrix",      136, "SciFi",   new int[]{120,  85, 200, 175, 300, 410, 380}),
+    new Film("Barbie",      114, "Komoedie",new int[]{210, 340, 180, 160, 220, 270, 190}),
+    new Film("Oppenheimer", 180, "Drama",   new int[]{200, 190, 210, 205, 450, 380, 420}),
+    new Film("Dune",        155, "SciFi",   new int[]{ 50, 140,  55, 170,  90, 150,  80}),
+    new Film("Avatar",      192, "SciFi",   new int[]{170, 155, 390, 160, 240, 310, 280})
+};
+```
+
+### Schritt 3: Die for-Schleife bleibt gleich – nur der Zugriff ändert sich
+
+```java
+for (int i = 0; i < programm.length; i++) {
+    System.out.println(programm[i].getTitel()
+                       + ": " + programm[i].getGesamtverkaufe()
+                       + " Tickets (" + programm[i].getGenre() + ")");
+}
+```
+
+### Vollständige Musterlösung C
+
+Zwei Dateien in BlueJ – `Film.java` und `KinoProgrammOOP.java`.
+
+#### Film.java
+
+```java
+public class Film {
+
+    private String titel;
+    private int    dauer;
+    private String genre;
+    private int[]  verkaufe;
+
+    public Film(String titel, int dauer, String genre, int[] verkaufe) {
+        this.titel    = titel;
+        this.dauer    = dauer;
+        this.genre    = genre;
+        this.verkaufe = verkaufe;
+    }
+
+    public String getTitel()    { return titel; }
+    public int    getDauer()    { return dauer; }
+    public String getGenre()    { return genre; }
+    public int[]  getVerkaufe() { return verkaufe; }
+
+    public int getGesamtverkaufe() {
+        int summe = 0;
+        for (int i = 0; i < verkaufe.length; i++) {
+            summe = summe + verkaufe[i];
+        }
+        return summe;
+    }
+
+    public String toString() {
+        return titel + " (" + genre + ", " + dauer + " min)"
+               + " – " + getGesamtverkaufe() + " Tickets";
+    }
+}
+```
+
+#### KinoProgrammOOP.java
+
+```java
+public class KinoProgrammOOP {
+
+    public static void main(String[] args) {
+
+        // Film-Array – jedes Element ist ein Objekt mit Metadaten + Verkaufszahlen
+        Film[] programm = {
+            new Film("Matrix",      136, "SciFi",    new int[]{120,  85, 200, 175, 300, 410, 380}),
+            new Film("Barbie",      114, "Komoedie", new int[]{210, 340, 180, 160, 220, 270, 190}),
+            new Film("Oppenheimer", 180, "Drama",    new int[]{200, 190, 210, 205, 450, 380, 420}),
+            new Film("Dune",        155, "SciFi",    new int[]{ 50, 140,  55, 170,  90, 150,  80}),
+            new Film("Avatar",      192, "SciFi",    new int[]{170, 155, 390, 160, 240, 310, 280})
+        };
+
+        // Alle Filme ausgeben
+        for (int i = 0; i < programm.length; i++) {
+            System.out.println(programm[i].toString());
+        }
+
+        // Bester Film gesamt
+        int maxIdx = 0;
+        for (int i = 1; i < programm.length; i++) {  // i=1: programm[0] ist erster Kandidat
+            if (programm[i].getGesamtverkaufe() > programm[maxIdx].getGesamtverkaufe()) {
+                maxIdx = i;
+            }
+        }
+        System.out.println("Erfolgreichster Film: " + programm[maxIdx].getTitel());
+    }
+}
+```
+
+Erwartete Ausgabe in BlueJ:
+
+```
+Matrix (SciFi, 136 min) – 1670 Tickets
+Barbie (Komoedie, 114 min) – 1570 Tickets
+Oppenheimer (Drama, 180 min) – 2055 Tickets
+Dune (SciFi, 155 min) – 735 Tickets
+Avatar (SciFi, 192 min) – 1705 Tickets
+Erfolgreichster Film: Oppenheimer
+```
+
+### Was hat sich geändert?
+
+| Aufgabe B | Aufgabe C |
+|-----------|-----------|
+| `int[][] programm` | `Film[] programm` |
+| `programm[i][tag]` | `programm[i].getVerkaufe()[tag]` |
+| `programm.length` | `programm.length` |
+| kein Titel, kein Genre | `programm[i].getTitel()`, `programm[i].getGenre()` |
+
+Die verschachtelte for-Schleife bleibt **strukturell identisch**. Nur der Zugriff auf die Daten geht jetzt durch die Klasse.
+
+---
+
 ## Merksätze
 
 1. Arrays speichern mehrere Werte **desselben Typs** unter einem Namen.
@@ -318,3 +497,5 @@ Zeile 1 ist `{4, 5, 6}`, Spalte 2 ist der dritte Wert: 6.
 4. Ein 2D-Array ist ein **Array von Arrays**: `int[][] tabelle = new int[zeilen][spalten];`.
 5. Beim Zugriff auf `tabelle[zeile][spalte]` ist die **Zeile immer zuerst**.
 6. `ArrayIndexOutOfBoundsException` entsteht, wenn der Index kleiner als 0 oder größer als `length - 1` ist.
+7. Wenn ein Array verschiedene Datentypen pro Element braucht, ist eine **eigene Klasse** die richtige Lösung.
+8. `Film[]` ist ein Array von Objekten – `programm.length` funktioniert genauso wie bei `int[]`.
